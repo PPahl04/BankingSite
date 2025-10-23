@@ -23,8 +23,6 @@ namespace BankingSite
 			this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
 			// TODO: This line of code loads data into the 'bankingSiteDataSet.Address' table. You can move, or remove it, as needed.
 			this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
-			// TODO: This line of code loads data into the 'bankingSiteDataSet.Customer' table. You can move, or remove it, as needed.
-			this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
 		}
 
 		string _connectionString;
@@ -172,11 +170,16 @@ namespace BankingSite
 
 		private void btnShowOwnedAccounts_Click(object sender, EventArgs e)
 		{
-			DataTable accounts = new DataTable();
+			DataTable accounts = accountTableAdapter.GetOwnedAccountsByCustomerID(Convert.ToInt32(customerIDTextBox.Text));
 
-
+			if (accounts.Rows.Count == 0)
+			{
+				MessageBox.Show("The selected customer has no accounts.", "Customer has no accounts.");
+				return;
+			}
 
 			OwnedAccounts owned = new OwnedAccounts(accounts);
+			owned.Show();
 		}
 	}
 }

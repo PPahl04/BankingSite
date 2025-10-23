@@ -60,6 +60,7 @@
 			this.MinimumSize = new System.Drawing.Size(660, 300);
 			this.Name = "OwnedAccounts";
 			this.ShowIcon = false;
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "OwnedAccounts";
 			((System.ComponentModel.ISupportInitialize)(this.dgvOwnedAccounts)).EndInit();
 			this.ResumeLayout(false);

@@ -936,7 +936,7 @@
 			this.txtbPassword.Location = new System.Drawing.Point(119, 152);
 			this.txtbPassword.MinimumSize = new System.Drawing.Size(255, 27);
 			this.txtbPassword.Name = "txtbPassword";
-			this.txtbPassword.Size = new System.Drawing.Size(328, 27);
+			this.txtbPassword.Size = new System.Drawing.Size(328, 26);
 			this.txtbPassword.TabIndex = 20;
 			this.txtbPassword.UseSystemPasswordChar = true;
 			this.txtbPassword.Leave += new System.EventHandler(this.txtbPassword_Leave);
@@ -950,7 +950,7 @@
 			this.txtbServerName.Location = new System.Drawing.Point(119, 60);
 			this.txtbServerName.MinimumSize = new System.Drawing.Size(255, 27);
 			this.txtbServerName.Name = "txtbServerName";
-			this.txtbServerName.Size = new System.Drawing.Size(328, 27);
+			this.txtbServerName.Size = new System.Drawing.Size(328, 26);
 			this.txtbServerName.TabIndex = 16;
 			// 
 			// lblPasword
@@ -990,7 +990,7 @@
 			this.txtbUsername.Location = new System.Drawing.Point(119, 106);
 			this.txtbUsername.MinimumSize = new System.Drawing.Size(255, 27);
 			this.txtbUsername.Name = "txtbUsername";
-			this.txtbUsername.Size = new System.Drawing.Size(328, 27);
+			this.txtbUsername.Size = new System.Drawing.Size(328, 26);
 			this.txtbUsername.TabIndex = 18;
 			// 
 			// tcWindow

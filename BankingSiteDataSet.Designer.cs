@@ -2482,7 +2482,7 @@ SELECT ID, IBAN, Balance, Number, Customer_ID FROM Account WHERE (ID = @ID)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, IBAN, Balance, Number, Customer_ID FROM dbo.Account";
@@ -2492,6 +2492,12 @@ SELECT ID, IBAN, Balance, Number, Customer_ID FROM Account WHERE (ID = @ID)";
             this._commandCollection[1].CommandText = "DELETE FROM [dbo].[Account] WHERE ID = @ID";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT        ID, IBAN, Balance, Number, Customer_ID\r\nFROM            Account\r\nWH" +
+                "ERE        (Customer_ID = @Customer_ID)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Customer_ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Customer_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2513,6 +2519,18 @@ SELECT ID, IBAN, Balance, Number, Customer_ID FROM Account WHERE (ID = @ID)";
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual BankingSiteDataSet.AccountDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            BankingSiteDataSet.AccountDataTable dataTable = new BankingSiteDataSet.AccountDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual BankingSiteDataSet.AccountDataTable GetOwnedAccountsByCustomerID(int Customer_ID) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(Customer_ID));
             BankingSiteDataSet.AccountDataTable dataTable = new BankingSiteDataSet.AccountDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
