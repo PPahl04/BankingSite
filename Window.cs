@@ -156,7 +156,7 @@ namespace BankingSite
 			}
 		}
 
-		private void button3_Click(object sender, EventArgs e)
+		private void btnDeleteAddress_Click(object sender, EventArgs e)
 		{
 			if (MessageBox.Show(string.Concat("Are you sure you want to delete the address with the ID: ", addressIDTextBox.Text, "?"), "Delete selected address",
 			MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -164,6 +164,11 @@ namespace BankingSite
 				addressTableAdapter.DeleteAddressWithID(Convert.ToInt32(addressIDTextBox.Text));
 				this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
 			}
+		}
+
+		private void btnCreateNewCustomer_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

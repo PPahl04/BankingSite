@@ -47,15 +47,49 @@
 			System.Windows.Forms.Label customer_IDLabel;
 			this.tpTransactions = new System.Windows.Forms.TabPage();
 			this.dgvTransactions = new System.Windows.Forms.DataGridView();
+			this.iDDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.intendedUseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.accountReceiverIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.accountSenderIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.transactionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.bankingSiteDataSet = new BankingSite.BankingSiteDataSet();
 			this.tpAccounts = new System.Windows.Forms.TabPage();
+			this.iDTextBox = new System.Windows.Forms.TextBox();
+			this.accountBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.iBANTextBox = new System.Windows.Forms.TextBox();
+			this.balanceTextBox = new System.Windows.Forms.TextBox();
+			this.numberTextBox = new System.Windows.Forms.TextBox();
+			this.customer_IDTextBox = new System.Windows.Forms.TextBox();
 			this.dgvAccounts = new System.Windows.Forms.DataGridView();
+			this.iDDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.iBANDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.balanceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.customerIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tpCustomers = new System.Windows.Forms.TabPage();
 			this.tlpCostumerAddress = new System.Windows.Forms.TableLayoutPanel();
 			this.dgvCustomers = new System.Windows.Forms.DataGridView();
+			this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.lastNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.phoneNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.emailAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.addressIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.dgvAddresses = new System.Windows.Forms.DataGridView();
+			this.iDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.streetNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.streetNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.zipCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.cityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.addressBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.pnlCustomerDetails = new System.Windows.Forms.Panel();
+			this.btnShowOwnedAccounts = new System.Windows.Forms.Button();
 			this.btnDeleteCustomer = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
+			this.btnCreateNewCustomer = new System.Windows.Forms.Button();
 			this.btnUpdateCustomer = new System.Windows.Forms.Button();
 			this.customerIDTextBox = new System.Windows.Forms.TextBox();
 			this.address_IDTextBox = new System.Windows.Forms.TextBox();
@@ -64,7 +98,7 @@
 			this.lastNameTextBox = new System.Windows.Forms.TextBox();
 			this.phoneNumberTextBox = new System.Windows.Forms.TextBox();
 			this.pnlAddressTableAdapter = new System.Windows.Forms.Panel();
-			this.button3 = new System.Windows.Forms.Button();
+			this.btnDeleteAddress = new System.Windows.Forms.Button();
 			this.btnCreateNewAddress = new System.Windows.Forms.Button();
 			this.btnUpdateAddress = new System.Windows.Forms.Button();
 			this.addressIDTextBox = new System.Windows.Forms.TextBox();
@@ -72,7 +106,6 @@
 			this.streetNumberTextBox = new System.Windows.Forms.TextBox();
 			this.zipCodeTextBox = new System.Windows.Forms.TextBox();
 			this.cityTextBox = new System.Windows.Forms.TextBox();
-			this.bankingSiteDataSet = new BankingSite.BankingSiteDataSet();
 			this.tpDBConnection = new System.Windows.Forms.TabPage();
 			this.pnlDbConnection = new System.Windows.Forms.Panel();
 			this.lblDbConnectionTitle = new System.Windows.Forms.Label();
@@ -94,7 +127,7 @@
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.lblReceiver = new System.Windows.Forms.Label();
-			this.button1 = new System.Windows.Forms.Button();
+			this.btnStartTransaction = new System.Windows.Forms.Button();
 			this.lblSelectedAccount = new System.Windows.Forms.Label();
 			this.lblAmount = new System.Windows.Forms.Label();
 			this.lblTransactionType = new System.Windows.Forms.Label();
@@ -105,38 +138,6 @@
 			this.addressTableAdapter = new BankingSite.BankingSiteDataSetTableAdapters.AddressTableAdapter();
 			this.transactionTableAdapter = new BankingSite.BankingSiteDataSetTableAdapters.TransactionTableAdapter();
 			this.tableAdapterManager = new BankingSite.BankingSiteDataSetTableAdapters.TableAdapterManager();
-			this.customerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.lastNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.phoneNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.emailAddressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.addressIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.addressBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.iDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.streetNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.streetNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.zipCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.cityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.accountBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.iDDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.iBANDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.balanceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.customerIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.transactionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.iDDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.intendedUseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.accountReceiverIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.accountSenderIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.iDTextBox = new System.Windows.Forms.TextBox();
-			this.iBANTextBox = new System.Windows.Forms.TextBox();
-			this.balanceTextBox = new System.Windows.Forms.TextBox();
-			this.numberTextBox = new System.Windows.Forms.TextBox();
-			this.customer_IDTextBox = new System.Windows.Forms.TextBox();
 			iDLabel = new System.Windows.Forms.Label();
 			firstNameLabel = new System.Windows.Forms.Label();
 			address_IDLabel = new System.Windows.Forms.Label();
@@ -155,15 +156,19 @@
 			customer_IDLabel = new System.Windows.Forms.Label();
 			this.tpTransactions.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.transactionBindingSource)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.bankingSiteDataSet)).BeginInit();
 			this.tpAccounts.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.accountBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
 			this.tpCustomers.SuspendLayout();
 			this.tlpCostumerAddress.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dgvAddresses)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).BeginInit();
 			this.pnlCustomerDetails.SuspendLayout();
 			this.pnlAddressTableAdapter.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.bankingSiteDataSet)).BeginInit();
 			this.tpDBConnection.SuspendLayout();
 			this.pnlDbConnection.SuspendLayout();
 			this.tcWindow.SuspendLayout();
@@ -171,10 +176,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.dgvSelectedCostumerAccounts)).BeginInit();
 			this.tpAddTransaction.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.accountBindingSource)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.transactionBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// iDLabel
@@ -298,6 +299,51 @@
 			cityLabel.TabIndex = 8;
 			cityLabel.Text = "City:";
 			// 
+			// iDLabel2
+			// 
+			iDLabel2.AutoSize = true;
+			iDLabel2.Location = new System.Drawing.Point(25, 113);
+			iDLabel2.Name = "iDLabel2";
+			iDLabel2.Size = new System.Drawing.Size(21, 13);
+			iDLabel2.TabIndex = 1;
+			iDLabel2.Text = "ID:";
+			// 
+			// iBANLabel
+			// 
+			iBANLabel.AutoSize = true;
+			iBANLabel.Location = new System.Drawing.Point(25, 139);
+			iBANLabel.Name = "iBANLabel";
+			iBANLabel.Size = new System.Drawing.Size(35, 13);
+			iBANLabel.TabIndex = 3;
+			iBANLabel.Text = "IBAN:";
+			// 
+			// balanceLabel
+			// 
+			balanceLabel.AutoSize = true;
+			balanceLabel.Location = new System.Drawing.Point(25, 165);
+			balanceLabel.Name = "balanceLabel";
+			balanceLabel.Size = new System.Drawing.Size(49, 13);
+			balanceLabel.TabIndex = 5;
+			balanceLabel.Text = "Balance:";
+			// 
+			// numberLabel
+			// 
+			numberLabel.AutoSize = true;
+			numberLabel.Location = new System.Drawing.Point(25, 191);
+			numberLabel.Name = "numberLabel";
+			numberLabel.Size = new System.Drawing.Size(47, 13);
+			numberLabel.TabIndex = 7;
+			numberLabel.Text = "Number:";
+			// 
+			// customer_IDLabel
+			// 
+			customer_IDLabel.AutoSize = true;
+			customer_IDLabel.Location = new System.Drawing.Point(25, 217);
+			customer_IDLabel.Name = "customer_IDLabel";
+			customer_IDLabel.Size = new System.Drawing.Size(68, 13);
+			customer_IDLabel.TabIndex = 9;
+			customer_IDLabel.Text = "Customer ID:";
+			// 
 			// tpTransactions
 			// 
 			this.tpTransactions.Controls.Add(this.dgvTransactions);
@@ -311,7 +357,10 @@
 			// 
 			// dgvTransactions
 			// 
+			this.dgvTransactions.AllowUserToAddRows = false;
+			this.dgvTransactions.AllowUserToDeleteRows = false;
 			this.dgvTransactions.AutoGenerateColumns = false;
+			this.dgvTransactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
 			this.dgvTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvTransactions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iDDataGridViewTextBoxColumn3,
@@ -322,11 +371,79 @@
             this.accountReceiverIDDataGridViewTextBoxColumn,
             this.accountSenderIDDataGridViewTextBoxColumn});
 			this.dgvTransactions.DataSource = this.transactionBindingSource;
-			this.dgvTransactions.Location = new System.Drawing.Point(433, 52);
+			this.dgvTransactions.Location = new System.Drawing.Point(323, 52);
 			this.dgvTransactions.Name = "dgvTransactions";
 			this.dgvTransactions.ReadOnly = true;
-			this.dgvTransactions.Size = new System.Drawing.Size(565, 483);
+			this.dgvTransactions.RowHeadersWidth = 21;
+			this.dgvTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dgvTransactions.Size = new System.Drawing.Size(675, 483);
 			this.dgvTransactions.TabIndex = 1;
+			// 
+			// iDDataGridViewTextBoxColumn3
+			// 
+			this.iDDataGridViewTextBoxColumn3.DataPropertyName = "ID";
+			this.iDDataGridViewTextBoxColumn3.HeaderText = "ID";
+			this.iDDataGridViewTextBoxColumn3.Name = "iDDataGridViewTextBoxColumn3";
+			this.iDDataGridViewTextBoxColumn3.ReadOnly = true;
+			this.iDDataGridViewTextBoxColumn3.Width = 43;
+			// 
+			// dateDataGridViewTextBoxColumn
+			// 
+			this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
+			this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
+			this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+			this.dateDataGridViewTextBoxColumn.ReadOnly = true;
+			this.dateDataGridViewTextBoxColumn.Width = 55;
+			// 
+			// amountDataGridViewTextBoxColumn
+			// 
+			this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
+			this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
+			this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+			this.amountDataGridViewTextBoxColumn.ReadOnly = true;
+			this.amountDataGridViewTextBoxColumn.Width = 68;
+			// 
+			// intendedUseDataGridViewTextBoxColumn
+			// 
+			this.intendedUseDataGridViewTextBoxColumn.DataPropertyName = "IntendedUse";
+			this.intendedUseDataGridViewTextBoxColumn.HeaderText = "IntendedUse";
+			this.intendedUseDataGridViewTextBoxColumn.Name = "intendedUseDataGridViewTextBoxColumn";
+			this.intendedUseDataGridViewTextBoxColumn.ReadOnly = true;
+			this.intendedUseDataGridViewTextBoxColumn.Width = 93;
+			// 
+			// typeDataGridViewTextBoxColumn
+			// 
+			this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
+			this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
+			this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+			this.typeDataGridViewTextBoxColumn.ReadOnly = true;
+			this.typeDataGridViewTextBoxColumn.Width = 56;
+			// 
+			// accountReceiverIDDataGridViewTextBoxColumn
+			// 
+			this.accountReceiverIDDataGridViewTextBoxColumn.DataPropertyName = "AccountReceiver_ID";
+			this.accountReceiverIDDataGridViewTextBoxColumn.HeaderText = "AccountReceiver_ID";
+			this.accountReceiverIDDataGridViewTextBoxColumn.Name = "accountReceiverIDDataGridViewTextBoxColumn";
+			this.accountReceiverIDDataGridViewTextBoxColumn.ReadOnly = true;
+			this.accountReceiverIDDataGridViewTextBoxColumn.Width = 132;
+			// 
+			// accountSenderIDDataGridViewTextBoxColumn
+			// 
+			this.accountSenderIDDataGridViewTextBoxColumn.DataPropertyName = "AccountSender_ID";
+			this.accountSenderIDDataGridViewTextBoxColumn.HeaderText = "AccountSender_ID";
+			this.accountSenderIDDataGridViewTextBoxColumn.Name = "accountSenderIDDataGridViewTextBoxColumn";
+			this.accountSenderIDDataGridViewTextBoxColumn.ReadOnly = true;
+			this.accountSenderIDDataGridViewTextBoxColumn.Width = 123;
+			// 
+			// transactionBindingSource
+			// 
+			this.transactionBindingSource.DataMember = "Transaction";
+			this.transactionBindingSource.DataSource = this.bankingSiteDataSet;
+			// 
+			// bankingSiteDataSet
+			// 
+			this.bankingSiteDataSet.DataSetName = "BankingSiteDataSet";
+			this.bankingSiteDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
 			// 
 			// tpAccounts
 			// 
@@ -350,10 +467,57 @@
 			this.tpAccounts.Text = "Accounts";
 			this.tpAccounts.UseVisualStyleBackColor = true;
 			// 
+			// iDTextBox
+			// 
+			this.iDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.accountBindingSource, "ID", true));
+			this.iDTextBox.Location = new System.Drawing.Point(99, 110);
+			this.iDTextBox.Name = "iDTextBox";
+			this.iDTextBox.Size = new System.Drawing.Size(100, 20);
+			this.iDTextBox.TabIndex = 2;
+			// 
+			// accountBindingSource
+			// 
+			this.accountBindingSource.DataMember = "Account";
+			this.accountBindingSource.DataSource = this.bankingSiteDataSet;
+			// 
+			// iBANTextBox
+			// 
+			this.iBANTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.accountBindingSource, "IBAN", true));
+			this.iBANTextBox.Location = new System.Drawing.Point(99, 136);
+			this.iBANTextBox.Name = "iBANTextBox";
+			this.iBANTextBox.Size = new System.Drawing.Size(100, 20);
+			this.iBANTextBox.TabIndex = 4;
+			// 
+			// balanceTextBox
+			// 
+			this.balanceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.accountBindingSource, "Balance", true));
+			this.balanceTextBox.Location = new System.Drawing.Point(99, 162);
+			this.balanceTextBox.Name = "balanceTextBox";
+			this.balanceTextBox.Size = new System.Drawing.Size(100, 20);
+			this.balanceTextBox.TabIndex = 6;
+			// 
+			// numberTextBox
+			// 
+			this.numberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.accountBindingSource, "Number", true));
+			this.numberTextBox.Location = new System.Drawing.Point(99, 188);
+			this.numberTextBox.Name = "numberTextBox";
+			this.numberTextBox.Size = new System.Drawing.Size(100, 20);
+			this.numberTextBox.TabIndex = 8;
+			// 
+			// customer_IDTextBox
+			// 
+			this.customer_IDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.accountBindingSource, "Customer_ID", true));
+			this.customer_IDTextBox.Location = new System.Drawing.Point(99, 214);
+			this.customer_IDTextBox.Name = "customer_IDTextBox";
+			this.customer_IDTextBox.Size = new System.Drawing.Size(100, 20);
+			this.customer_IDTextBox.TabIndex = 10;
+			// 
 			// dgvAccounts
 			// 
 			this.dgvAccounts.AllowUserToAddRows = false;
+			this.dgvAccounts.AllowUserToDeleteRows = false;
 			this.dgvAccounts.AutoGenerateColumns = false;
+			this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
 			this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvAccounts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iDDataGridViewTextBoxColumn2,
@@ -366,9 +530,50 @@
 			this.dgvAccounts.MultiSelect = false;
 			this.dgvAccounts.Name = "dgvAccounts";
 			this.dgvAccounts.ReadOnly = true;
-			this.dgvAccounts.RowHeadersWidth = 10;
+			this.dgvAccounts.RowHeadersWidth = 21;
+			this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvAccounts.Size = new System.Drawing.Size(763, 440);
 			this.dgvAccounts.TabIndex = 1;
+			// 
+			// iDDataGridViewTextBoxColumn2
+			// 
+			this.iDDataGridViewTextBoxColumn2.DataPropertyName = "ID";
+			this.iDDataGridViewTextBoxColumn2.HeaderText = "ID";
+			this.iDDataGridViewTextBoxColumn2.Name = "iDDataGridViewTextBoxColumn2";
+			this.iDDataGridViewTextBoxColumn2.ReadOnly = true;
+			this.iDDataGridViewTextBoxColumn2.Width = 43;
+			// 
+			// iBANDataGridViewTextBoxColumn
+			// 
+			this.iBANDataGridViewTextBoxColumn.DataPropertyName = "IBAN";
+			this.iBANDataGridViewTextBoxColumn.HeaderText = "IBAN";
+			this.iBANDataGridViewTextBoxColumn.Name = "iBANDataGridViewTextBoxColumn";
+			this.iBANDataGridViewTextBoxColumn.ReadOnly = true;
+			this.iBANDataGridViewTextBoxColumn.Width = 57;
+			// 
+			// balanceDataGridViewTextBoxColumn
+			// 
+			this.balanceDataGridViewTextBoxColumn.DataPropertyName = "Balance";
+			this.balanceDataGridViewTextBoxColumn.HeaderText = "Balance";
+			this.balanceDataGridViewTextBoxColumn.Name = "balanceDataGridViewTextBoxColumn";
+			this.balanceDataGridViewTextBoxColumn.ReadOnly = true;
+			this.balanceDataGridViewTextBoxColumn.Width = 71;
+			// 
+			// numberDataGridViewTextBoxColumn
+			// 
+			this.numberDataGridViewTextBoxColumn.DataPropertyName = "Number";
+			this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
+			this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
+			this.numberDataGridViewTextBoxColumn.ReadOnly = true;
+			this.numberDataGridViewTextBoxColumn.Width = 69;
+			// 
+			// customerIDDataGridViewTextBoxColumn
+			// 
+			this.customerIDDataGridViewTextBoxColumn.DataPropertyName = "Customer_ID";
+			this.customerIDDataGridViewTextBoxColumn.HeaderText = "Customer_ID";
+			this.customerIDDataGridViewTextBoxColumn.Name = "customerIDDataGridViewTextBoxColumn";
+			this.customerIDDataGridViewTextBoxColumn.ReadOnly = true;
+			this.customerIDDataGridViewTextBoxColumn.Width = 93;
 			// 
 			// tpCustomers
 			// 
@@ -403,6 +608,7 @@
 			// dgvCustomers
 			// 
 			this.dgvCustomers.AllowUserToAddRows = false;
+			this.dgvCustomers.AllowUserToDeleteRows = false;
 			this.dgvCustomers.AutoGenerateColumns = false;
 			this.dgvCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
 			this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -419,13 +625,68 @@
 			this.dgvCustomers.MultiSelect = false;
 			this.dgvCustomers.Name = "dgvCustomers";
 			this.dgvCustomers.ReadOnly = true;
+			this.dgvCustomers.RowHeadersWidth = 21;
+			this.dgvCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvCustomers.ShowEditingIcon = false;
 			this.dgvCustomers.Size = new System.Drawing.Size(642, 296);
 			this.dgvCustomers.TabIndex = 0;
 			// 
+			// iDDataGridViewTextBoxColumn
+			// 
+			this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
+			this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
+			this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
+			this.iDDataGridViewTextBoxColumn.ReadOnly = true;
+			this.iDDataGridViewTextBoxColumn.Width = 43;
+			// 
+			// firstNameDataGridViewTextBoxColumn
+			// 
+			this.firstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName";
+			this.firstNameDataGridViewTextBoxColumn.HeaderText = "FirstName";
+			this.firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
+			this.firstNameDataGridViewTextBoxColumn.ReadOnly = true;
+			this.firstNameDataGridViewTextBoxColumn.Width = 79;
+			// 
+			// lastNameDataGridViewTextBoxColumn
+			// 
+			this.lastNameDataGridViewTextBoxColumn.DataPropertyName = "LastName";
+			this.lastNameDataGridViewTextBoxColumn.HeaderText = "LastName";
+			this.lastNameDataGridViewTextBoxColumn.Name = "lastNameDataGridViewTextBoxColumn";
+			this.lastNameDataGridViewTextBoxColumn.ReadOnly = true;
+			this.lastNameDataGridViewTextBoxColumn.Width = 80;
+			// 
+			// phoneNumberDataGridViewTextBoxColumn
+			// 
+			this.phoneNumberDataGridViewTextBoxColumn.DataPropertyName = "PhoneNumber";
+			this.phoneNumberDataGridViewTextBoxColumn.HeaderText = "PhoneNumber";
+			this.phoneNumberDataGridViewTextBoxColumn.Name = "phoneNumberDataGridViewTextBoxColumn";
+			this.phoneNumberDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// emailAddressDataGridViewTextBoxColumn
+			// 
+			this.emailAddressDataGridViewTextBoxColumn.DataPropertyName = "EmailAddress";
+			this.emailAddressDataGridViewTextBoxColumn.HeaderText = "EmailAddress";
+			this.emailAddressDataGridViewTextBoxColumn.Name = "emailAddressDataGridViewTextBoxColumn";
+			this.emailAddressDataGridViewTextBoxColumn.ReadOnly = true;
+			this.emailAddressDataGridViewTextBoxColumn.Width = 95;
+			// 
+			// addressIDDataGridViewTextBoxColumn
+			// 
+			this.addressIDDataGridViewTextBoxColumn.DataPropertyName = "Address_ID";
+			this.addressIDDataGridViewTextBoxColumn.HeaderText = "Address_ID";
+			this.addressIDDataGridViewTextBoxColumn.Name = "addressIDDataGridViewTextBoxColumn";
+			this.addressIDDataGridViewTextBoxColumn.ReadOnly = true;
+			this.addressIDDataGridViewTextBoxColumn.Width = 87;
+			// 
+			// customerBindingSource
+			// 
+			this.customerBindingSource.DataMember = "Customer";
+			this.customerBindingSource.DataSource = this.bankingSiteDataSet;
+			// 
 			// dgvAddresses
 			// 
 			this.dgvAddresses.AllowUserToAddRows = false;
+			this.dgvAddresses.AllowUserToDeleteRows = false;
 			this.dgvAddresses.AutoGenerateColumns = false;
 			this.dgvAddresses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 			this.dgvAddresses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -441,14 +702,57 @@
 			this.dgvAddresses.MultiSelect = false;
 			this.dgvAddresses.Name = "dgvAddresses";
 			this.dgvAddresses.ReadOnly = true;
+			this.dgvAddresses.RowHeadersWidth = 21;
+			this.dgvAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvAddresses.ShowEditingIcon = false;
 			this.dgvAddresses.Size = new System.Drawing.Size(642, 303);
 			this.dgvAddresses.TabIndex = 1;
 			// 
+			// iDDataGridViewTextBoxColumn1
+			// 
+			this.iDDataGridViewTextBoxColumn1.DataPropertyName = "ID";
+			this.iDDataGridViewTextBoxColumn1.HeaderText = "ID";
+			this.iDDataGridViewTextBoxColumn1.Name = "iDDataGridViewTextBoxColumn1";
+			this.iDDataGridViewTextBoxColumn1.ReadOnly = true;
+			// 
+			// streetNameDataGridViewTextBoxColumn
+			// 
+			this.streetNameDataGridViewTextBoxColumn.DataPropertyName = "StreetName";
+			this.streetNameDataGridViewTextBoxColumn.HeaderText = "StreetName";
+			this.streetNameDataGridViewTextBoxColumn.Name = "streetNameDataGridViewTextBoxColumn";
+			this.streetNameDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// streetNumberDataGridViewTextBoxColumn
+			// 
+			this.streetNumberDataGridViewTextBoxColumn.DataPropertyName = "StreetNumber";
+			this.streetNumberDataGridViewTextBoxColumn.HeaderText = "StreetNumber";
+			this.streetNumberDataGridViewTextBoxColumn.Name = "streetNumberDataGridViewTextBoxColumn";
+			this.streetNumberDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// zipCodeDataGridViewTextBoxColumn
+			// 
+			this.zipCodeDataGridViewTextBoxColumn.DataPropertyName = "ZipCode";
+			this.zipCodeDataGridViewTextBoxColumn.HeaderText = "ZipCode";
+			this.zipCodeDataGridViewTextBoxColumn.Name = "zipCodeDataGridViewTextBoxColumn";
+			this.zipCodeDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// cityDataGridViewTextBoxColumn
+			// 
+			this.cityDataGridViewTextBoxColumn.DataPropertyName = "City";
+			this.cityDataGridViewTextBoxColumn.HeaderText = "City";
+			this.cityDataGridViewTextBoxColumn.Name = "cityDataGridViewTextBoxColumn";
+			this.cityDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// addressBindingSource
+			// 
+			this.addressBindingSource.DataMember = "Address";
+			this.addressBindingSource.DataSource = this.bankingSiteDataSet;
+			// 
 			// pnlCustomerDetails
 			// 
+			this.pnlCustomerDetails.Controls.Add(this.btnShowOwnedAccounts);
 			this.pnlCustomerDetails.Controls.Add(this.btnDeleteCustomer);
-			this.pnlCustomerDetails.Controls.Add(this.button2);
+			this.pnlCustomerDetails.Controls.Add(this.btnCreateNewCustomer);
 			this.pnlCustomerDetails.Controls.Add(this.btnUpdateCustomer);
 			this.pnlCustomerDetails.Controls.Add(iDLabel);
 			this.pnlCustomerDetails.Controls.Add(this.customerIDTextBox);
@@ -468,34 +772,46 @@
 			this.pnlCustomerDetails.Size = new System.Drawing.Size(335, 296);
 			this.pnlCustomerDetails.TabIndex = 21;
 			// 
+			// btnShowOwnedAccounts
+			// 
+			this.btnShowOwnedAccounts.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnShowOwnedAccounts.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
+			this.btnShowOwnedAccounts.Location = new System.Drawing.Point(161, 254);
+			this.btnShowOwnedAccounts.Name = "btnShowOwnedAccounts";
+			this.btnShowOwnedAccounts.Size = new System.Drawing.Size(166, 32);
+			this.btnShowOwnedAccounts.TabIndex = 23;
+			this.btnShowOwnedAccounts.Text = "Show Owned Accounts";
+			this.btnShowOwnedAccounts.UseVisualStyleBackColor = true;
+			// 
 			// btnDeleteCustomer
 			// 
 			this.btnDeleteCustomer.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnDeleteCustomer.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnDeleteCustomer.Location = new System.Drawing.Point(87, 254);
+			this.btnDeleteCustomer.Location = new System.Drawing.Point(12, 254);
 			this.btnDeleteCustomer.Name = "btnDeleteCustomer";
-			this.btnDeleteCustomer.Size = new System.Drawing.Size(157, 32);
+			this.btnDeleteCustomer.Size = new System.Drawing.Size(140, 32);
 			this.btnDeleteCustomer.TabIndex = 22;
 			this.btnDeleteCustomer.Text = "Delete Customer";
 			this.btnDeleteCustomer.UseVisualStyleBackColor = true;
 			this.btnDeleteCustomer.Click += new System.EventHandler(this.btnDeleteCustomer_Click);
 			// 
-			// button2
+			// btnCreateNewCustomer
 			// 
-			this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.button2.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.button2.Location = new System.Drawing.Point(166, 216);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(157, 32);
-			this.button2.TabIndex = 21;
-			this.button2.Text = "Create New Customer";
-			this.button2.UseVisualStyleBackColor = true;
+			this.btnCreateNewCustomer.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnCreateNewCustomer.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
+			this.btnCreateNewCustomer.Location = new System.Drawing.Point(161, 216);
+			this.btnCreateNewCustomer.Name = "btnCreateNewCustomer";
+			this.btnCreateNewCustomer.Size = new System.Drawing.Size(166, 32);
+			this.btnCreateNewCustomer.TabIndex = 21;
+			this.btnCreateNewCustomer.Text = "Create New Customer";
+			this.btnCreateNewCustomer.UseVisualStyleBackColor = true;
+			this.btnCreateNewCustomer.Click += new System.EventHandler(this.btnCreateNewCustomer_Click);
 			// 
 			// btnUpdateCustomer
 			// 
 			this.btnUpdateCustomer.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnUpdateCustomer.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnUpdateCustomer.Location = new System.Drawing.Point(11, 216);
+			this.btnUpdateCustomer.Location = new System.Drawing.Point(12, 216);
 			this.btnUpdateCustomer.Name = "btnUpdateCustomer";
 			this.btnUpdateCustomer.Size = new System.Drawing.Size(140, 32);
 			this.btnUpdateCustomer.TabIndex = 20;
@@ -567,7 +883,7 @@
 			// pnlAddressTableAdapter
 			// 
 			this.pnlAddressTableAdapter.AutoScroll = true;
-			this.pnlAddressTableAdapter.Controls.Add(this.button3);
+			this.pnlAddressTableAdapter.Controls.Add(this.btnDeleteAddress);
 			this.pnlAddressTableAdapter.Controls.Add(this.btnCreateNewAddress);
 			this.pnlAddressTableAdapter.Controls.Add(this.btnUpdateAddress);
 			this.pnlAddressTableAdapter.Controls.Add(iDLabel1);
@@ -586,17 +902,17 @@
 			this.pnlAddressTableAdapter.Size = new System.Drawing.Size(335, 303);
 			this.pnlAddressTableAdapter.TabIndex = 22;
 			// 
-			// button3
+			// btnDeleteAddress
 			// 
-			this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.button3.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.button3.Location = new System.Drawing.Point(87, 253);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(157, 32);
-			this.button3.TabIndex = 23;
-			this.button3.Text = "Delete Address";
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Click += new System.EventHandler(this.button3_Click);
+			this.btnDeleteAddress.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnDeleteAddress.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
+			this.btnDeleteAddress.Location = new System.Drawing.Point(89, 253);
+			this.btnDeleteAddress.Name = "btnDeleteAddress";
+			this.btnDeleteAddress.Size = new System.Drawing.Size(157, 32);
+			this.btnDeleteAddress.TabIndex = 23;
+			this.btnDeleteAddress.Text = "Delete Address";
+			this.btnDeleteAddress.UseVisualStyleBackColor = true;
+			this.btnDeleteAddress.Click += new System.EventHandler(this.btnDeleteAddress_Click);
 			// 
 			// btnCreateNewAddress
 			// 
@@ -671,11 +987,6 @@
 			this.cityTextBox.Name = "cityTextBox";
 			this.cityTextBox.Size = new System.Drawing.Size(185, 30);
 			this.cityTextBox.TabIndex = 9;
-			// 
-			// bankingSiteDataSet
-			// 
-			this.bankingSiteDataSet.DataSetName = "BankingSiteDataSet";
-			this.bankingSiteDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
 			// 
 			// tpDBConnection
 			// 
@@ -902,7 +1213,7 @@
 			this.tpAddTransaction.Controls.Add(this.textBox1);
 			this.tpAddTransaction.Controls.Add(this.comboBox1);
 			this.tpAddTransaction.Controls.Add(this.lblReceiver);
-			this.tpAddTransaction.Controls.Add(this.button1);
+			this.tpAddTransaction.Controls.Add(this.btnStartTransaction);
 			this.tpAddTransaction.Controls.Add(this.lblSelectedAccount);
 			this.tpAddTransaction.Controls.Add(this.lblAmount);
 			this.tpAddTransaction.Controls.Add(this.lblTransactionType);
@@ -965,15 +1276,15 @@
 			this.lblReceiver.Text = "Receiver:";
 			this.lblReceiver.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// button1
+			// btnStartTransaction
 			// 
-			this.button1.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button1.Location = new System.Drawing.Point(92, 385);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(168, 44);
-			this.button1.TabIndex = 12;
-			this.button1.Text = "Start Transaction";
-			this.button1.UseVisualStyleBackColor = true;
+			this.btnStartTransaction.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnStartTransaction.Location = new System.Drawing.Point(92, 385);
+			this.btnStartTransaction.Name = "btnStartTransaction";
+			this.btnStartTransaction.Size = new System.Drawing.Size(168, 44);
+			this.btnStartTransaction.TabIndex = 12;
+			this.btnStartTransaction.Text = "Start Transaction";
+			this.btnStartTransaction.UseVisualStyleBackColor = true;
 			// 
 			// lblSelectedAccount
 			// 
@@ -1063,277 +1374,6 @@
 			this.tableAdapterManager.TransactionTableAdapter = null;
 			this.tableAdapterManager.UpdateOrder = BankingSite.BankingSiteDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
 			// 
-			// customerBindingSource
-			// 
-			this.customerBindingSource.DataMember = "Customer";
-			this.customerBindingSource.DataSource = this.bankingSiteDataSet;
-			// 
-			// iDDataGridViewTextBoxColumn
-			// 
-			this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
-			this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
-			this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
-			this.iDDataGridViewTextBoxColumn.ReadOnly = true;
-			this.iDDataGridViewTextBoxColumn.Width = 43;
-			// 
-			// firstNameDataGridViewTextBoxColumn
-			// 
-			this.firstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName";
-			this.firstNameDataGridViewTextBoxColumn.HeaderText = "FirstName";
-			this.firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
-			this.firstNameDataGridViewTextBoxColumn.ReadOnly = true;
-			this.firstNameDataGridViewTextBoxColumn.Width = 79;
-			// 
-			// lastNameDataGridViewTextBoxColumn
-			// 
-			this.lastNameDataGridViewTextBoxColumn.DataPropertyName = "LastName";
-			this.lastNameDataGridViewTextBoxColumn.HeaderText = "LastName";
-			this.lastNameDataGridViewTextBoxColumn.Name = "lastNameDataGridViewTextBoxColumn";
-			this.lastNameDataGridViewTextBoxColumn.ReadOnly = true;
-			this.lastNameDataGridViewTextBoxColumn.Width = 80;
-			// 
-			// phoneNumberDataGridViewTextBoxColumn
-			// 
-			this.phoneNumberDataGridViewTextBoxColumn.DataPropertyName = "PhoneNumber";
-			this.phoneNumberDataGridViewTextBoxColumn.HeaderText = "PhoneNumber";
-			this.phoneNumberDataGridViewTextBoxColumn.Name = "phoneNumberDataGridViewTextBoxColumn";
-			this.phoneNumberDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// emailAddressDataGridViewTextBoxColumn
-			// 
-			this.emailAddressDataGridViewTextBoxColumn.DataPropertyName = "EmailAddress";
-			this.emailAddressDataGridViewTextBoxColumn.HeaderText = "EmailAddress";
-			this.emailAddressDataGridViewTextBoxColumn.Name = "emailAddressDataGridViewTextBoxColumn";
-			this.emailAddressDataGridViewTextBoxColumn.ReadOnly = true;
-			this.emailAddressDataGridViewTextBoxColumn.Width = 95;
-			// 
-			// addressIDDataGridViewTextBoxColumn
-			// 
-			this.addressIDDataGridViewTextBoxColumn.DataPropertyName = "Address_ID";
-			this.addressIDDataGridViewTextBoxColumn.HeaderText = "Address_ID";
-			this.addressIDDataGridViewTextBoxColumn.Name = "addressIDDataGridViewTextBoxColumn";
-			this.addressIDDataGridViewTextBoxColumn.ReadOnly = true;
-			this.addressIDDataGridViewTextBoxColumn.Width = 87;
-			// 
-			// addressBindingSource
-			// 
-			this.addressBindingSource.DataMember = "Address";
-			this.addressBindingSource.DataSource = this.bankingSiteDataSet;
-			// 
-			// iDDataGridViewTextBoxColumn1
-			// 
-			this.iDDataGridViewTextBoxColumn1.DataPropertyName = "ID";
-			this.iDDataGridViewTextBoxColumn1.HeaderText = "ID";
-			this.iDDataGridViewTextBoxColumn1.Name = "iDDataGridViewTextBoxColumn1";
-			this.iDDataGridViewTextBoxColumn1.ReadOnly = true;
-			// 
-			// streetNameDataGridViewTextBoxColumn
-			// 
-			this.streetNameDataGridViewTextBoxColumn.DataPropertyName = "StreetName";
-			this.streetNameDataGridViewTextBoxColumn.HeaderText = "StreetName";
-			this.streetNameDataGridViewTextBoxColumn.Name = "streetNameDataGridViewTextBoxColumn";
-			this.streetNameDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// streetNumberDataGridViewTextBoxColumn
-			// 
-			this.streetNumberDataGridViewTextBoxColumn.DataPropertyName = "StreetNumber";
-			this.streetNumberDataGridViewTextBoxColumn.HeaderText = "StreetNumber";
-			this.streetNumberDataGridViewTextBoxColumn.Name = "streetNumberDataGridViewTextBoxColumn";
-			this.streetNumberDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// zipCodeDataGridViewTextBoxColumn
-			// 
-			this.zipCodeDataGridViewTextBoxColumn.DataPropertyName = "ZipCode";
-			this.zipCodeDataGridViewTextBoxColumn.HeaderText = "ZipCode";
-			this.zipCodeDataGridViewTextBoxColumn.Name = "zipCodeDataGridViewTextBoxColumn";
-			this.zipCodeDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// cityDataGridViewTextBoxColumn
-			// 
-			this.cityDataGridViewTextBoxColumn.DataPropertyName = "City";
-			this.cityDataGridViewTextBoxColumn.HeaderText = "City";
-			this.cityDataGridViewTextBoxColumn.Name = "cityDataGridViewTextBoxColumn";
-			this.cityDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// accountBindingSource
-			// 
-			this.accountBindingSource.DataMember = "Account";
-			this.accountBindingSource.DataSource = this.bankingSiteDataSet;
-			// 
-			// iDDataGridViewTextBoxColumn2
-			// 
-			this.iDDataGridViewTextBoxColumn2.DataPropertyName = "ID";
-			this.iDDataGridViewTextBoxColumn2.HeaderText = "ID";
-			this.iDDataGridViewTextBoxColumn2.Name = "iDDataGridViewTextBoxColumn2";
-			this.iDDataGridViewTextBoxColumn2.ReadOnly = true;
-			// 
-			// iBANDataGridViewTextBoxColumn
-			// 
-			this.iBANDataGridViewTextBoxColumn.DataPropertyName = "IBAN";
-			this.iBANDataGridViewTextBoxColumn.HeaderText = "IBAN";
-			this.iBANDataGridViewTextBoxColumn.Name = "iBANDataGridViewTextBoxColumn";
-			this.iBANDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// balanceDataGridViewTextBoxColumn
-			// 
-			this.balanceDataGridViewTextBoxColumn.DataPropertyName = "Balance";
-			this.balanceDataGridViewTextBoxColumn.HeaderText = "Balance";
-			this.balanceDataGridViewTextBoxColumn.Name = "balanceDataGridViewTextBoxColumn";
-			this.balanceDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// numberDataGridViewTextBoxColumn
-			// 
-			this.numberDataGridViewTextBoxColumn.DataPropertyName = "Number";
-			this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
-			this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
-			this.numberDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// customerIDDataGridViewTextBoxColumn
-			// 
-			this.customerIDDataGridViewTextBoxColumn.DataPropertyName = "Customer_ID";
-			this.customerIDDataGridViewTextBoxColumn.HeaderText = "Customer_ID";
-			this.customerIDDataGridViewTextBoxColumn.Name = "customerIDDataGridViewTextBoxColumn";
-			this.customerIDDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// transactionBindingSource
-			// 
-			this.transactionBindingSource.DataMember = "Transaction";
-			this.transactionBindingSource.DataSource = this.bankingSiteDataSet;
-			// 
-			// iDDataGridViewTextBoxColumn3
-			// 
-			this.iDDataGridViewTextBoxColumn3.DataPropertyName = "ID";
-			this.iDDataGridViewTextBoxColumn3.HeaderText = "ID";
-			this.iDDataGridViewTextBoxColumn3.Name = "iDDataGridViewTextBoxColumn3";
-			this.iDDataGridViewTextBoxColumn3.ReadOnly = true;
-			// 
-			// dateDataGridViewTextBoxColumn
-			// 
-			this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
-			this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
-			this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-			this.dateDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// amountDataGridViewTextBoxColumn
-			// 
-			this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
-			this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
-			this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
-			this.amountDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// intendedUseDataGridViewTextBoxColumn
-			// 
-			this.intendedUseDataGridViewTextBoxColumn.DataPropertyName = "IntendedUse";
-			this.intendedUseDataGridViewTextBoxColumn.HeaderText = "IntendedUse";
-			this.intendedUseDataGridViewTextBoxColumn.Name = "intendedUseDataGridViewTextBoxColumn";
-			this.intendedUseDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// typeDataGridViewTextBoxColumn
-			// 
-			this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-			this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
-			this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-			this.typeDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// accountReceiverIDDataGridViewTextBoxColumn
-			// 
-			this.accountReceiverIDDataGridViewTextBoxColumn.DataPropertyName = "AccountReceiver_ID";
-			this.accountReceiverIDDataGridViewTextBoxColumn.HeaderText = "AccountReceiver_ID";
-			this.accountReceiverIDDataGridViewTextBoxColumn.Name = "accountReceiverIDDataGridViewTextBoxColumn";
-			this.accountReceiverIDDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// accountSenderIDDataGridViewTextBoxColumn
-			// 
-			this.accountSenderIDDataGridViewTextBoxColumn.DataPropertyName = "AccountSender_ID";
-			this.accountSenderIDDataGridViewTextBoxColumn.HeaderText = "AccountSender_ID";
-			this.accountSenderIDDataGridViewTextBoxColumn.Name = "accountSenderIDDataGridViewTextBoxColumn";
-			this.accountSenderIDDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// iDLabel2
-			// 
-			iDLabel2.AutoSize = true;
-			iDLabel2.Location = new System.Drawing.Point(25, 113);
-			iDLabel2.Name = "iDLabel2";
-			iDLabel2.Size = new System.Drawing.Size(21, 13);
-			iDLabel2.TabIndex = 1;
-			iDLabel2.Text = "ID:";
-			// 
-			// iDTextBox
-			// 
-			this.iDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.accountBindingSource, "ID", true));
-			this.iDTextBox.Location = new System.Drawing.Point(99, 110);
-			this.iDTextBox.Name = "iDTextBox";
-			this.iDTextBox.Size = new System.Drawing.Size(100, 20);
-			this.iDTextBox.TabIndex = 2;
-			// 
-			// iBANLabel
-			// 
-			iBANLabel.AutoSize = true;
-			iBANLabel.Location = new System.Drawing.Point(25, 139);
-			iBANLabel.Name = "iBANLabel";
-			iBANLabel.Size = new System.Drawing.Size(35, 13);
-			iBANLabel.TabIndex = 3;
-			iBANLabel.Text = "IBAN:";
-			// 
-			// iBANTextBox
-			// 
-			this.iBANTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.accountBindingSource, "IBAN", true));
-			this.iBANTextBox.Location = new System.Drawing.Point(99, 136);
-			this.iBANTextBox.Name = "iBANTextBox";
-			this.iBANTextBox.Size = new System.Drawing.Size(100, 20);
-			this.iBANTextBox.TabIndex = 4;
-			// 
-			// balanceLabel
-			// 
-			balanceLabel.AutoSize = true;
-			balanceLabel.Location = new System.Drawing.Point(25, 165);
-			balanceLabel.Name = "balanceLabel";
-			balanceLabel.Size = new System.Drawing.Size(49, 13);
-			balanceLabel.TabIndex = 5;
-			balanceLabel.Text = "Balance:";
-			// 
-			// balanceTextBox
-			// 
-			this.balanceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.accountBindingSource, "Balance", true));
-			this.balanceTextBox.Location = new System.Drawing.Point(99, 162);
-			this.balanceTextBox.Name = "balanceTextBox";
-			this.balanceTextBox.Size = new System.Drawing.Size(100, 20);
-			this.balanceTextBox.TabIndex = 6;
-			// 
-			// numberLabel
-			// 
-			numberLabel.AutoSize = true;
-			numberLabel.Location = new System.Drawing.Point(25, 191);
-			numberLabel.Name = "numberLabel";
-			numberLabel.Size = new System.Drawing.Size(47, 13);
-			numberLabel.TabIndex = 7;
-			numberLabel.Text = "Number:";
-			// 
-			// numberTextBox
-			// 
-			this.numberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.accountBindingSource, "Number", true));
-			this.numberTextBox.Location = new System.Drawing.Point(99, 188);
-			this.numberTextBox.Name = "numberTextBox";
-			this.numberTextBox.Size = new System.Drawing.Size(100, 20);
-			this.numberTextBox.TabIndex = 8;
-			// 
-			// customer_IDLabel
-			// 
-			customer_IDLabel.AutoSize = true;
-			customer_IDLabel.Location = new System.Drawing.Point(25, 217);
-			customer_IDLabel.Name = "customer_IDLabel";
-			customer_IDLabel.Size = new System.Drawing.Size(68, 13);
-			customer_IDLabel.TabIndex = 9;
-			customer_IDLabel.Text = "Customer ID:";
-			// 
-			// customer_IDTextBox
-			// 
-			this.customer_IDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.accountBindingSource, "Customer_ID", true));
-			this.customer_IDTextBox.Location = new System.Drawing.Point(99, 214);
-			this.customer_IDTextBox.Name = "customer_IDTextBox";
-			this.customer_IDTextBox.Size = new System.Drawing.Size(100, 20);
-			this.customer_IDTextBox.TabIndex = 10;
-			// 
 			// Window
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1348,18 +1388,22 @@
 			this.Load += new System.EventHandler(this.Window_Load);
 			this.tpTransactions.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.transactionBindingSource)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.bankingSiteDataSet)).EndInit();
 			this.tpAccounts.ResumeLayout(false);
 			this.tpAccounts.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.accountBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
 			this.tpCustomers.ResumeLayout(false);
 			this.tlpCostumerAddress.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dgvAddresses)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).EndInit();
 			this.pnlCustomerDetails.ResumeLayout(false);
 			this.pnlCustomerDetails.PerformLayout();
 			this.pnlAddressTableAdapter.ResumeLayout(false);
 			this.pnlAddressTableAdapter.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.bankingSiteDataSet)).EndInit();
 			this.tpDBConnection.ResumeLayout(false);
 			this.tpDBConnection.PerformLayout();
 			this.pnlDbConnection.ResumeLayout(false);
@@ -1371,10 +1415,6 @@
 			this.tpAddTransaction.ResumeLayout(false);
 			this.tpAddTransaction.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.accountBindingSource)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.transactionBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -1389,13 +1429,12 @@
 		private System.Windows.Forms.TabPage tpDetails;
 		private System.Windows.Forms.TabPage tpAddTransaction;
 		private System.Windows.Forms.DataGridView dgvTransactions;
-		private System.Windows.Forms.DataGridView dgvAccounts;
 		private System.Windows.Forms.DataGridView dgvCustomers;
 		private System.Windows.Forms.DataGridView dgvSelectedCostumerAccounts;
 		private System.Windows.Forms.ComboBox cbTransactionType;
 		private System.Windows.Forms.NumericUpDown nudAmount;
 		private System.Windows.Forms.Label lblSelectedCustomerAccounts;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button btnStartTransaction;
 		private System.Windows.Forms.Label lblSelectedAccount;
 		private System.Windows.Forms.Label lblAmount;
 		private System.Windows.Forms.Label lblTransactionType;
@@ -1423,7 +1462,7 @@
 		private System.Windows.Forms.TextBox emailAddressTextBox;
 		private System.Windows.Forms.TextBox lastNameTextBox;
 		private System.Windows.Forms.TextBox phoneNumberTextBox;
-		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.Button btnCreateNewCustomer;
 		private System.Windows.Forms.Button btnUpdateCustomer;
 		private System.Windows.Forms.Panel pnlAddressTableAdapter;
 		private System.Windows.Forms.TextBox addressIDTextBox;
@@ -1434,7 +1473,7 @@
 		private System.Windows.Forms.Button btnCreateNewAddress;
 		private System.Windows.Forms.Button btnUpdateAddress;
 		private System.Windows.Forms.Button btnDeleteCustomer;
-		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Button btnDeleteAddress;
 		private BankingSiteDataSetTableAdapters.AccountTableAdapter accountTableAdapter;
 		private BankingSiteDataSetTableAdapters.CustomerTableAdapter customerTableAdapter;
 		private BankingSiteDataSetTableAdapters.AddressTableAdapter addressTableAdapter;
@@ -1455,11 +1494,6 @@
 		private System.Windows.Forms.TextBox balanceTextBox;
 		private System.Windows.Forms.TextBox numberTextBox;
 		private System.Windows.Forms.TextBox customer_IDTextBox;
-		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn iBANDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn balanceDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn customerIDDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
@@ -1473,5 +1507,12 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn zipCodeDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn cityDataGridViewTextBoxColumn;
 		private System.Windows.Forms.BindingSource addressBindingSource;
+		private System.Windows.Forms.DataGridView dgvAccounts;
+		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn iBANDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn balanceDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn customerIDDataGridViewTextBoxColumn;
+		private System.Windows.Forms.Button btnShowOwnedAccounts;
 	}
 }
