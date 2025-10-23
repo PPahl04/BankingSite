@@ -67,12 +67,12 @@
 			this.customer_IDTextBox = new System.Windows.Forms.TextBox();
 			this.btnCreateAccount = new System.Windows.Forms.Button();
 			this.pnlTransaction = new System.Windows.Forms.Panel();
+			this.accountReceiver_IDComboBox = new System.Windows.Forms.ComboBox();
+			this.accountSender_IDComboBox = new System.Windows.Forms.ComboBox();
+			this.typeComboBox = new System.Windows.Forms.ComboBox();
 			this.dateDateTimePicker = new System.Windows.Forms.DateTimePicker();
 			this.amountTextBox = new System.Windows.Forms.TextBox();
 			this.intendedUseTextBox = new System.Windows.Forms.TextBox();
-			this.typeTextBox = new System.Windows.Forms.TextBox();
-			this.accountReceiver_IDTextBox = new System.Windows.Forms.TextBox();
-			this.accountSender_IDTextBox = new System.Windows.Forms.TextBox();
 			this.btnTransaction = new System.Windows.Forms.Button();
 			firstNameLabel = new System.Windows.Forms.Label();
 			lastNameLabel = new System.Windows.Forms.Label();
@@ -522,6 +522,9 @@
 			// 
 			// pnlTransaction
 			// 
+			this.pnlTransaction.Controls.Add(this.accountReceiver_IDComboBox);
+			this.pnlTransaction.Controls.Add(this.accountSender_IDComboBox);
+			this.pnlTransaction.Controls.Add(this.typeComboBox);
 			this.pnlTransaction.Controls.Add(dateLabel);
 			this.pnlTransaction.Controls.Add(this.dateDateTimePicker);
 			this.pnlTransaction.Controls.Add(amountLabel);
@@ -529,11 +532,8 @@
 			this.pnlTransaction.Controls.Add(intendedUseLabel);
 			this.pnlTransaction.Controls.Add(this.intendedUseTextBox);
 			this.pnlTransaction.Controls.Add(typeLabel);
-			this.pnlTransaction.Controls.Add(this.typeTextBox);
 			this.pnlTransaction.Controls.Add(accountReceiver_IDLabel);
-			this.pnlTransaction.Controls.Add(this.accountReceiver_IDTextBox);
 			this.pnlTransaction.Controls.Add(accountSender_IDLabel);
-			this.pnlTransaction.Controls.Add(this.accountSender_IDTextBox);
 			this.pnlTransaction.Controls.Add(this.btnTransaction);
 			this.pnlTransaction.Location = new System.Drawing.Point(273, 295);
 			this.pnlTransaction.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -542,14 +542,46 @@
 			this.pnlTransaction.TabIndex = 32;
 			this.pnlTransaction.Visible = false;
 			// 
+			// accountReceiver_IDComboBox
+			// 
+			this.accountReceiver_IDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.accountReceiver_IDComboBox.Enabled = false;
+			this.accountReceiver_IDComboBox.FormattingEnabled = true;
+			this.accountReceiver_IDComboBox.Location = new System.Drawing.Point(187, 200);
+			this.accountReceiver_IDComboBox.Name = "accountReceiver_IDComboBox";
+			this.accountReceiver_IDComboBox.Size = new System.Drawing.Size(265, 31);
+			this.accountReceiver_IDComboBox.TabIndex = 38;
+			// 
+			// accountSender_IDComboBox
+			// 
+			this.accountSender_IDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.accountSender_IDComboBox.FormattingEnabled = true;
+			this.accountSender_IDComboBox.Location = new System.Drawing.Point(187, 246);
+			this.accountSender_IDComboBox.Name = "accountSender_IDComboBox";
+			this.accountSender_IDComboBox.Size = new System.Drawing.Size(265, 31);
+			this.accountSender_IDComboBox.TabIndex = 37;
+			this.accountSender_IDComboBox.SelectedIndexChanged += new System.EventHandler(this.accountSender_IDComboBox_SelectedIndexChanged);
+			// 
+			// typeComboBox
+			// 
+			this.typeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.typeComboBox.FormattingEnabled = true;
+			this.typeComboBox.Location = new System.Drawing.Point(187, 154);
+			this.typeComboBox.Name = "typeComboBox";
+			this.typeComboBox.Size = new System.Drawing.Size(265, 31);
+			this.typeComboBox.TabIndex = 36;
+			this.typeComboBox.SelectedIndexChanged += new System.EventHandler(this.typeComboBox_SelectedIndexChanged);
+			// 
 			// dateDateTimePicker
 			// 
 			this.dateDateTimePicker.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.dateDateTimePicker.Location = new System.Drawing.Point(187, 9);
 			this.dateDateTimePicker.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.dateDateTimePicker.MaxDate = new System.DateTime(2025, 10, 23, 0, 0, 0, 0);
 			this.dateDateTimePicker.Name = "dateDateTimePicker";
 			this.dateDateTimePicker.Size = new System.Drawing.Size(265, 30);
 			this.dateDateTimePicker.TabIndex = 25;
+			this.dateDateTimePicker.Value = new System.DateTime(2025, 10, 23, 0, 0, 0, 0);
 			// 
 			// amountTextBox
 			// 
@@ -568,33 +600,6 @@
 			this.intendedUseTextBox.Name = "intendedUseTextBox";
 			this.intendedUseTextBox.Size = new System.Drawing.Size(265, 30);
 			this.intendedUseTextBox.TabIndex = 29;
-			// 
-			// typeTextBox
-			// 
-			this.typeTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.typeTextBox.Location = new System.Drawing.Point(187, 152);
-			this.typeTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.typeTextBox.Name = "typeTextBox";
-			this.typeTextBox.Size = new System.Drawing.Size(265, 30);
-			this.typeTextBox.TabIndex = 31;
-			// 
-			// accountReceiver_IDTextBox
-			// 
-			this.accountReceiver_IDTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.accountReceiver_IDTextBox.Location = new System.Drawing.Point(187, 198);
-			this.accountReceiver_IDTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.accountReceiver_IDTextBox.Name = "accountReceiver_IDTextBox";
-			this.accountReceiver_IDTextBox.Size = new System.Drawing.Size(265, 30);
-			this.accountReceiver_IDTextBox.TabIndex = 33;
-			// 
-			// accountSender_IDTextBox
-			// 
-			this.accountSender_IDTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.accountSender_IDTextBox.Location = new System.Drawing.Point(187, 244);
-			this.accountSender_IDTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.accountSender_IDTextBox.Name = "accountSender_IDTextBox";
-			this.accountSender_IDTextBox.Size = new System.Drawing.Size(265, 30);
-			this.accountSender_IDTextBox.TabIndex = 35;
 			// 
 			// btnTransaction
 			// 
@@ -664,8 +669,8 @@
 		private System.Windows.Forms.DateTimePicker dateDateTimePicker;
 		private System.Windows.Forms.TextBox amountTextBox;
 		private System.Windows.Forms.TextBox intendedUseTextBox;
-		private System.Windows.Forms.TextBox typeTextBox;
-		private System.Windows.Forms.TextBox accountReceiver_IDTextBox;
-		private System.Windows.Forms.TextBox accountSender_IDTextBox;
+		private System.Windows.Forms.ComboBox typeComboBox;
+		private System.Windows.Forms.ComboBox accountReceiver_IDComboBox;
+		private System.Windows.Forms.ComboBox accountSender_IDComboBox;
 	}
 }

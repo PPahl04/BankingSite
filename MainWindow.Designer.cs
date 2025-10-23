@@ -123,7 +123,7 @@
 			this.addressTableAdapter = new BankingSite.BankingSiteDataSetTableAdapters.AddressTableAdapter();
 			this.accountTableAdapter = new BankingSite.BankingSiteDataSetTableAdapters.AccountTableAdapter();
 			this.transactionTableAdapter = new BankingSite.BankingSiteDataSetTableAdapters.TransactionTableAdapter();
-			this.tableAdapterManager1 = new BankingSite.BankingSiteDataSetTableAdapters.TableAdapterManager();
+			this.tableAdapterManager = new BankingSite.BankingSiteDataSetTableAdapters.TableAdapterManager();
 			this.tlpTransactions = new System.Windows.Forms.TableLayoutPanel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			iDLabel = new System.Windows.Forms.Label();
@@ -1175,14 +1175,14 @@
 			// 
 			this.transactionTableAdapter.ClearBeforeFill = true;
 			// 
-			// tableAdapterManager1
+			// tableAdapterManager
 			// 
-			this.tableAdapterManager1.AccountTableAdapter = this.accountTableAdapter;
-			this.tableAdapterManager1.AddressTableAdapter = this.addressTableAdapter;
-			this.tableAdapterManager1.BackupDataSetBeforeUpdate = false;
-			this.tableAdapterManager1.CustomerTableAdapter = this.customerTableAdapter;
-			this.tableAdapterManager1.TransactionTableAdapter = this.transactionTableAdapter;
-			this.tableAdapterManager1.UpdateOrder = BankingSite.BankingSiteDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+			this.tableAdapterManager.AccountTableAdapter = this.accountTableAdapter;
+			this.tableAdapterManager.AddressTableAdapter = this.addressTableAdapter;
+			this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+			this.tableAdapterManager.CustomerTableAdapter = this.customerTableAdapter;
+			this.tableAdapterManager.TransactionTableAdapter = this.transactionTableAdapter;
+			this.tableAdapterManager.UpdateOrder = BankingSite.BankingSiteDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
 			// 
 			// tlpTransactions
 			// 
@@ -1292,7 +1292,6 @@
 		private System.Windows.Forms.TableLayoutPanel tlpAccounts;
 		private System.Windows.Forms.Panel pnlAccountDetails;
 		private System.Windows.Forms.Button btnDeleteSelectedAccount;
-		private BankingSiteDataSetTableAdapters.TableAdapterManager tableAdapterManager;
 		private System.Windows.Forms.Button btnCreateNewAccount;
 		private BankingSiteDataSet bankingSiteDataSet;
 		private System.Windows.Forms.BindingSource customerBindingSource;
@@ -1337,7 +1336,7 @@
 		private System.Windows.Forms.TextBox streetNumberTextBox;
 		private System.Windows.Forms.TextBox zipCodeTextBox;
 		private System.Windows.Forms.TextBox cityTextBox;
-		private BankingSiteDataSetTableAdapters.TableAdapterManager tableAdapterManager1;
+		private BankingSiteDataSetTableAdapters.TableAdapterManager tableAdapterManager;
 		private System.Windows.Forms.TextBox accountIDTextBox;
 		private System.Windows.Forms.TextBox transactionIDTextBox;
 		private System.Windows.Forms.Button btnCreateNewTransaction;
