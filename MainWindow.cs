@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using BankingSite;
 
 namespace BankingSite
 {
-	public partial class Window : Form
+	public partial class MainWindow : Form
 	{
-		public Window()
+		public MainWindow()
 		{
 			InitializeComponent();
 		}
@@ -74,19 +76,6 @@ namespace BankingSite
 			{
 				MessageBox.Show(ex.Message, "An Error ocurred");
 			}
-		}
-
-		private void tcWindow_TabIndexChanged(object sender, EventArgs e)
-		{
-			//TabControl tc = (TabControl)sender;
-
-			//if (tpDetails.Name.Equals(tcWindow.TabPages[tcWindow.SelectedIndex].Name) && !_detailsHaveBeenUpdated)
-			//{
-			//	tcWindow.SelectedTab = tcWindow.TabPages[_currentTabPage];
-			//	return;
-			//}
-
-			//_currentTabPage = tcWindow.TabPages[tcWindow.SelectedIndex].Name;
 		}
 
 		void btnUpdateCustomer_Click(object sender, EventArgs e)
@@ -159,7 +148,7 @@ namespace BankingSite
 		private void btnDeleteAddress_Click(object sender, EventArgs e)
 		{
 			if (MessageBox.Show(string.Concat("Are you sure you want to delete the address with the ID: ", addressIDTextBox.Text, "?"), "Delete selected address",
-			MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
 				addressTableAdapter.DeleteAddressWithID(Convert.ToInt32(addressIDTextBox.Text));
 				this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
@@ -169,6 +158,25 @@ namespace BankingSite
 		private void btnCreateNewCustomer_Click(object sender, EventArgs e)
 		{
 
+		}
+
+		private void btnDeleteSelectedAccount_Click(object sender, EventArgs e)
+		{
+			if (MessageBox.Show(string.Concat("Are you sure you want to delete the account with the ID: ", accountIDTextBox.Text, "?"), "Delete selected account",
+				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+			{
+				accountTableAdapter.DeleteAccountWithID(Convert.ToInt32(accountIDTextBox.Text));
+				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+			}
+		}
+
+		private void btnShowOwnedAccounts_Click(object sender, EventArgs e)
+		{
+			DataTable accounts = new DataTable();
+
+
+
+			OwnedAccounts owned = new OwnedAccounts(accounts);
 		}
 	}
 }
