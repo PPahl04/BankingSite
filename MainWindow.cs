@@ -8,6 +8,13 @@ namespace BankingSite
 {
 	public partial class MainWindow : Form
 	{
+		string _connectionString;
+		SqlConnection _connection;
+
+		string _currentTabPage;
+		bool _detailsHaveBeenUpdated;
+
+		#region Server Connection
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -15,21 +22,24 @@ namespace BankingSite
 
 		private void Window_Load(object sender, EventArgs e)
 		{
-			// TODO: This line of code loads data into the 'bankingSiteDataSet.Customer' table. You can move, or remove it, as needed.
-			this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
 			// TODO: This line of code loads data into the 'bankingSiteDataSet.Transaction' table. You can move, or remove it, as needed.
 			this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
 			// TODO: This line of code loads data into the 'bankingSiteDataSet.Account' table. You can move, or remove it, as needed.
 			this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
 			// TODO: This line of code loads data into the 'bankingSiteDataSet.Address' table. You can move, or remove it, as needed.
 			this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
+			// TODO: This line of code loads data into the 'bankingSiteDataSet.Customer' table. You can move, or remove it, as needed.
+			this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
+			// TODO: This line of code loads data into the 'bankingSiteDataSet.Customer' table. You can move, or remove it, as needed.
+			customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
+			// TODO: This line of code loads data into the 'bankingSiteDataSet.Transaction' table. You can move, or remove it, as needed.
+			transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+			// TODO: This line of code loads data into the 'bankingSiteDataSet.Account' table. You can move, or remove it, as needed.
+			accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+			// TODO: This line of code loads data into the 'bankingSiteDataSet.Address' table. You can move, or remove it, as needed.
+			addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
 		}
 
-		string _connectionString;
-		SqlConnection _connection;
-
-		string _currentTabPage;
-		bool _detailsHaveBeenUpdated;
 
 		void EstablisheDatabaseConnection()
 		{	//string defaultCn = "Data Source=localhost;Initial Catalog=BankingSite;Integrated Security=True;TrustServerCertificate=True";
@@ -75,6 +85,21 @@ namespace BankingSite
 				MessageBox.Show(ex.Message, "An Error ocurred");
 			}
 		}
+		#endregion 
+
+		#region Customer
+		private void btnCreateNewCustomer_Click(object sender, EventArgs e)
+		{
+			CreateNew cnForm = new CreateNew();
+			cnForm.SetUp(customerTableAdapter, CreateNew.CreateType.Customer);
+
+			if (cnForm.ShowDialog() == DialogResult.Cancel)
+			{ 
+				return;
+			}
+
+			customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
+		}
 
 		void btnUpdateCustomer_Click(object sender, EventArgs e)
 		{   //Update the dataset but check if all of them are valid first
@@ -107,12 +132,49 @@ namespace BankingSite
 
 		private void btnDeleteCustomer_Click(object sender, EventArgs e)
 		{
-			if (MessageBox.Show(string.Concat("Are you sure you want to delete the customer with the ID: ", customerIDTextBox.Text, "?"), "Delete selected customer",
+			if (String.IsNullOrWhiteSpace(customerIDTextBox.Text))
+			{
+				return;
+			}
+
+			int id = Convert.ToInt32(customerIDTextBox.Text);
+			if (MessageBox.Show(string.Concat("Are you sure you want to delete the customer with the ID: ", id, "?"), "Delete selected customer",
 						MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
-				customerTableAdapter.DeleteCustomerWithID(Convert.ToInt32(customerIDTextBox.Text));
+				customerTableAdapter.DeleteCustomerWithID(id);
 				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
 			}
+		}
+
+		private void btnShowOwnedAccounts_Click(object sender, EventArgs e)
+		{
+			int custID = Convert.ToInt32(customerIDTextBox.Text);
+			DataTable accounts = accountTableAdapter.GetOwnedAccountsByCustomerID(Convert.ToInt32(custID));
+
+			if (accounts.Rows.Count == 0)
+			{
+				MessageBox.Show("The selected customer has no accounts.", "Customer has no accounts.");
+				return;
+			}
+
+			OwnedAccounts owned = new OwnedAccounts(accounts);
+			owned.Text = string.Concat("Owned Accounts From Customer with ID ", custID);
+			owned.Show();
+		}
+		#endregion
+
+		#region Address
+		private void btnCreateNewAddress_Click(object sender, EventArgs e)
+		{
+			CreateNew cnForm = new CreateNew();
+			cnForm.SetUp(addressTableAdapter, CreateNew.CreateType.Address);
+
+			if (cnForm.ShowDialog() == DialogResult.Cancel)
+			{
+				return;
+			}
+
+			addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
 		}
 
 		void btnUpdateAddress_Click(object sender, EventArgs e)
@@ -145,41 +207,81 @@ namespace BankingSite
 
 		private void btnDeleteAddress_Click(object sender, EventArgs e)
 		{
-			if (MessageBox.Show(string.Concat("Are you sure you want to delete the address with the ID: ", addressIDTextBox.Text, "?"), "Delete selected address",
-				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+			if (String.IsNullOrWhiteSpace(addressIDTextBox.Text))
 			{
-				addressTableAdapter.DeleteAddressWithID(Convert.ToInt32(addressIDTextBox.Text));
-				this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
-			}
-		}
-
-		private void btnCreateNewCustomer_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void btnDeleteSelectedAccount_Click(object sender, EventArgs e)
-		{
-			if (MessageBox.Show(string.Concat("Are you sure you want to delete the account with the ID: ", accountIDTextBox.Text, "?"), "Delete selected account",
-				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-			{
-				accountTableAdapter.DeleteAccountWithID(Convert.ToInt32(accountIDTextBox.Text));
-				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
-			}
-		}
-
-		private void btnShowOwnedAccounts_Click(object sender, EventArgs e)
-		{
-			DataTable accounts = accountTableAdapter.GetOwnedAccountsByCustomerID(Convert.ToInt32(customerIDTextBox.Text));
-
-			if (accounts.Rows.Count == 0)
-			{
-				MessageBox.Show("The selected customer has no accounts.", "Customer has no accounts.");
 				return;
 			}
 
-			OwnedAccounts owned = new OwnedAccounts(accounts);
-			owned.Show();
+			int id = Convert.ToInt32(addressIDTextBox.Text);
+			if (MessageBox.Show(string.Concat("Are you sure you want to delete the address with the ID: ", id, "?"), "Delete selected address",
+				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+			{
+				addressTableAdapter.DeleteAddressWithID(id);
+				this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
+			}
 		}
+		#endregion
+
+		#region Account
+		private void btnCreateNewAccount_Click(object sender, EventArgs e)
+		{
+			CreateNew cnForm = new CreateNew();
+			cnForm.SetUp(accountTableAdapter, CreateNew.CreateType.Account);
+
+			if (cnForm.ShowDialog() == DialogResult.Cancel)
+			{
+				return;
+			}
+
+			accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+		}
+		
+		private void btnDeleteSelectedAccount_Click(object sender, EventArgs e)
+		{
+			if (String.IsNullOrWhiteSpace(accountIDTextBox.Text))
+			{
+				return;
+			}
+
+			int id = Convert.ToInt32(accountIDTextBox.Text);
+			if (MessageBox.Show(string.Concat("Are you sure you want to delete the account with the ID: ", id, "?"), "Delete selected account",
+				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+			{
+				accountTableAdapter.DeleteAccountWithID(id);
+				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+			}
+		}
+		#endregion
+
+		#region Transaction
+		private void btnCreateNewTransaction_Click(object sender, EventArgs e)
+		{
+			CreateNew cnForm = new CreateNew();
+			cnForm.SetUp(transactionTableAdapter, CreateNew.CreateType.Transaction);
+
+			if (cnForm.ShowDialog() == DialogResult.Cancel)
+			{
+				return;
+			}
+
+			transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+		}
+	
+		private void btnDeleteTransaction_Click(object sender, EventArgs e)
+		{
+			if (String.IsNullOrWhiteSpace(transactionIDTextBox.Text))
+			{
+				return;
+			}
+
+			int id = Convert.ToInt32(transactionIDTextBox.Text);
+			if (MessageBox.Show(string.Concat("Are you sure you want to delete the account with the ID: ", transactionIDTextBox.Text, "?"), "Delete selected account",
+				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+			{
+				//transactionTableAdapter.DeleteTransactionWithID(id);
+				//this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+			}
+		}
+		#endregion
 	}
 }
