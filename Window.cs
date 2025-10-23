@@ -13,8 +13,8 @@ namespace BankingSite
 
 		private void Window_Load(object sender, EventArgs e)
 		{
-			// TODO: This line of code loads data into the 'bankingSiteDataSet1.Customer' table. You can move, or remove it, as needed.
-			this.customerTableAdapter.Fill(this.bankingSiteDataSet1.Customer);
+			// TODO: This line of code loads data into the 'bankingSiteDataSet.Customer' table. You can move, or remove it, as needed.
+			this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
 			// TODO: This line of code loads data into the 'bankingSiteDataSet.Transaction' table. You can move, or remove it, as needed.
 			this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
 			// TODO: This line of code loads data into the 'bankingSiteDataSet.Account' table. You can move, or remove it, as needed.
