@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{353A5255-1FAD-49FD-AD97-F4667A0D45DD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>TrimbleTest</RootNamespace>
-    <AssemblyName>TrimbleTest</AssemblyName>
+    <RootNamespace>BankingSite</RootNamespace>
+    <AssemblyName>BankingSite</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,6 +46,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>BankingSite.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -108,6 +111,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="BankingSiteDataSet.xsc">
       <DependentUpon>BankingSiteDataSet.xsd</DependentUpon>

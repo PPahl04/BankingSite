@@ -14,6 +14,8 @@ namespace BankingSite
 		List<string> _missingTables;
 		bool _isConnectedAndHasTables;
 
+		//ToDo: Test every case and fix it. Goodluck!
+
 		#region Server Connection
 		public MainWindow()
 		{
@@ -144,13 +146,9 @@ namespace BankingSite
 					MessageBox.Show("Succsessfully connected to database!", "Connection to database established.");
 				}
 
-				// TODO: This line of code loads data into the 'bankingSiteDataSet.Customer' table. You can move, or remove it, as needed.
 				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
-				// TODO: This line of code loads data into the 'bankingSiteDataSet.Transaction' table. You can move, or remove it, as needed.
 				this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
-				// TODO: This line of code loads data into the 'bankingSiteDataSet.Account' table. You can move, or remove it, as needed.
 				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
-				// TODO: This line of code loads data into the 'bankingSiteDataSet.Address' table. You can move, or remove it, as needed.
 				this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
 			}
 			catch (Exception ex)
