@@ -308,7 +308,7 @@ namespace BankingSite
 				return;
 			}
 
-			OwnedAccounts owned = new OwnedAccounts(accounts);
+			AssotiatedDataTables owned = new AssotiatedDataTables(accounts);
 			owned.Text = string.Concat("Owned Accounts From Customer with ID ", custID);
 			owned.Show();
 		}
@@ -386,7 +386,28 @@ namespace BankingSite
 
 			accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
 		}
-		
+
+		/// <summary>
+		/// Will open a window to show all transactions the account is assotiated with.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void btnShowTransactions_Click(object sender, EventArgs e)
+		{
+			int accID = Convert.ToInt32(accountIDTextBox.Text);
+			DataTable transactions = transactionTableAdapter.GetAllTransactionsFromAccountID(Convert.ToInt32(accID));
+
+			if (transactions.Rows.Count == 0)
+			{
+				MessageBox.Show("The selected account is not assostiated with any transactions.", "Account has no transactions.");
+				return;
+			}
+
+			AssotiatedDataTables owned = new AssotiatedDataTables(transactions);
+			owned.Text = string.Concat("Assotiated transactions from Account with ID ", accID);
+			owned.Show();
+		}
+
 		private void btnDeleteSelectedAccount_Click(object sender, EventArgs e)
 		{
 			if (String.IsNullOrWhiteSpace(accountIDTextBox.Text))

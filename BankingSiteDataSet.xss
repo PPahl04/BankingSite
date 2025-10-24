@@ -9,7 +9,7 @@
     <Shape ID="DesignTable:Account" ZOrder="2" X="70" Y="71" Height="248" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
     <Shape ID="DesignTable:Address" ZOrder="4" X="751" Y="58" Height="210" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
     <Shape ID="DesignTable:Customer" ZOrder="3" X="400" Y="54" Height="248" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
-    <Shape ID="DesignTable:Transaction" ZOrder="1" X="396" Y="337" Height="248" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
+    <Shape ID="DesignTable:Transaction" ZOrder="1" X="396" Y="337" Height="267" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:FK_Account_Customer" ZOrder="8" LineWidth="11">
