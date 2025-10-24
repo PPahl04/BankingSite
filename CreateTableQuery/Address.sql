@@ -1,0 +1,15 @@
+﻿/****** Object:  Table [dbo].[Address]    Script Date: 24.10.2025 02:49:54 ******/
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Address](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[StreetName] [nchar](100) NOT NULL,
+	[StreetNumber] [int] NOT NULL,
+	[ZipCode] [int] NOT NULL,
+	[City] [nchar](100) NOT NULL,
+ CONSTRAINT [PK_Address] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]

@@ -43,6 +43,8 @@
 			System.Windows.Forms.Label iDLabel2;
 			System.Windows.Forms.Label iDLabel3;
 			this.tpTransactions = new System.Windows.Forms.TabPage();
+			this.tlpTransactions = new System.Windows.Forms.TableLayoutPanel();
+			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnCreateNewTransaction = new System.Windows.Forms.Button();
 			this.btnDeleteTransaction = new System.Windows.Forms.Button();
 			this.transactionIDTextBox = new System.Windows.Forms.TextBox();
@@ -124,8 +126,7 @@
 			this.accountTableAdapter = new BankingSite.BankingSiteDataSetTableAdapters.AccountTableAdapter();
 			this.transactionTableAdapter = new BankingSite.BankingSiteDataSetTableAdapters.TransactionTableAdapter();
 			this.tableAdapterManager = new BankingSite.BankingSiteDataSetTableAdapters.TableAdapterManager();
-			this.tlpTransactions = new System.Windows.Forms.TableLayoutPanel();
-			this.panel1 = new System.Windows.Forms.Panel();
+			this.btnGetTables = new System.Windows.Forms.Button();
 			iDLabel = new System.Windows.Forms.Label();
 			firstNameLabel = new System.Windows.Forms.Label();
 			lastNameLabel = new System.Windows.Forms.Label();
@@ -140,6 +141,8 @@
 			iDLabel2 = new System.Windows.Forms.Label();
 			iDLabel3 = new System.Windows.Forms.Label();
 			this.tpTransactions.SuspendLayout();
+			this.tlpTransactions.SuspendLayout();
+			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.transactionBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.bankingSiteDataSet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).BeginInit();
@@ -159,8 +162,6 @@
 			this.tpDBConnection.SuspendLayout();
 			this.pnlDbConnection.SuspendLayout();
 			this.tcWindow.SuspendLayout();
-			this.tlpTransactions.SuspendLayout();
-			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// iDLabel
@@ -304,6 +305,35 @@
 			this.tpTransactions.TabIndex = 3;
 			this.tpTransactions.Text = "Transactions";
 			this.tpTransactions.UseVisualStyleBackColor = true;
+			// 
+			// tlpTransactions
+			// 
+			this.tlpTransactions.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+			this.tlpTransactions.ColumnCount = 2;
+			this.tlpTransactions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.91524F));
+			this.tlpTransactions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.08476F));
+			this.tlpTransactions.Controls.Add(this.panel1, 0, 0);
+			this.tlpTransactions.Controls.Add(this.dgvTransactions, 1, 0);
+			this.tlpTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tlpTransactions.Location = new System.Drawing.Point(3, 3);
+			this.tlpTransactions.Name = "tlpTransactions";
+			this.tlpTransactions.RowCount = 1;
+			this.tlpTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.96737F));
+			this.tlpTransactions.Size = new System.Drawing.Size(992, 614);
+			this.tlpTransactions.TabIndex = 36;
+			// 
+			// panel1
+			// 
+			this.panel1.AutoScroll = true;
+			this.panel1.Controls.Add(this.btnCreateNewTransaction);
+			this.panel1.Controls.Add(iDLabel3);
+			this.panel1.Controls.Add(this.btnDeleteTransaction);
+			this.panel1.Controls.Add(this.transactionIDTextBox);
+			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panel1.Location = new System.Drawing.Point(4, 4);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(230, 606);
+			this.panel1.TabIndex = 12;
 			// 
 			// btnCreateNewTransaction
 			// 
@@ -994,6 +1024,7 @@
 			// 
 			this.pnlDbConnection.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.pnlDbConnection.AutoSize = true;
+			this.pnlDbConnection.Controls.Add(this.btnGetTables);
 			this.pnlDbConnection.Controls.Add(this.lblDbConnectionTitle);
 			this.pnlDbConnection.Controls.Add(this.lblDataBaseName);
 			this.pnlDbConnection.Controls.Add(this.btnConnectToDB);
@@ -1043,7 +1074,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnConnectToDB.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnConnectToDB.Location = new System.Drawing.Point(163, 261);
+			this.btnConnectToDB.Location = new System.Drawing.Point(76, 253);
 			this.btnConnectToDB.MaximumSize = new System.Drawing.Size(130, 54);
 			this.btnConnectToDB.MinimumSize = new System.Drawing.Size(130, 54);
 			this.btnConnectToDB.Name = "btnConnectToDB";
@@ -1158,6 +1189,7 @@
 			this.tcWindow.SelectedIndex = 0;
 			this.tcWindow.Size = new System.Drawing.Size(1006, 646);
 			this.tcWindow.TabIndex = 0;
+			this.tcWindow.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tcWindow_Selecting);
 			// 
 			// customerTableAdapter
 			// 
@@ -1184,34 +1216,21 @@
 			this.tableAdapterManager.TransactionTableAdapter = this.transactionTableAdapter;
 			this.tableAdapterManager.UpdateOrder = BankingSite.BankingSiteDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
 			// 
-			// tlpTransactions
+			// btnGetTables
 			// 
-			this.tlpTransactions.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-			this.tlpTransactions.ColumnCount = 2;
-			this.tlpTransactions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.91524F));
-			this.tlpTransactions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.08476F));
-			this.tlpTransactions.Controls.Add(this.panel1, 0, 0);
-			this.tlpTransactions.Controls.Add(this.dgvTransactions, 1, 0);
-			this.tlpTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tlpTransactions.Location = new System.Drawing.Point(3, 3);
-			this.tlpTransactions.Name = "tlpTransactions";
-			this.tlpTransactions.RowCount = 1;
-			this.tlpTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.96737F));
-			this.tlpTransactions.Size = new System.Drawing.Size(992, 614);
-			this.tlpTransactions.TabIndex = 36;
-			// 
-			// panel1
-			// 
-			this.panel1.AutoScroll = true;
-			this.panel1.Controls.Add(this.btnCreateNewTransaction);
-			this.panel1.Controls.Add(iDLabel3);
-			this.panel1.Controls.Add(this.btnDeleteTransaction);
-			this.panel1.Controls.Add(this.transactionIDTextBox);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(4, 4);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(230, 606);
-			this.panel1.TabIndex = 12;
+			this.btnGetTables.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnGetTables.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnGetTables.Location = new System.Drawing.Point(238, 253);
+			this.btnGetTables.MaximumSize = new System.Drawing.Size(130, 54);
+			this.btnGetTables.MinimumSize = new System.Drawing.Size(130, 54);
+			this.btnGetTables.Name = "btnGetTables";
+			this.btnGetTables.Size = new System.Drawing.Size(130, 54);
+			this.btnGetTables.TabIndex = 24;
+			this.btnGetTables.Text = "Get Tables";
+			this.btnGetTables.UseVisualStyleBackColor = true;
+			this.btnGetTables.Click += new System.EventHandler(this.btnGetTables_Click);
 			// 
 			// MainWindow
 			// 
@@ -1226,6 +1245,9 @@
 			this.Text = "Banking Site";
 			this.Load += new System.EventHandler(this.Window_Load);
 			this.tpTransactions.ResumeLayout(false);
+			this.tlpTransactions.ResumeLayout(false);
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.transactionBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.bankingSiteDataSet)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).EndInit();
@@ -1250,9 +1272,6 @@
 			this.pnlDbConnection.ResumeLayout(false);
 			this.pnlDbConnection.PerformLayout();
 			this.tcWindow.ResumeLayout(false);
-			this.tlpTransactions.ResumeLayout(false);
-			this.panel1.ResumeLayout(false);
-			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -1343,5 +1362,6 @@
 		private System.Windows.Forms.Button btnDeleteTransaction;
 		private System.Windows.Forms.TableLayoutPanel tlpTransactions;
 		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Button btnGetTables;
 	}
 }

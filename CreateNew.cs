@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace BankingSite
 {
@@ -64,13 +65,16 @@ namespace BankingSite
 					accountReceiver_IDComboBox.Enabled = false;
 				break;
 			}
+			
 			Text = title;
+			//AutoSize = true;
 		}
 
 		void UsePanel(Panel myPanel)
 		{
 			myPanel.Visible = true;
-			myPanel.Dock = DockStyle.Fill;
+			Size = new Size(myPanel.Size.Width + 17, myPanel.Size.Height + 37);
+			myPanel.Location = new Point(0, 0);
 		}
 
 		public void GetAccountIDs(DataTable myAccountIDs)
@@ -229,7 +233,7 @@ namespace BankingSite
 					
 				if (type == TransactionType.Transfer.ToString())
 				{
-
+					return;
 				}
 
 				Close();

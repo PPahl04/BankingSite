@@ -1,9 +1,8 @@
-﻿using BankingSite.BankingSiteDataSetTableAdapters;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -12,10 +11,8 @@ namespace BankingSite
 	public partial class MainWindow : Form
 	{
 		string _connectionString;
-		SqlConnection _connection;
-
-		string _currentTabPage;
 		List<string> _missingTables;
+		bool _isConnectedAndHasTables;
 
 		#region Server Connection
 		public MainWindow()
@@ -26,30 +23,27 @@ namespace BankingSite
 		private void Window_Load(object sender, EventArgs e)
 		{
 			txtbServerName.Text = string.Concat(Environment.MachineName, "\\");
-
-			//// TODO: This line of code loads data into the 'bankingSiteDataSet.Customer' table. You can move, or remove it, as needed.
-			//this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
-			//// TODO: This line of code loads data into the 'bankingSiteDataSet.Transaction' table. You can move, or remove it, as needed.
-			//this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
-			//// TODO: This line of code loads data into the 'bankingSiteDataSet.Account' table. You can move, or remove it, as needed.
-			//this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
-			//// TODO: This line of code loads data into the 'bankingSiteDataSet.Address' table. You can move, or remove it, as needed.
-			//this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
 		}
 
+		private void tcWindow_Selecting(object sender, TabControlCancelEventArgs e)
+		{
+			e.Cancel = !_isConnectedAndHasTables;
+		}
 
 		bool CanConnectToServer()
-		{	//string defaultCn = "Data Source=localhost;Initial Catalog=BankingSite;Integrated Security=True;TrustServerCertificate=True";
+		{	
 			string startDbName = string.IsNullOrWhiteSpace(cbDbNames.Text) ? "master" : cbDbNames.Text;
-			_connectionString = string.Concat("Data Source=", txtbServerName.Text, ";Initial Catalog=", startDbName, ";UID=", txtbUsername.Text, ";Password=", txtbPassword.Text,
+			string cnString = string.Concat("Data Source=", txtbServerName.Text, ";Initial Catalog=", startDbName, ";UID=", txtbUsername.Text, ";Password=", txtbPassword.Text,
 						";Integrated Security=False;TrustServerCertificate=True");
+			SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(cnString);
+			builder.ConnectTimeout = 5;
 
-			using(SqlConnection cn = new SqlConnection(_connectionString))
+			using(SqlConnection cn = new SqlConnection(builder.ConnectionString))
 			{
 				try
 				{
 					cn.Open();
-					_connection = new SqlConnection(_connectionString);
+					_connectionString = cnString;
 					return true;
 				}
 				catch 
@@ -65,7 +59,18 @@ namespace BankingSite
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void txtbPassword_Leave(object sender, EventArgs e)
-		{	//try to connect in order to show all dbs in the dropdown
+		{
+			LoadTables();
+		}
+
+		private void btnGetTables_Click(object sender, EventArgs e)
+		{
+			LoadTables();
+		}
+
+		void LoadTables()
+		{
+			//try to connect in order to show all dbs in the dropdown
 			try
 			{
 				if (!CanConnectToServer())
@@ -74,19 +79,27 @@ namespace BankingSite
 					return;
 				}
 
-				using (_connection)
+				using (SqlConnection cn = new SqlConnection(_connectionString))
 				{
-					_connection.Open();
-			
-					SqlCommand cmd = _connection.CreateCommand();
+					cn.Open();
+
+					SqlCommand cmd = cn.CreateCommand();
 					cmd.CommandText = "SELECT name FROM sys.databases";
-					
+					cmd.CommandTimeout = 5;
+
 					using (SqlDataReader reader = cmd.ExecuteReader())
 					{
+						string[] systemDatabases = { "master", "tempdb", "model", "msdb" };
+						cbDbNames.Items.Clear();
+
 						while (reader.Read())
 						{
 							string databaseName = reader.GetString(0);
-							cbDbNames.Items.Add(databaseName);
+
+							if (!systemDatabases.Contains(databaseName))
+							{
+								cbDbNames.Items.Add(databaseName);
+							}
 						}
 					}
 				}
@@ -104,41 +117,41 @@ namespace BankingSite
 					return;
 				}
 
-				accountTableAdapter.Connection.ConnectionString = _connection.ConnectionString;
-				customerTableAdapter.Connection.ConnectionString = _connection.ConnectionString;
-				transactionTableAdapter.Connection.ConnectionString = _connection.ConnectionString;
-				addressTableAdapter.Connection.ConnectionString = _connection.ConnectionString;
+				accountTableAdapter.Connection.ConnectionString = _connectionString;
+				customerTableAdapter.Connection.ConnectionString = _connectionString;
+				transactionTableAdapter.Connection.ConnectionString = _connectionString;
+				addressTableAdapter.Connection.ConnectionString = _connectionString;
 
-				tableAdapterManager.Connection.ConnectionString = _connection.ConnectionString;
+				tableAdapterManager.Connection.ConnectionString = _connectionString;
 
 				if (!DatabaseContainsAllTables())
 				{
 					if (DialogResult.Yes ==  MessageBox.Show("The selected database does not contain the required tables customer, address, account and transaction." +
-								" Do you want to create these tables?", "Tables missing", MessageBoxButtons.YesNo))
+								"\nDo you want to create these tables?", "Tables missing", MessageBoxButtons.YesNo))
 					{
 						CreateTables();
+						ConnectedToDatabase();
+						MessageBox.Show("Missing tables have been succssessfully created, so all of them are empty.", "Empty tables created.");
 					}
 					else
 					{ 
 						return; 
 					}
 				}
-
-				try 
+				else 
 				{
-					// TODO: This line of code loads data into the 'bankingSiteDataSet.Customer' table. You can move, or remove it, as needed.
-					this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
-					// TODO: This line of code loads data into the 'bankingSiteDataSet.Transaction' table. You can move, or remove it, as needed.
-					this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
-					// TODO: This line of code loads data into the 'bankingSiteDataSet.Account' table. You can move, or remove it, as needed.
-					this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
-					// TODO: This line of code loads data into the 'bankingSiteDataSet.Address' table. You can move, or remove it, as needed.
-					this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
+					ConnectedToDatabase();
+					MessageBox.Show("Succsessfully connected to database!", "Connection to database established.");
 				}
-				catch
-				{
 
-				}
+				// TODO: This line of code loads data into the 'bankingSiteDataSet.Customer' table. You can move, or remove it, as needed.
+				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
+				// TODO: This line of code loads data into the 'bankingSiteDataSet.Transaction' table. You can move, or remove it, as needed.
+				this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+				// TODO: This line of code loads data into the 'bankingSiteDataSet.Account' table. You can move, or remove it, as needed.
+				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+				// TODO: This line of code loads data into the 'bankingSiteDataSet.Address' table. You can move, or remove it, as needed.
+				this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
 			}
 			catch (Exception ex)
 			{
@@ -148,14 +161,15 @@ namespace BankingSite
 
 		bool DatabaseContainsAllTables()
 		{
-			using (_connection)
+			using (SqlConnection cn = new SqlConnection(_connectionString))
 			{
-				_connection.Open();
+				cn.Open();
 
-				SqlCommand cmd = _connection.CreateCommand();
+				SqlCommand cmd = cn.CreateCommand();
 				cmd.CommandText = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES";
-				
-				List<string> tableNames = new List<string>{ "Customer", "Address", "Account", "Transaction" };
+				cmd.CommandTimeout = 5;
+
+				List<string> tableNames = new List<string>{ "Address", "Customer", "Account", "Transaction" };
 
 				using (SqlDataReader reader = cmd.ExecuteReader())
 				{
@@ -169,14 +183,60 @@ namespace BankingSite
 					}
 					_missingTables = new List<string>(tableNames);
 				}
-
-				return _missingTables.Count == 0;
 			}
+			return _missingTables.Count == 0;
 		}
 
 		void CreateTables()
 		{
+			foreach (string missingTable in _missingTables)
+			{
+				using(SqlConnection cn =  new SqlConnection(_connectionString))
+				{
+					cn.Open();
+					SqlCommand cmd = cn.CreateCommand();
+					cmd.CommandTimeout = 5;
+					
+					string folderPath = @"..\..\CreateTableQuery\";
 
+					if (missingTable.Equals("Address"))
+					{
+						cmd.CommandText = File.ReadAllText(string.Concat(folderPath, "Address.sql"));
+						cmd.ExecuteNonQuery();
+						continue;
+					}
+
+					if (missingTable.Equals("Customer"))
+					{
+						cmd.CommandText = File.ReadAllText(string.Concat(folderPath, "Customer.sql"));
+						cmd.ExecuteNonQuery();
+						continue;
+					}
+
+					if (missingTable.Equals("Account"))
+					{
+						cmd.CommandText = File.ReadAllText(string.Concat(folderPath, "Account.sql"));
+						cmd.ExecuteNonQuery();
+						continue;
+					}
+
+					if (missingTable.Equals("Transaction"))
+					{
+						cmd.CommandText = File.ReadAllText(string.Concat(folderPath, "Transaction.sql"));
+						cmd.ExecuteNonQuery();
+						continue;
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Will change the text of the window and allow changing the tab pages
+		/// </summary>
+		void ConnectedToDatabase()
+		{
+			_isConnectedAndHasTables = true;
+			Text = string.Concat("BankingSite - Connected to ", cbDbNames.Text);
 		}
 		#endregion 
 
