@@ -65,12 +65,6 @@
 			this.accountBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.btnCreateNewAccount = new System.Windows.Forms.Button();
 			this.btnDeleteSelectedAccount = new System.Windows.Forms.Button();
-			this.dgvAccounts = new System.Windows.Forms.DataGridView();
-			this.iDDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.iBANDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.balanceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.customerIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tpCustomers = new System.Windows.Forms.TabPage();
 			this.tlpCostumerAddress = new System.Windows.Forms.TableLayoutPanel();
 			this.dgvCustomers = new System.Windows.Forms.DataGridView();
@@ -110,6 +104,7 @@
 			this.btnUpdateAddress = new System.Windows.Forms.Button();
 			this.tpDBConnection = new System.Windows.Forms.TabPage();
 			this.pnlDbConnection = new System.Windows.Forms.Panel();
+			this.btnGetTables = new System.Windows.Forms.Button();
 			this.lblDbConnectionTitle = new System.Windows.Forms.Label();
 			this.lblDataBaseName = new System.Windows.Forms.Label();
 			this.btnConnectToDB = new System.Windows.Forms.Button();
@@ -126,7 +121,12 @@
 			this.accountTableAdapter = new BankingSite.BankingSiteDataSetTableAdapters.AccountTableAdapter();
 			this.transactionTableAdapter = new BankingSite.BankingSiteDataSetTableAdapters.TransactionTableAdapter();
 			this.tableAdapterManager = new BankingSite.BankingSiteDataSetTableAdapters.TableAdapterManager();
-			this.btnGetTables = new System.Windows.Forms.Button();
+			this.customerIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.balanceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.iBANDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.iDDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dgvAccounts = new System.Windows.Forms.DataGridView();
 			iDLabel = new System.Windows.Forms.Label();
 			firstNameLabel = new System.Windows.Forms.Label();
 			lastNameLabel = new System.Windows.Forms.Label();
@@ -150,7 +150,6 @@
 			this.tlpAccounts.SuspendLayout();
 			this.pnlAccountDetails.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.accountBindingSource)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
 			this.tpCustomers.SuspendLayout();
 			this.tlpCostumerAddress.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
@@ -162,13 +161,14 @@
 			this.tpDBConnection.SuspendLayout();
 			this.pnlDbConnection.SuspendLayout();
 			this.tcWindow.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// iDLabel
 			// 
 			iDLabel.AutoSize = true;
 			iDLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			iDLabel.Location = new System.Drawing.Point(55, 35);
+			iDLabel.Location = new System.Drawing.Point(60, 14);
 			iDLabel.Name = "iDLabel";
 			iDLabel.Size = new System.Drawing.Size(24, 23);
 			iDLabel.TabIndex = 23;
@@ -178,7 +178,7 @@
 			// 
 			firstNameLabel.AutoSize = true;
 			firstNameLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			firstNameLabel.Location = new System.Drawing.Point(55, 61);
+			firstNameLabel.Location = new System.Drawing.Point(60, 48);
 			firstNameLabel.Name = "firstNameLabel";
 			firstNameLabel.Size = new System.Drawing.Size(81, 23);
 			firstNameLabel.TabIndex = 25;
@@ -188,7 +188,7 @@
 			// 
 			lastNameLabel.AutoSize = true;
 			lastNameLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			lastNameLabel.Location = new System.Drawing.Point(55, 87);
+			lastNameLabel.Location = new System.Drawing.Point(60, 82);
 			lastNameLabel.Name = "lastNameLabel";
 			lastNameLabel.Size = new System.Drawing.Size(79, 23);
 			lastNameLabel.TabIndex = 27;
@@ -198,7 +198,7 @@
 			// 
 			phoneNumberLabel.AutoSize = true;
 			phoneNumberLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			phoneNumberLabel.Location = new System.Drawing.Point(55, 113);
+			phoneNumberLabel.Location = new System.Drawing.Point(60, 116);
 			phoneNumberLabel.Name = "phoneNumberLabel";
 			phoneNumberLabel.Size = new System.Drawing.Size(103, 23);
 			phoneNumberLabel.TabIndex = 29;
@@ -208,7 +208,7 @@
 			// 
 			emailAddressLabel.AutoSize = true;
 			emailAddressLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			emailAddressLabel.Location = new System.Drawing.Point(55, 139);
+			emailAddressLabel.Location = new System.Drawing.Point(60, 150);
 			emailAddressLabel.Name = "emailAddressLabel";
 			emailAddressLabel.Size = new System.Drawing.Size(103, 23);
 			emailAddressLabel.TabIndex = 31;
@@ -218,7 +218,7 @@
 			// 
 			address_IDLabel.AutoSize = true;
 			address_IDLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			address_IDLabel.Location = new System.Drawing.Point(55, 165);
+			address_IDLabel.Location = new System.Drawing.Point(60, 184);
 			address_IDLabel.Name = "address_IDLabel";
 			address_IDLabel.Size = new System.Drawing.Size(79, 23);
 			address_IDLabel.TabIndex = 33;
@@ -228,7 +228,7 @@
 			// 
 			iDLabel1.AutoSize = true;
 			iDLabel1.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			iDLabel1.Location = new System.Drawing.Point(73, 43);
+			iDLabel1.Location = new System.Drawing.Point(68, 24);
 			iDLabel1.Name = "iDLabel1";
 			iDLabel1.Size = new System.Drawing.Size(24, 23);
 			iDLabel1.TabIndex = 23;
@@ -238,7 +238,7 @@
 			// 
 			streetNameLabel.AutoSize = true;
 			streetNameLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			streetNameLabel.Location = new System.Drawing.Point(73, 69);
+			streetNameLabel.Location = new System.Drawing.Point(68, 58);
 			streetNameLabel.Name = "streetNameLabel";
 			streetNameLabel.Size = new System.Drawing.Size(90, 23);
 			streetNameLabel.TabIndex = 25;
@@ -248,7 +248,7 @@
 			// 
 			streetNumberLabel.AutoSize = true;
 			streetNumberLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			streetNumberLabel.Location = new System.Drawing.Point(73, 95);
+			streetNumberLabel.Location = new System.Drawing.Point(68, 92);
 			streetNumberLabel.Name = "streetNumberLabel";
 			streetNumberLabel.Size = new System.Drawing.Size(103, 23);
 			streetNumberLabel.TabIndex = 27;
@@ -258,7 +258,7 @@
 			// 
 			zipCodeLabel.AutoSize = true;
 			zipCodeLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			zipCodeLabel.Location = new System.Drawing.Point(73, 121);
+			zipCodeLabel.Location = new System.Drawing.Point(68, 126);
 			zipCodeLabel.Name = "zipCodeLabel";
 			zipCodeLabel.Size = new System.Drawing.Size(66, 23);
 			zipCodeLabel.TabIndex = 29;
@@ -268,7 +268,7 @@
 			// 
 			cityLabel.AutoSize = true;
 			cityLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			cityLabel.Location = new System.Drawing.Point(73, 147);
+			cityLabel.Location = new System.Drawing.Point(68, 160);
 			cityLabel.Name = "cityLabel";
 			cityLabel.Size = new System.Drawing.Size(36, 23);
 			cityLabel.TabIndex = 31;
@@ -276,9 +276,12 @@
 			// 
 			// iDLabel2
 			// 
+			iDLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			iDLabel2.AutoSize = true;
 			iDLabel2.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			iDLabel2.Location = new System.Drawing.Point(20, 24);
+			iDLabel2.Location = new System.Drawing.Point(435, 26);
 			iDLabel2.Name = "iDLabel2";
 			iDLabel2.Size = new System.Drawing.Size(81, 23);
 			iDLabel2.TabIndex = 33;
@@ -286,9 +289,12 @@
 			// 
 			// iDLabel3
 			// 
+			iDLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			iDLabel3.AutoSize = true;
 			iDLabel3.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			iDLabel3.Location = new System.Drawing.Point(20, 24);
+			iDLabel3.Location = new System.Drawing.Point(435, 26);
 			iDLabel3.Name = "iDLabel3";
 			iDLabel3.Size = new System.Drawing.Size(81, 23);
 			iDLabel3.TabIndex = 1;
@@ -309,16 +315,16 @@
 			// tlpTransactions
 			// 
 			this.tlpTransactions.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-			this.tlpTransactions.ColumnCount = 2;
-			this.tlpTransactions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.91524F));
-			this.tlpTransactions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.08476F));
-			this.tlpTransactions.Controls.Add(this.panel1, 0, 0);
-			this.tlpTransactions.Controls.Add(this.dgvTransactions, 1, 0);
+			this.tlpTransactions.ColumnCount = 1;
+			this.tlpTransactions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tlpTransactions.Controls.Add(this.dgvTransactions, 0, 0);
+			this.tlpTransactions.Controls.Add(this.panel1, 0, 1);
 			this.tlpTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tlpTransactions.Location = new System.Drawing.Point(3, 3);
 			this.tlpTransactions.Name = "tlpTransactions";
-			this.tlpTransactions.RowCount = 1;
-			this.tlpTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.96737F));
+			this.tlpTransactions.RowCount = 2;
+			this.tlpTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tlpTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
 			this.tlpTransactions.Size = new System.Drawing.Size(992, 614);
 			this.tlpTransactions.TabIndex = 36;
 			// 
@@ -330,18 +336,22 @@
 			this.panel1.Controls.Add(this.btnDeleteTransaction);
 			this.panel1.Controls.Add(this.transactionIDTextBox);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(4, 4);
+			this.panel1.Location = new System.Drawing.Point(4, 536);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(230, 606);
+			this.panel1.Size = new System.Drawing.Size(984, 74);
 			this.panel1.TabIndex = 12;
 			// 
 			// btnCreateNewTransaction
 			// 
-			this.btnCreateNewTransaction.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnCreateNewTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCreateNewTransaction.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnCreateNewTransaction.Location = new System.Drawing.Point(24, 143);
+			this.btnCreateNewTransaction.Location = new System.Drawing.Point(191, 17);
+			this.btnCreateNewTransaction.MaximumSize = new System.Drawing.Size(200, 40);
+			this.btnCreateNewTransaction.MinimumSize = new System.Drawing.Size(200, 40);
 			this.btnCreateNewTransaction.Name = "btnCreateNewTransaction";
-			this.btnCreateNewTransaction.Size = new System.Drawing.Size(177, 32);
+			this.btnCreateNewTransaction.Size = new System.Drawing.Size(200, 40);
 			this.btnCreateNewTransaction.TabIndex = 35;
 			this.btnCreateNewTransaction.Text = "Create New Transaction...";
 			this.btnCreateNewTransaction.UseVisualStyleBackColor = true;
@@ -349,11 +359,15 @@
 			// 
 			// btnDeleteTransaction
 			// 
-			this.btnDeleteTransaction.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnDeleteTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnDeleteTransaction.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnDeleteTransaction.Location = new System.Drawing.Point(38, 68);
+			this.btnDeleteTransaction.Location = new System.Drawing.Point(638, 17);
+			this.btnDeleteTransaction.MaximumSize = new System.Drawing.Size(155, 40);
+			this.btnDeleteTransaction.MinimumSize = new System.Drawing.Size(155, 40);
 			this.btnDeleteTransaction.Name = "btnDeleteTransaction";
-			this.btnDeleteTransaction.Size = new System.Drawing.Size(155, 32);
+			this.btnDeleteTransaction.Size = new System.Drawing.Size(155, 40);
 			this.btnDeleteTransaction.TabIndex = 34;
 			this.btnDeleteTransaction.Text = "Delete Transaction";
 			this.btnDeleteTransaction.UseVisualStyleBackColor = true;
@@ -361,9 +375,14 @@
 			// 
 			// transactionIDTextBox
 			// 
+			this.transactionIDTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.transactionIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.transactionBindingSource, "ID", true));
 			this.transactionIDTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.transactionIDTextBox.Location = new System.Drawing.Point(106, 21);
+			this.transactionIDTextBox.Location = new System.Drawing.Point(527, 22);
+			this.transactionIDTextBox.MaximumSize = new System.Drawing.Size(100, 30);
+			this.transactionIDTextBox.MinimumSize = new System.Drawing.Size(100, 30);
 			this.transactionIDTextBox.Name = "transactionIDTextBox";
 			this.transactionIDTextBox.ReadOnly = true;
 			this.transactionIDTextBox.Size = new System.Drawing.Size(100, 30);
@@ -396,16 +415,17 @@
             this.accountSenderIDDataGridViewTextBoxColumn});
 			this.dgvTransactions.DataSource = this.transactionBindingSource;
 			this.dgvTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dgvTransactions.Location = new System.Drawing.Point(241, 4);
+			this.dgvTransactions.Location = new System.Drawing.Point(4, 4);
 			this.dgvTransactions.Name = "dgvTransactions";
 			this.dgvTransactions.ReadOnly = true;
 			this.dgvTransactions.RowHeadersWidth = 21;
 			this.dgvTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvTransactions.Size = new System.Drawing.Size(747, 606);
+			this.dgvTransactions.Size = new System.Drawing.Size(984, 525);
 			this.dgvTransactions.TabIndex = 1;
 			// 
 			// iDDataGridViewTextBoxColumn3
 			// 
+			this.iDDataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
 			this.iDDataGridViewTextBoxColumn3.DataPropertyName = "ID";
 			this.iDDataGridViewTextBoxColumn3.HeaderText = "ID";
 			this.iDDataGridViewTextBoxColumn3.Name = "iDDataGridViewTextBoxColumn3";
@@ -414,14 +434,15 @@
 			// 
 			// dateDataGridViewTextBoxColumn
 			// 
+			this.dateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
 			this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
 			this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
 			this.dateDataGridViewTextBoxColumn.ReadOnly = true;
-			this.dateDataGridViewTextBoxColumn.Width = 55;
 			// 
 			// amountDataGridViewTextBoxColumn
 			// 
+			this.amountDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 			this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
 			this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
 			this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
@@ -430,6 +451,7 @@
 			// 
 			// intendedUseDataGridViewTextBoxColumn
 			// 
+			this.intendedUseDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 			this.intendedUseDataGridViewTextBoxColumn.DataPropertyName = "IntendedUse";
 			this.intendedUseDataGridViewTextBoxColumn.HeaderText = "IntendedUse";
 			this.intendedUseDataGridViewTextBoxColumn.Name = "intendedUseDataGridViewTextBoxColumn";
@@ -438,6 +460,7 @@
 			// 
 			// typeDataGridViewTextBoxColumn
 			// 
+			this.typeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 			this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
 			this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
 			this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
@@ -446,6 +469,7 @@
 			// 
 			// accountReceiverIDDataGridViewTextBoxColumn
 			// 
+			this.accountReceiverIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
 			this.accountReceiverIDDataGridViewTextBoxColumn.DataPropertyName = "AccountReceiver_ID";
 			this.accountReceiverIDDataGridViewTextBoxColumn.HeaderText = "AccountReceiver_ID";
 			this.accountReceiverIDDataGridViewTextBoxColumn.Name = "accountReceiverIDDataGridViewTextBoxColumn";
@@ -454,6 +478,7 @@
 			// 
 			// accountSenderIDDataGridViewTextBoxColumn
 			// 
+			this.accountSenderIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
 			this.accountSenderIDDataGridViewTextBoxColumn.DataPropertyName = "AccountSender_ID";
 			this.accountSenderIDDataGridViewTextBoxColumn.HeaderText = "AccountSender_ID";
 			this.accountSenderIDDataGridViewTextBoxColumn.Name = "accountSenderIDDataGridViewTextBoxColumn";
@@ -475,16 +500,16 @@
 			// tlpAccounts
 			// 
 			this.tlpAccounts.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-			this.tlpAccounts.ColumnCount = 2;
-			this.tlpAccounts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.91524F));
-			this.tlpAccounts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.08476F));
-			this.tlpAccounts.Controls.Add(this.pnlAccountDetails, 0, 0);
-			this.tlpAccounts.Controls.Add(this.dgvAccounts, 1, 0);
+			this.tlpAccounts.ColumnCount = 1;
+			this.tlpAccounts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tlpAccounts.Controls.Add(this.pnlAccountDetails, 0, 1);
+			this.tlpAccounts.Controls.Add(this.dgvAccounts, 0, 0);
 			this.tlpAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tlpAccounts.Location = new System.Drawing.Point(3, 3);
 			this.tlpAccounts.Name = "tlpAccounts";
-			this.tlpAccounts.RowCount = 1;
-			this.tlpAccounts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.96737F));
+			this.tlpAccounts.RowCount = 2;
+			this.tlpAccounts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tlpAccounts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
 			this.tlpAccounts.Size = new System.Drawing.Size(992, 614);
 			this.tlpAccounts.TabIndex = 11;
 			// 
@@ -496,16 +521,21 @@
 			this.pnlAccountDetails.Controls.Add(this.btnCreateNewAccount);
 			this.pnlAccountDetails.Controls.Add(this.btnDeleteSelectedAccount);
 			this.pnlAccountDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnlAccountDetails.Location = new System.Drawing.Point(4, 4);
+			this.pnlAccountDetails.Location = new System.Drawing.Point(4, 536);
 			this.pnlAccountDetails.Name = "pnlAccountDetails";
-			this.pnlAccountDetails.Size = new System.Drawing.Size(230, 606);
+			this.pnlAccountDetails.Size = new System.Drawing.Size(984, 74);
 			this.pnlAccountDetails.TabIndex = 12;
 			// 
 			// accountIDTextBox
 			// 
+			this.accountIDTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.accountIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.accountBindingSource, "ID", true));
 			this.accountIDTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.accountIDTextBox.Location = new System.Drawing.Point(106, 21);
+			this.accountIDTextBox.Location = new System.Drawing.Point(527, 22);
+			this.accountIDTextBox.MaximumSize = new System.Drawing.Size(100, 30);
+			this.accountIDTextBox.MinimumSize = new System.Drawing.Size(100, 30);
 			this.accountIDTextBox.Name = "accountIDTextBox";
 			this.accountIDTextBox.ReadOnly = true;
 			this.accountIDTextBox.Size = new System.Drawing.Size(100, 30);
@@ -518,11 +548,15 @@
 			// 
 			// btnCreateNewAccount
 			// 
-			this.btnCreateNewAccount.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnCreateNewAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCreateNewAccount.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnCreateNewAccount.Location = new System.Drawing.Point(36, 153);
+			this.btnCreateNewAccount.Location = new System.Drawing.Point(191, 17);
+			this.btnCreateNewAccount.MaximumSize = new System.Drawing.Size(200, 40);
+			this.btnCreateNewAccount.MinimumSize = new System.Drawing.Size(200, 40);
 			this.btnCreateNewAccount.Name = "btnCreateNewAccount";
-			this.btnCreateNewAccount.Size = new System.Drawing.Size(155, 32);
+			this.btnCreateNewAccount.Size = new System.Drawing.Size(200, 40);
 			this.btnCreateNewAccount.TabIndex = 33;
 			this.btnCreateNewAccount.Text = "Create New Account...";
 			this.btnCreateNewAccount.UseVisualStyleBackColor = true;
@@ -530,79 +564,19 @@
 			// 
 			// btnDeleteSelectedAccount
 			// 
-			this.btnDeleteSelectedAccount.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnDeleteSelectedAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnDeleteSelectedAccount.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnDeleteSelectedAccount.Location = new System.Drawing.Point(36, 66);
+			this.btnDeleteSelectedAccount.Location = new System.Drawing.Point(638, 17);
+			this.btnDeleteSelectedAccount.MaximumSize = new System.Drawing.Size(155, 40);
+			this.btnDeleteSelectedAccount.MinimumSize = new System.Drawing.Size(155, 40);
 			this.btnDeleteSelectedAccount.Name = "btnDeleteSelectedAccount";
-			this.btnDeleteSelectedAccount.Size = new System.Drawing.Size(155, 32);
+			this.btnDeleteSelectedAccount.Size = new System.Drawing.Size(155, 40);
 			this.btnDeleteSelectedAccount.TabIndex = 23;
 			this.btnDeleteSelectedAccount.Text = "Delete Account";
 			this.btnDeleteSelectedAccount.UseVisualStyleBackColor = true;
 			this.btnDeleteSelectedAccount.Click += new System.EventHandler(this.btnDeleteSelectedAccount_Click);
-			// 
-			// dgvAccounts
-			// 
-			this.dgvAccounts.AllowUserToAddRows = false;
-			this.dgvAccounts.AllowUserToDeleteRows = false;
-			this.dgvAccounts.AutoGenerateColumns = false;
-			this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-			this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvAccounts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iDDataGridViewTextBoxColumn2,
-            this.iBANDataGridViewTextBoxColumn,
-            this.balanceDataGridViewTextBoxColumn,
-            this.numberDataGridViewTextBoxColumn,
-            this.customerIDDataGridViewTextBoxColumn});
-			this.dgvAccounts.DataSource = this.accountBindingSource;
-			this.dgvAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dgvAccounts.Location = new System.Drawing.Point(241, 4);
-			this.dgvAccounts.MultiSelect = false;
-			this.dgvAccounts.Name = "dgvAccounts";
-			this.dgvAccounts.ReadOnly = true;
-			this.dgvAccounts.RowHeadersWidth = 21;
-			this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvAccounts.Size = new System.Drawing.Size(747, 606);
-			this.dgvAccounts.TabIndex = 1;
-			// 
-			// iDDataGridViewTextBoxColumn2
-			// 
-			this.iDDataGridViewTextBoxColumn2.DataPropertyName = "ID";
-			this.iDDataGridViewTextBoxColumn2.HeaderText = "ID";
-			this.iDDataGridViewTextBoxColumn2.Name = "iDDataGridViewTextBoxColumn2";
-			this.iDDataGridViewTextBoxColumn2.ReadOnly = true;
-			this.iDDataGridViewTextBoxColumn2.Width = 43;
-			// 
-			// iBANDataGridViewTextBoxColumn
-			// 
-			this.iBANDataGridViewTextBoxColumn.DataPropertyName = "IBAN";
-			this.iBANDataGridViewTextBoxColumn.HeaderText = "IBAN";
-			this.iBANDataGridViewTextBoxColumn.Name = "iBANDataGridViewTextBoxColumn";
-			this.iBANDataGridViewTextBoxColumn.ReadOnly = true;
-			this.iBANDataGridViewTextBoxColumn.Width = 57;
-			// 
-			// balanceDataGridViewTextBoxColumn
-			// 
-			this.balanceDataGridViewTextBoxColumn.DataPropertyName = "Balance";
-			this.balanceDataGridViewTextBoxColumn.HeaderText = "Balance";
-			this.balanceDataGridViewTextBoxColumn.Name = "balanceDataGridViewTextBoxColumn";
-			this.balanceDataGridViewTextBoxColumn.ReadOnly = true;
-			this.balanceDataGridViewTextBoxColumn.Width = 71;
-			// 
-			// numberDataGridViewTextBoxColumn
-			// 
-			this.numberDataGridViewTextBoxColumn.DataPropertyName = "Number";
-			this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
-			this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
-			this.numberDataGridViewTextBoxColumn.ReadOnly = true;
-			this.numberDataGridViewTextBoxColumn.Width = 69;
-			// 
-			// customerIDDataGridViewTextBoxColumn
-			// 
-			this.customerIDDataGridViewTextBoxColumn.DataPropertyName = "Customer_ID";
-			this.customerIDDataGridViewTextBoxColumn.HeaderText = "Customer_ID";
-			this.customerIDDataGridViewTextBoxColumn.Name = "customerIDDataGridViewTextBoxColumn";
-			this.customerIDDataGridViewTextBoxColumn.ReadOnly = true;
-			this.customerIDDataGridViewTextBoxColumn.Width = 93;
 			// 
 			// tpCustomers
 			// 
@@ -639,7 +613,6 @@
 			this.dgvCustomers.AllowUserToAddRows = false;
 			this.dgvCustomers.AllowUserToDeleteRows = false;
 			this.dgvCustomers.AutoGenerateColumns = false;
-			this.dgvCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
 			this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvCustomers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iDDataGridViewTextBoxColumn,
@@ -662,6 +635,7 @@
 			// 
 			// iDDataGridViewTextBoxColumn
 			// 
+			this.iDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
 			this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
 			this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
@@ -670,6 +644,7 @@
 			// 
 			// firstNameDataGridViewTextBoxColumn
 			// 
+			this.firstNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 			this.firstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName";
 			this.firstNameDataGridViewTextBoxColumn.HeaderText = "FirstName";
 			this.firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
@@ -678,6 +653,7 @@
 			// 
 			// lastNameDataGridViewTextBoxColumn
 			// 
+			this.lastNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 			this.lastNameDataGridViewTextBoxColumn.DataPropertyName = "LastName";
 			this.lastNameDataGridViewTextBoxColumn.HeaderText = "LastName";
 			this.lastNameDataGridViewTextBoxColumn.Name = "lastNameDataGridViewTextBoxColumn";
@@ -686,6 +662,7 @@
 			// 
 			// phoneNumberDataGridViewTextBoxColumn
 			// 
+			this.phoneNumberDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 			this.phoneNumberDataGridViewTextBoxColumn.DataPropertyName = "PhoneNumber";
 			this.phoneNumberDataGridViewTextBoxColumn.HeaderText = "PhoneNumber";
 			this.phoneNumberDataGridViewTextBoxColumn.Name = "phoneNumberDataGridViewTextBoxColumn";
@@ -693,14 +670,15 @@
 			// 
 			// emailAddressDataGridViewTextBoxColumn
 			// 
+			this.emailAddressDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.emailAddressDataGridViewTextBoxColumn.DataPropertyName = "EmailAddress";
 			this.emailAddressDataGridViewTextBoxColumn.HeaderText = "EmailAddress";
 			this.emailAddressDataGridViewTextBoxColumn.Name = "emailAddressDataGridViewTextBoxColumn";
 			this.emailAddressDataGridViewTextBoxColumn.ReadOnly = true;
-			this.emailAddressDataGridViewTextBoxColumn.Width = 95;
 			// 
 			// addressIDDataGridViewTextBoxColumn
 			// 
+			this.addressIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
 			this.addressIDDataGridViewTextBoxColumn.DataPropertyName = "Address_ID";
 			this.addressIDDataGridViewTextBoxColumn.HeaderText = "Address_ID";
 			this.addressIDDataGridViewTextBoxColumn.Name = "addressIDDataGridViewTextBoxColumn";
@@ -739,6 +717,7 @@
 			// 
 			// iDDataGridViewTextBoxColumn1
 			// 
+			this.iDDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.iDDataGridViewTextBoxColumn1.DataPropertyName = "ID";
 			this.iDDataGridViewTextBoxColumn1.HeaderText = "ID";
 			this.iDDataGridViewTextBoxColumn1.Name = "iDDataGridViewTextBoxColumn1";
@@ -746,31 +725,39 @@
 			// 
 			// streetNameDataGridViewTextBoxColumn
 			// 
+			this.streetNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 			this.streetNameDataGridViewTextBoxColumn.DataPropertyName = "StreetName";
 			this.streetNameDataGridViewTextBoxColumn.HeaderText = "StreetName";
 			this.streetNameDataGridViewTextBoxColumn.Name = "streetNameDataGridViewTextBoxColumn";
 			this.streetNameDataGridViewTextBoxColumn.ReadOnly = true;
+			this.streetNameDataGridViewTextBoxColumn.Width = 88;
 			// 
 			// streetNumberDataGridViewTextBoxColumn
 			// 
+			this.streetNumberDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 			this.streetNumberDataGridViewTextBoxColumn.DataPropertyName = "StreetNumber";
 			this.streetNumberDataGridViewTextBoxColumn.HeaderText = "StreetNumber";
 			this.streetNumberDataGridViewTextBoxColumn.Name = "streetNumberDataGridViewTextBoxColumn";
 			this.streetNumberDataGridViewTextBoxColumn.ReadOnly = true;
+			this.streetNumberDataGridViewTextBoxColumn.Width = 97;
 			// 
 			// zipCodeDataGridViewTextBoxColumn
 			// 
+			this.zipCodeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 			this.zipCodeDataGridViewTextBoxColumn.DataPropertyName = "ZipCode";
 			this.zipCodeDataGridViewTextBoxColumn.HeaderText = "ZipCode";
 			this.zipCodeDataGridViewTextBoxColumn.Name = "zipCodeDataGridViewTextBoxColumn";
 			this.zipCodeDataGridViewTextBoxColumn.ReadOnly = true;
+			this.zipCodeDataGridViewTextBoxColumn.Width = 72;
 			// 
 			// cityDataGridViewTextBoxColumn
 			// 
+			this.cityDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 			this.cityDataGridViewTextBoxColumn.DataPropertyName = "City";
 			this.cityDataGridViewTextBoxColumn.HeaderText = "City";
 			this.cityDataGridViewTextBoxColumn.Name = "cityDataGridViewTextBoxColumn";
 			this.cityDataGridViewTextBoxColumn.ReadOnly = true;
+			this.cityDataGridViewTextBoxColumn.Width = 49;
 			// 
 			// addressBindingSource
 			// 
@@ -806,7 +793,7 @@
 			// 
 			this.customerIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customerBindingSource, "ID", true));
 			this.customerIDTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.customerIDTextBox.Location = new System.Drawing.Point(158, 32);
+			this.customerIDTextBox.Location = new System.Drawing.Point(169, 11);
 			this.customerIDTextBox.Name = "customerIDTextBox";
 			this.customerIDTextBox.ReadOnly = true;
 			this.customerIDTextBox.Size = new System.Drawing.Size(100, 30);
@@ -816,7 +803,7 @@
 			// 
 			this.firstNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customerBindingSource, "FirstName", true));
 			this.firstNameTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.firstNameTextBox.Location = new System.Drawing.Point(158, 58);
+			this.firstNameTextBox.Location = new System.Drawing.Point(169, 45);
 			this.firstNameTextBox.Name = "firstNameTextBox";
 			this.firstNameTextBox.Size = new System.Drawing.Size(100, 30);
 			this.firstNameTextBox.TabIndex = 26;
@@ -825,7 +812,7 @@
 			// 
 			this.lastNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customerBindingSource, "LastName", true));
 			this.lastNameTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.lastNameTextBox.Location = new System.Drawing.Point(158, 84);
+			this.lastNameTextBox.Location = new System.Drawing.Point(169, 79);
 			this.lastNameTextBox.Name = "lastNameTextBox";
 			this.lastNameTextBox.Size = new System.Drawing.Size(100, 30);
 			this.lastNameTextBox.TabIndex = 28;
@@ -834,7 +821,7 @@
 			// 
 			this.phoneNumberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customerBindingSource, "PhoneNumber", true));
 			this.phoneNumberTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.phoneNumberTextBox.Location = new System.Drawing.Point(158, 110);
+			this.phoneNumberTextBox.Location = new System.Drawing.Point(169, 113);
 			this.phoneNumberTextBox.Name = "phoneNumberTextBox";
 			this.phoneNumberTextBox.Size = new System.Drawing.Size(100, 30);
 			this.phoneNumberTextBox.TabIndex = 30;
@@ -843,7 +830,7 @@
 			// 
 			this.emailAddressTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customerBindingSource, "EmailAddress", true));
 			this.emailAddressTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.emailAddressTextBox.Location = new System.Drawing.Point(158, 136);
+			this.emailAddressTextBox.Location = new System.Drawing.Point(169, 147);
 			this.emailAddressTextBox.Name = "emailAddressTextBox";
 			this.emailAddressTextBox.Size = new System.Drawing.Size(100, 30);
 			this.emailAddressTextBox.TabIndex = 32;
@@ -852,7 +839,7 @@
 			// 
 			this.address_IDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customerBindingSource, "Address_ID", true));
 			this.address_IDTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.address_IDTextBox.Location = new System.Drawing.Point(158, 162);
+			this.address_IDTextBox.Location = new System.Drawing.Point(169, 181);
 			this.address_IDTextBox.Name = "address_IDTextBox";
 			this.address_IDTextBox.Size = new System.Drawing.Size(100, 30);
 			this.address_IDTextBox.TabIndex = 34;
@@ -861,7 +848,7 @@
 			// 
 			this.btnShowOwnedAccounts.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnShowOwnedAccounts.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnShowOwnedAccounts.Location = new System.Drawing.Point(158, 254);
+			this.btnShowOwnedAccounts.Location = new System.Drawing.Point(155, 254);
 			this.btnShowOwnedAccounts.Name = "btnShowOwnedAccounts";
 			this.btnShowOwnedAccounts.Size = new System.Drawing.Size(171, 32);
 			this.btnShowOwnedAccounts.TabIndex = 23;
@@ -873,7 +860,7 @@
 			// 
 			this.btnDeleteCustomer.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnDeleteCustomer.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnDeleteCustomer.Location = new System.Drawing.Point(12, 254);
+			this.btnDeleteCustomer.Location = new System.Drawing.Point(9, 254);
 			this.btnDeleteCustomer.Name = "btnDeleteCustomer";
 			this.btnDeleteCustomer.Size = new System.Drawing.Size(140, 32);
 			this.btnDeleteCustomer.TabIndex = 22;
@@ -885,7 +872,7 @@
 			// 
 			this.btnCreateNewCustomer.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnCreateNewCustomer.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnCreateNewCustomer.Location = new System.Drawing.Point(158, 216);
+			this.btnCreateNewCustomer.Location = new System.Drawing.Point(155, 216);
 			this.btnCreateNewCustomer.Name = "btnCreateNewCustomer";
 			this.btnCreateNewCustomer.Size = new System.Drawing.Size(171, 32);
 			this.btnCreateNewCustomer.TabIndex = 21;
@@ -897,7 +884,7 @@
 			// 
 			this.btnUpdateCustomer.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnUpdateCustomer.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnUpdateCustomer.Location = new System.Drawing.Point(12, 216);
+			this.btnUpdateCustomer.Location = new System.Drawing.Point(9, 216);
 			this.btnUpdateCustomer.Name = "btnUpdateCustomer";
 			this.btnUpdateCustomer.Size = new System.Drawing.Size(140, 32);
 			this.btnUpdateCustomer.TabIndex = 20;
@@ -931,7 +918,7 @@
 			// 
 			this.addressIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.addressBindingSource, "ID", true));
 			this.addressIDTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.addressIDTextBox.Location = new System.Drawing.Point(181, 43);
+			this.addressIDTextBox.Location = new System.Drawing.Point(176, 23);
 			this.addressIDTextBox.Name = "addressIDTextBox";
 			this.addressIDTextBox.ReadOnly = true;
 			this.addressIDTextBox.Size = new System.Drawing.Size(100, 30);
@@ -941,7 +928,7 @@
 			// 
 			this.streetNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.addressBindingSource, "StreetName", true));
 			this.streetNameTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.streetNameTextBox.Location = new System.Drawing.Point(181, 69);
+			this.streetNameTextBox.Location = new System.Drawing.Point(176, 57);
 			this.streetNameTextBox.Name = "streetNameTextBox";
 			this.streetNameTextBox.Size = new System.Drawing.Size(100, 30);
 			this.streetNameTextBox.TabIndex = 26;
@@ -950,7 +937,7 @@
 			// 
 			this.streetNumberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.addressBindingSource, "StreetNumber", true));
 			this.streetNumberTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.streetNumberTextBox.Location = new System.Drawing.Point(181, 95);
+			this.streetNumberTextBox.Location = new System.Drawing.Point(176, 91);
 			this.streetNumberTextBox.Name = "streetNumberTextBox";
 			this.streetNumberTextBox.Size = new System.Drawing.Size(100, 30);
 			this.streetNumberTextBox.TabIndex = 28;
@@ -959,7 +946,7 @@
 			// 
 			this.zipCodeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.addressBindingSource, "ZipCode", true));
 			this.zipCodeTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.zipCodeTextBox.Location = new System.Drawing.Point(181, 121);
+			this.zipCodeTextBox.Location = new System.Drawing.Point(176, 125);
 			this.zipCodeTextBox.Name = "zipCodeTextBox";
 			this.zipCodeTextBox.Size = new System.Drawing.Size(100, 30);
 			this.zipCodeTextBox.TabIndex = 30;
@@ -968,7 +955,7 @@
 			// 
 			this.cityTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.addressBindingSource, "City", true));
 			this.cityTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.cityTextBox.Location = new System.Drawing.Point(181, 147);
+			this.cityTextBox.Location = new System.Drawing.Point(176, 159);
 			this.cityTextBox.Name = "cityTextBox";
 			this.cityTextBox.Size = new System.Drawing.Size(100, 30);
 			this.cityTextBox.TabIndex = 32;
@@ -977,7 +964,7 @@
 			// 
 			this.btnDeleteAddress.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnDeleteAddress.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnDeleteAddress.Location = new System.Drawing.Point(89, 253);
+			this.btnDeleteAddress.Location = new System.Drawing.Point(89, 248);
 			this.btnDeleteAddress.Name = "btnDeleteAddress";
 			this.btnDeleteAddress.Size = new System.Drawing.Size(157, 32);
 			this.btnDeleteAddress.TabIndex = 23;
@@ -989,7 +976,7 @@
 			// 
 			this.btnCreateNewAddress.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnCreateNewAddress.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnCreateNewAddress.Location = new System.Drawing.Point(166, 215);
+			this.btnCreateNewAddress.Location = new System.Drawing.Point(166, 210);
 			this.btnCreateNewAddress.Name = "btnCreateNewAddress";
 			this.btnCreateNewAddress.Size = new System.Drawing.Size(157, 32);
 			this.btnCreateNewAddress.TabIndex = 23;
@@ -1001,7 +988,7 @@
 			// 
 			this.btnUpdateAddress.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnUpdateAddress.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnUpdateAddress.Location = new System.Drawing.Point(11, 215);
+			this.btnUpdateAddress.Location = new System.Drawing.Point(11, 210);
 			this.btnUpdateAddress.Name = "btnUpdateAddress";
 			this.btnUpdateAddress.Size = new System.Drawing.Size(140, 32);
 			this.btnUpdateAddress.TabIndex = 22;
@@ -1039,6 +1026,22 @@
 			this.pnlDbConnection.Name = "pnlDbConnection";
 			this.pnlDbConnection.Size = new System.Drawing.Size(456, 335);
 			this.pnlDbConnection.TabIndex = 24;
+			// 
+			// btnGetTables
+			// 
+			this.btnGetTables.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnGetTables.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnGetTables.Location = new System.Drawing.Point(238, 253);
+			this.btnGetTables.MaximumSize = new System.Drawing.Size(130, 54);
+			this.btnGetTables.MinimumSize = new System.Drawing.Size(130, 54);
+			this.btnGetTables.Name = "btnGetTables";
+			this.btnGetTables.Size = new System.Drawing.Size(130, 54);
+			this.btnGetTables.TabIndex = 24;
+			this.btnGetTables.Text = "Get Tables";
+			this.btnGetTables.UseVisualStyleBackColor = true;
+			this.btnGetTables.Click += new System.EventHandler(this.btnGetTables_Click);
 			// 
 			// lblDbConnectionTitle
 			// 
@@ -1216,21 +1219,73 @@
 			this.tableAdapterManager.TransactionTableAdapter = this.transactionTableAdapter;
 			this.tableAdapterManager.UpdateOrder = BankingSite.BankingSiteDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
 			// 
-			// btnGetTables
+			// customerIDDataGridViewTextBoxColumn
 			// 
-			this.btnGetTables.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnGetTables.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnGetTables.Location = new System.Drawing.Point(238, 253);
-			this.btnGetTables.MaximumSize = new System.Drawing.Size(130, 54);
-			this.btnGetTables.MinimumSize = new System.Drawing.Size(130, 54);
-			this.btnGetTables.Name = "btnGetTables";
-			this.btnGetTables.Size = new System.Drawing.Size(130, 54);
-			this.btnGetTables.TabIndex = 24;
-			this.btnGetTables.Text = "Get Tables";
-			this.btnGetTables.UseVisualStyleBackColor = true;
-			this.btnGetTables.Click += new System.EventHandler(this.btnGetTables_Click);
+			this.customerIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+			this.customerIDDataGridViewTextBoxColumn.DataPropertyName = "Customer_ID";
+			this.customerIDDataGridViewTextBoxColumn.HeaderText = "Customer_ID";
+			this.customerIDDataGridViewTextBoxColumn.Name = "customerIDDataGridViewTextBoxColumn";
+			this.customerIDDataGridViewTextBoxColumn.ReadOnly = true;
+			this.customerIDDataGridViewTextBoxColumn.Width = 93;
+			// 
+			// numberDataGridViewTextBoxColumn
+			// 
+			this.numberDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+			this.numberDataGridViewTextBoxColumn.DataPropertyName = "Number";
+			this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
+			this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
+			this.numberDataGridViewTextBoxColumn.ReadOnly = true;
+			this.numberDataGridViewTextBoxColumn.Width = 69;
+			// 
+			// balanceDataGridViewTextBoxColumn
+			// 
+			this.balanceDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+			this.balanceDataGridViewTextBoxColumn.DataPropertyName = "Balance";
+			this.balanceDataGridViewTextBoxColumn.HeaderText = "Balance";
+			this.balanceDataGridViewTextBoxColumn.Name = "balanceDataGridViewTextBoxColumn";
+			this.balanceDataGridViewTextBoxColumn.ReadOnly = true;
+			this.balanceDataGridViewTextBoxColumn.Width = 71;
+			// 
+			// iBANDataGridViewTextBoxColumn
+			// 
+			this.iBANDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.iBANDataGridViewTextBoxColumn.DataPropertyName = "IBAN";
+			this.iBANDataGridViewTextBoxColumn.HeaderText = "IBAN";
+			this.iBANDataGridViewTextBoxColumn.Name = "iBANDataGridViewTextBoxColumn";
+			this.iBANDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// iDDataGridViewTextBoxColumn2
+			// 
+			this.iDDataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+			this.iDDataGridViewTextBoxColumn2.DataPropertyName = "ID";
+			this.iDDataGridViewTextBoxColumn2.HeaderText = "ID";
+			this.iDDataGridViewTextBoxColumn2.Name = "iDDataGridViewTextBoxColumn2";
+			this.iDDataGridViewTextBoxColumn2.ReadOnly = true;
+			this.iDDataGridViewTextBoxColumn2.Width = 43;
+			// 
+			// dgvAccounts
+			// 
+			this.dgvAccounts.AllowUserToAddRows = false;
+			this.dgvAccounts.AllowUserToDeleteRows = false;
+			this.dgvAccounts.AutoGenerateColumns = false;
+			this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+			this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvAccounts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.iDDataGridViewTextBoxColumn2,
+            this.iBANDataGridViewTextBoxColumn,
+            this.balanceDataGridViewTextBoxColumn,
+            this.numberDataGridViewTextBoxColumn,
+            this.customerIDDataGridViewTextBoxColumn});
+			this.dgvAccounts.DataSource = this.accountBindingSource;
+			this.dgvAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dgvAccounts.Location = new System.Drawing.Point(4, 4);
+			this.dgvAccounts.MultiSelect = false;
+			this.dgvAccounts.Name = "dgvAccounts";
+			this.dgvAccounts.ReadOnly = true;
+			this.dgvAccounts.RowHeadersWidth = 21;
+			this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dgvAccounts.Size = new System.Drawing.Size(984, 525);
+			this.dgvAccounts.TabIndex = 1;
 			// 
 			// MainWindow
 			// 
@@ -1256,7 +1311,6 @@
 			this.pnlAccountDetails.ResumeLayout(false);
 			this.pnlAccountDetails.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.accountBindingSource)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
 			this.tpCustomers.ResumeLayout(false);
 			this.tlpCostumerAddress.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
@@ -1272,6 +1326,7 @@
 			this.pnlDbConnection.ResumeLayout(false);
 			this.pnlDbConnection.PerformLayout();
 			this.tcWindow.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -1306,7 +1361,6 @@
 		private System.Windows.Forms.Button btnUpdateAddress;
 		private System.Windows.Forms.Button btnDeleteCustomer;
 		private System.Windows.Forms.Button btnDeleteAddress;
-		private System.Windows.Forms.DataGridView dgvAccounts;
 		private System.Windows.Forms.Button btnShowOwnedAccounts;
 		private System.Windows.Forms.TableLayoutPanel tlpAccounts;
 		private System.Windows.Forms.Panel pnlAccountDetails;
@@ -1315,35 +1369,12 @@
 		private BankingSiteDataSet bankingSiteDataSet;
 		private System.Windows.Forms.BindingSource customerBindingSource;
 		private BankingSiteDataSetTableAdapters.CustomerTableAdapter customerTableAdapter;
-		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumberDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn emailAddressDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn addressIDDataGridViewTextBoxColumn;
 		private System.Windows.Forms.BindingSource addressBindingSource;
 		private BankingSiteDataSetTableAdapters.AddressTableAdapter addressTableAdapter;
-		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn streetNameDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn streetNumberDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn zipCodeDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn cityDataGridViewTextBoxColumn;
 		private System.Windows.Forms.BindingSource accountBindingSource;
 		private BankingSiteDataSetTableAdapters.AccountTableAdapter accountTableAdapter;
-		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn iBANDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn balanceDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn customerIDDataGridViewTextBoxColumn;
 		private System.Windows.Forms.BindingSource transactionBindingSource;
 		private BankingSiteDataSetTableAdapters.TransactionTableAdapter transactionTableAdapter;
-		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn3;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn intendedUseDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn accountReceiverIDDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn accountSenderIDDataGridViewTextBoxColumn;
 		private System.Windows.Forms.TextBox customerIDTextBox;
 		private System.Windows.Forms.TextBox firstNameTextBox;
 		private System.Windows.Forms.TextBox lastNameTextBox;
@@ -1363,5 +1394,29 @@
 		private System.Windows.Forms.TableLayoutPanel tlpTransactions;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.Button btnGetTables;
+		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumberDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn emailAddressDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn addressIDDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn intendedUseDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn accountReceiverIDDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn accountSenderIDDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn streetNameDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn streetNumberDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn zipCodeDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn cityDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridView dgvAccounts;
+		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn iBANDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn balanceDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn customerIDDataGridViewTextBoxColumn;
 	}
 }

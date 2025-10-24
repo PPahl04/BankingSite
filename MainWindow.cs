@@ -410,8 +410,7 @@ namespace BankingSite
 			CreateNew cnForm = new CreateNew();
 			cnForm.SetUp(transactionTableAdapter, CreateNew.CreateType.Transaction);
 
-			DataTable temp = accountTableAdapter.GetData();
-			cnForm.GetAccountIDs(temp.Columns["ID"].Table);
+			cnForm.GetAccountTableAdapter(accountTableAdapter);
 
 			if (cnForm.ShowDialog() == DialogResult.Cancel)
 			{
@@ -419,6 +418,7 @@ namespace BankingSite
 			}
 
 			transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+			accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
 		}
 	
 		private void btnDeleteTransaction_Click(object sender, EventArgs e)

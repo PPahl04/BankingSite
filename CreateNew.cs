@@ -77,10 +77,17 @@ namespace BankingSite
 			myPanel.Location = new Point(0, 0);
 		}
 
-		public void GetAccountIDs(DataTable myAccountIDs)
+		/// <summary>
+		/// Gets the Account Table Adapter to get all account ids and use the adapter when creating the transaction.
+		/// </summary>
+		/// <param name="myATA"></param>
+		public void GetAccountTableAdapter(AccountTableAdapter myATA)
 		{
-			accountReceiver_IDComboBox.DataSource = new DataView(myAccountIDs);
-			accountSender_IDComboBox.DataSource = new DataView(myAccountIDs);
+			_accountTableAdapter = myATA;
+			DataTable myAccountIDs = _accountTableAdapter.GetData();
+		
+			accountReceiver_IDComboBox.DataSource = new DataView(myAccountIDs.Columns["ID"].Table);
+			accountSender_IDComboBox.DataSource = new DataView(myAccountIDs.Columns["ID"].Table);
 
 			accountReceiver_IDComboBox.DisplayMember = "ID";
 			accountSender_IDComboBox.DisplayMember = "ID";
@@ -202,6 +209,12 @@ namespace BankingSite
 				return;
 			}
 
+			if (amount < 1)
+			{
+				MessageBox.Show(string.Concat("You cant start a transaction with the amount of ", amount, ". Please input a greater number than 0"), "Invalid amount");
+				return;
+			}
+
 			string intendedUse = intendedUseTextBox.Text;
 			string type = typeComboBox.Text;
 
@@ -215,33 +228,61 @@ namespace BankingSite
 			{
 				_transactionTableAdapter.InsertNewTransaction(dateDateTimePicker.Value.ToString(), amount, intendedUse, type, receiverID, senderID);
 				_hasCanceled = false;
+				Close();
 
+				//get balance from sender and update it based on the transaction balance
 				if (type == TransactionType.Withdrawal.ToString())
 				{
-					return;
-				}
-				
-				if (type == TransactionType.Deposit.ToString())
-				{
+					WithdrawFromAccount(senderID, amount);
 					return;
 				}
 
+				//get balance from sender and update it based on the transaction balance
+				if (type == TransactionType.Deposit.ToString())
+				{
+					DepositToAccount(senderID, amount);
+					return;
+				}
+
+				//get balance from both ids and update it based on the transaction balance
+				if (type == TransactionType.Transfer.ToString())
+				{
+					TransferFromSenderToReceiver(senderID, receiverID, amount);
+					return;
+				}               
+				
 				if (type == TransactionType.Incoming.ToString())
 				{
 					return;
 				}
-					
-				if (type == TransactionType.Transfer.ToString())
-				{
-					return;
-				}
-
-				Close();
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message, "Error oocurred while creating a new transaction.");
 			}
+		}
+
+		void WithdrawFromAccount(int myAccountID, int myAmount)
+		{
+			//Will remove amount from account
+			int currentBalance = (int)_accountTableAdapter.GetBalanceFromAccountWithID(myAccountID);
+			int newBalance = currentBalance - myAmount;
+			_accountTableAdapter.UpdateBalanceFromAccountWithID(newBalance, myAccountID);
+		}
+
+		void DepositToAccount(int myAccountID, int myAmount)
+		{
+			//will add amount to account
+			int currentBalance = (int)_accountTableAdapter.GetBalanceFromAccountWithID(myAccountID);
+			int newBalance = currentBalance + myAmount;
+			_accountTableAdapter.UpdateBalanceFromAccountWithID(newBalance, myAccountID);
+		}
+
+		void TransferFromSenderToReceiver(int mySenderID, int myReceiverID, int myAmount)
+		{
+			//actually just withdraw from sender and deposit to receiver tehe
+			WithdrawFromAccount(mySenderID, myAmount);
+			DepositToAccount(myReceiverID, myAmount);
 		}
 
 		void CreateNew_FormClosing(object sender, FormClosingEventArgs e)
