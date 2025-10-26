@@ -1,8 +1,8 @@
 ﻿using BankingSite.BankingSiteDataSetTableAdapters;
-using System;
-using System.Data;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Data;
+using System;
 
 namespace BankingSite
 {
@@ -21,6 +21,12 @@ namespace BankingSite
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// Will determine which tableAdapter and panel (which holds all neccesary UI) to use by its parameters
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="myTableAdapter"></param>
+		/// <param name="myCreateType"></param>
 		public void SetUp<T> (T myTableAdapter, CreateType myCreateType) 
 		{
 			_type = myCreateType;
@@ -67,7 +73,6 @@ namespace BankingSite
 			}
 			
 			Text = title;
-			//AutoSize = true;
 		}
 
 		void UsePanel(Panel myPanel)
@@ -93,6 +98,11 @@ namespace BankingSite
 			accountSender_IDComboBox.DisplayMember = "ID";
 		}
 
+		/// <summary>
+		/// Will choose the correct Create method (Address, Customer, Account or Transaction) based on the type of data the user wants to create.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		void btnCreateNew_Click(object sender, EventArgs e)
 		{
 			switch (_type)
@@ -116,7 +126,7 @@ namespace BankingSite
 		}
 
 		void CreateNewCustomer()
-		{   //Create a new Customer dataset but check if all of the inputs are valid first
+		{   //Create a new Customer dataTable but check if all of the inputs are valid first
 			if (!int.TryParse(address_IDTextBox.Text, out int addrID) || !int.TryParse(phoneNumberTextBox.Text, out int phoneN))
 			{
 				MessageBox.Show("Please make sure to only input numbers for the address ID and phonenumber.", "Error using inputs for creating new dataset");
@@ -146,7 +156,7 @@ namespace BankingSite
 		}
 
 		void CreateNewAddress()
-		{	//Create new address the dataset but check if all of them are valid first
+		{	//Create new address dataTable but check if all of them are valid first
 			if (!int.TryParse(streetNumberTextBox.Text, out int streetNumber) || !int.TryParse(zipCodeTextBox.Text, out int zipCode))
 			{
 				MessageBox.Show("Please make sure to only input numbers for the street receiverID and zip code.", "Error using inputs for creating new dataset");
@@ -175,7 +185,7 @@ namespace BankingSite
 		}
 
 		void CreateNewAccount()
-		{   //Create a new Customer dataset but check if all of the inputs are valid first
+		{   //Create a new Account dataTable but check if all of the inputs are valid first
 			if (!int.TryParse(balanceTextBox.Text, out int balance) || !int.TryParse(numberTextBox.Text, out int number) || !int.TryParse(customer_IDTextBox.Text, out int custID))
 			{
 				MessageBox.Show("Please make sure to only input numbers for the amount, bumber and customer id.", "Error using inputs for creating new dataset");
@@ -201,6 +211,9 @@ namespace BankingSite
 			}
 		}
 
+		/// <summary>
+		/// Creates a new Transaction and change the balance of the sender and receiver accounts based on which type of transaction was chosen.
+		/// </summary>
 		void CreateNewTransaction()
 		{	//Create a new transaction but check if all of the inputs are valid first
 			if (!int.TryParse(amountTextBox.Text, out int amount) || !int.TryParse(accountReceiver_IDComboBox.Text, out int receiverID) || !int.TryParse(accountSender_IDComboBox.Text, out int senderID))
@@ -251,6 +264,7 @@ namespace BankingSite
 					return;
 				}               
 				
+				//What is this
 				if (type == TransactionType.Incoming.ToString())
 				{
 					return;
@@ -262,25 +276,38 @@ namespace BankingSite
 			}
 		}
 
+		/// <summary>
+		///Will remove myAmount from balance of Account with ID myAccountID.
+		/// </summary>
+		/// <param name="myAccountID"></param>
+		/// <param name="myAmount"></param>
 		void WithdrawFromAccount(int myAccountID, int myAmount)
 		{
-			//Will remove amount from account
 			int currentBalance = (int)_accountTableAdapter.GetBalanceFromAccountWithID(myAccountID);
 			int newBalance = currentBalance - myAmount;
 			_accountTableAdapter.UpdateBalanceFromAccountWithID(newBalance, myAccountID);
 		}
 
+		/// <summary>
+		///Will add myAmount to balance of Account with ID myAccountID.
+		/// </summary>
+		/// <param name="myAccountID"></param>
+		/// <param name="myAmount"></param>
 		void DepositToAccount(int myAccountID, int myAmount)
 		{
-			//will add amount to account
 			int currentBalance = (int)_accountTableAdapter.GetBalanceFromAccountWithID(myAccountID);
 			int newBalance = currentBalance + myAmount;
 			_accountTableAdapter.UpdateBalanceFromAccountWithID(newBalance, myAccountID);
 		}
 
+		/// <summary>
+		///Will remove myAmount from balance of the sender and add it into the balance of the receiver Account.
+		/// </summary>
+		/// <param name="mySenderID"></param>
+		/// <param name="myReceiverID"></param>
+		/// <param name="myAmount"></param>
 		void TransferFromSenderToReceiver(int mySenderID, int myReceiverID, int myAmount)
 		{
-			//actually just withdraw from sender and deposit to receiver tehe
 			WithdrawFromAccount(mySenderID, myAmount);
 			DepositToAccount(myReceiverID, myAmount);
 		}
@@ -290,6 +317,10 @@ namespace BankingSite
 			DialogResult = _hasCanceled ? DialogResult.Cancel : DialogResult.OK;
 		}
 
+		/// <summary>
+		/// Contains all different types of DataTables the User can create.
+		/// Customer, Address, Account and Transaction.
+		/// </summary>
 		public enum CreateType
 		{
 			Customer,
@@ -307,7 +338,8 @@ namespace BankingSite
 		}
 
 		/// <summary>
-		/// Disable the receiver id if withdawal or deposit have been selected. the receiver is the same as the sender on these types.
+		/// Disable the selection of receiver id if withdrawal or deposit have been selected.
+		/// The receiver will be the same as the sender on these types.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
@@ -322,7 +354,7 @@ namespace BankingSite
 		}
 
 		/// <summary>
-		/// Will make the selected Index of both comboBoxes equal if the one for the sender is disabled.
+		/// Will make the selected Index of both comboBoxes equal if the one for the receiver is disabled.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>

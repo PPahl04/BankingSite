@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
 using System.Windows.Forms;
+using System.Data;
+using System.Linq;
+using System.IO;
+using System;
 
 namespace BankingSite
 {
@@ -65,9 +65,11 @@ namespace BankingSite
 			LoadTables();
 		}
 
+		/// <summary>
+		/// Will connect to the server and db in order to display all tables (except the system dbs) in the comboBox for selection.
+		/// </summary>
 		void LoadTables()
 		{
-			//try to connect in order to show all dbs in the dropdown
 			try
 			{
 				if (!CanConnectToServer())
@@ -141,11 +143,12 @@ namespace BankingSite
 				cmd.ExecuteNonQuery();
 			}
 
-			MessageBox.Show("Data has been succsellfulyy been inserted into the Address, Customer and Account tables!", "Data succsessfully inserted");
+			RefillDGVs();
+			MessageBox.Show("Data has been succsessfully been inserted into the Address, Customer and Account tables!", "Data succsessfully inserted");
 		}
 
 		private void btnConnectToDB_Click(object sender, EventArgs e)
-		{   //connect to the desired db
+		{
 			try
 			{
 				if (!CanConnectToServer())
@@ -170,10 +173,7 @@ namespace BankingSite
 						ConnectedToDatabase();
 						MessageBox.Show("Missing tables have been succssessfully created, so all of them are empty.", "Empty tables created.");
 					}
-					else
-					{ 
-						return; 
-					}
+					return; 
 				}
 				else 
 				{
@@ -181,10 +181,7 @@ namespace BankingSite
 					MessageBox.Show("Succsessfully connected to database!", "Connection to database established.");
 				}
 
-				this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
-				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
-				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
-				this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+				RefillDGVs();
 			}
 			catch (Exception ex)
 			{
@@ -192,6 +189,22 @@ namespace BankingSite
 			}
 		}
 
+		/// <summary>
+		/// Uses the TableAdapters to refill all dataGridViews.
+		/// </summary>
+		void RefillDGVs()
+		{
+			this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
+			this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
+			this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+			this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+		}
+
+		/// <summary>
+		/// Will check if the selected Database contains all requered tables such as: Address, Customer, Account and Transaction.
+		/// Will return false if one of them doesn't exist.
+		/// </summary>
+		/// <returns></returns>
 		bool DatabaseContainsAllTables()
 		{
 			using (SqlConnection cn = new SqlConnection(_connectionString))
@@ -220,6 +233,9 @@ namespace BankingSite
 			return _missingTables.Count == 0;
 		}
 
+		/// <summary>
+		/// Creates the required tables that are missing.
+		/// </summary>
 		void CreateTables()
 		{
 			foreach (string missingTable in _missingTables)
@@ -274,7 +290,7 @@ namespace BankingSite
 		}
 		#endregion 
 
-		#region Customer
+		#region Customer Tab
 		private void btnCreateNewCustomer_Click(object sender, EventArgs e)
 		{
 			CreateNew cnForm = new CreateNew();
@@ -289,7 +305,7 @@ namespace BankingSite
 		}
 
 		void btnUpdateCustomer_Click(object sender, EventArgs e)
-		{   //Update the dataset but check if all of them are valid first
+		{   //Update the dataTable but check if all of them are valid first
 			if (!int.TryParse(customerIDTextBox.Text, out int custID) || !int.TryParse(address_IDTextBox.Text, out int addrID) || !int.TryParse(phoneNumberTextBox.Text, out int phoneN))
 			{
 				MessageBox.Show("Please make sure to only input numbers for the address ID and phonenumber.", "Error using inputs for updating dataset");
@@ -325,7 +341,8 @@ namespace BankingSite
 			}
 
 			int id = Convert.ToInt32(customerIDTextBox.Text);
-			if (MessageBox.Show(string.Concat("Are you sure you want to delete the customer with the ID: ", id, "? This will also delete all account they own."), "Delete selected customer",
+			if (MessageBox.Show(string.Concat("Are you sure you want to delete the customer with the ID: ", id, "?" +
+				"\nThis will also delete all accounts they own."), "Delete selected customer",
 						MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
 				customerTableAdapter.DeleteCustomerWithID(id);
@@ -334,6 +351,11 @@ namespace BankingSite
 			}
 		}
 
+		/// <summary>
+		/// Creates a Window to display all Accounts the selecetd Customer owns.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnShowOwnedAccounts_Click(object sender, EventArgs e)
 		{
 			int custID = Convert.ToInt32(customerIDTextBox.Text);
@@ -351,7 +373,7 @@ namespace BankingSite
 		}
 		#endregion
 
-		#region Address
+		#region Address Tab
 		private void btnCreateNewAddress_Click(object sender, EventArgs e)
 		{
 			CreateNew cnForm = new CreateNew();
@@ -366,7 +388,7 @@ namespace BankingSite
 		}
 
 		void btnUpdateAddress_Click(object sender, EventArgs e)
-		{	//Update the dataset but check if all of them are valid first
+		{	//Update the dataTable but check if all of them are valid first
 			if (!int.TryParse(streetNumberTextBox.Text, out int streetNumber) || !int.TryParse(zipCodeTextBox.Text, out int zipCode))
 			{
 				MessageBox.Show("Please make sure to only input numbers for the street number and zip code.", "Error using inputs for updating dataset");
@@ -401,16 +423,18 @@ namespace BankingSite
 			}
 
 			int id = Convert.ToInt32(addressIDTextBox.Text);
-			if (MessageBox.Show(string.Concat("Are you sure you want to delete the address with the ID: ", id, "?"), "Delete selected address",
+			if (MessageBox.Show(string.Concat("Are you sure you want to delete the address with the ID: ", id, "?" +
+				"\nCustomers living at this place will become homeless."), "Delete selected address",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
 				addressTableAdapter.DeleteAddressWithID(id);
 				this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
+				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
 			}
 		}
 		#endregion
 
-		#region Account
+		#region Account Tab
 		private void btnCreateNewAccount_Click(object sender, EventArgs e)
 		{
 			CreateNew cnForm = new CreateNew();
@@ -453,16 +477,18 @@ namespace BankingSite
 			}
 
 			int id = Convert.ToInt32(accountIDTextBox.Text);
-			if (MessageBox.Show(string.Concat("Are you sure you want to delete the account with the ID: ", id, "?"), "Delete selected account",
+			if (MessageBox.Show(string.Concat("Are you sure you want to delete the account with the ID: ", id, "?" +
+				"\n this may also delete transactions assosiated with this account."), "Delete selected account",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
 				accountTableAdapter.DeleteAccountWithID(id);
 				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+				this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
 			}
 		}
 		#endregion
 
-		#region Transaction
+		#region Transaction Tab
 		private void btnCreateNewTransaction_Click(object sender, EventArgs e)
 		{
 			CreateNew cnForm = new CreateNew();
@@ -487,7 +513,7 @@ namespace BankingSite
 			}
 
 			int id = Convert.ToInt32(transactionIDTextBox.Text);
-			if (MessageBox.Show(string.Concat("Are you sure you want to delete the account with the ID: ", transactionIDTextBox.Text, "?"), "Delete selected account",
+			if (MessageBox.Show(string.Concat("Are you sure you want to delete the transaction with the ID: ", transactionIDTextBox.Text, "?"), "Delete selected Transaction",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
 				transactionTableAdapter.DeleteTransactionWithID(id);

@@ -1268,7 +1268,6 @@ namespace BankingSite {
                 this.columnPhoneNumber.AllowDBNull = false;
                 this.columnEmailAddress.AllowDBNull = false;
                 this.columnEmailAddress.MaxLength = 50;
-                this.columnAddress_ID.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2006,7 +2005,12 @@ namespace BankingSite {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public int Address_ID {
                 get {
-                    return ((int)(this[this.tableCustomer.Address_IDColumn]));
+                    try {
+                        return ((int)(this[this.tableCustomer.Address_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Address_ID\' in table \'Customer\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableCustomer.Address_IDColumn] = value;
@@ -2022,6 +2026,18 @@ namespace BankingSite {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Customer_Address"]);
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsAddress_IDNull() {
+                return this.IsNull(this.tableCustomer.Address_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetAddress_IDNull() {
+                this[this.tableCustomer.Address_IDColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3527,7 +3543,7 @@ WHERE        (ID = @ID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_FirstName, string Original_LastName, int Original_PhoneNumber, string Original_EmailAddress, int Original_Address_ID) {
+        public virtual int Delete(int Original_ID, string Original_FirstName, string Original_LastName, int Original_PhoneNumber, string Original_EmailAddress, global::System.Nullable<int> Original_Address_ID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((Original_FirstName == null)) {
                 throw new global::System.ArgumentNullException("Original_FirstName");
@@ -3548,7 +3564,12 @@ WHERE        (ID = @ID)";
             else {
                 this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_EmailAddress));
             }
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_Address_ID));
+            if ((Original_Address_ID.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_Address_ID.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3569,7 +3590,7 @@ WHERE        (ID = @ID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string FirstName, string LastName, int PhoneNumber, string EmailAddress, int Address_ID) {
+        public virtual int Insert(string FirstName, string LastName, int PhoneNumber, string EmailAddress, global::System.Nullable<int> Address_ID) {
             if ((FirstName == null)) {
                 throw new global::System.ArgumentNullException("FirstName");
             }
@@ -3589,7 +3610,12 @@ WHERE        (ID = @ID)";
             else {
                 this.Adapter.InsertCommand.Parameters[3].Value = ((string)(EmailAddress));
             }
-            this.Adapter.InsertCommand.Parameters[4].Value = ((int)(Address_ID));
+            if ((Address_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(Address_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3610,7 +3636,7 @@ WHERE        (ID = @ID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string FirstName, string LastName, int PhoneNumber, string EmailAddress, int Address_ID, int Original_ID, string Original_FirstName, string Original_LastName, int Original_PhoneNumber, string Original_EmailAddress, int Original_Address_ID, int ID) {
+        public virtual int Update(string FirstName, string LastName, int PhoneNumber, string EmailAddress, global::System.Nullable<int> Address_ID, int Original_ID, string Original_FirstName, string Original_LastName, int Original_PhoneNumber, string Original_EmailAddress, global::System.Nullable<int> Original_Address_ID, int ID) {
             if ((FirstName == null)) {
                 throw new global::System.ArgumentNullException("FirstName");
             }
@@ -3630,7 +3656,12 @@ WHERE        (ID = @ID)";
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(EmailAddress));
             }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Address_ID));
+            if ((Address_ID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Address_ID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
             this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_ID));
             if ((Original_FirstName == null)) {
                 throw new global::System.ArgumentNullException("Original_FirstName");
@@ -3651,7 +3682,12 @@ WHERE        (ID = @ID)";
             else {
                 this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_EmailAddress));
             }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_Address_ID));
+            if ((Original_Address_ID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_Address_ID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
             this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -3673,7 +3709,7 @@ WHERE        (ID = @ID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string FirstName, string LastName, int PhoneNumber, string EmailAddress, int Address_ID, int Original_ID, string Original_FirstName, string Original_LastName, int Original_PhoneNumber, string Original_EmailAddress, int Original_Address_ID) {
+        public virtual int Update(string FirstName, string LastName, int PhoneNumber, string EmailAddress, global::System.Nullable<int> Address_ID, int Original_ID, string Original_FirstName, string Original_LastName, int Original_PhoneNumber, string Original_EmailAddress, global::System.Nullable<int> Original_Address_ID) {
             return this.Update(FirstName, LastName, PhoneNumber, EmailAddress, Address_ID, Original_ID, Original_FirstName, Original_LastName, Original_PhoneNumber, Original_EmailAddress, Original_Address_ID, Original_ID);
         }
         
@@ -3705,7 +3741,7 @@ WHERE        (ID = @ID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
-        public virtual int InsertNewCustomer(string FirstName, string LastName, int PhoneNumber, string EmailAddress, int Address_ID) {
+        public virtual int InsertNewCustomer(string FirstName, string LastName, int PhoneNumber, string EmailAddress, global::System.Nullable<int> Address_ID) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
             if ((FirstName == null)) {
                 throw new global::System.ArgumentNullException("FirstName");
@@ -3726,7 +3762,12 @@ WHERE        (ID = @ID)";
             else {
                 command.Parameters[3].Value = ((string)(EmailAddress));
             }
-            command.Parameters[4].Value = ((int)(Address_ID));
+            if ((Address_ID.HasValue == true)) {
+                command.Parameters[4].Value = ((int)(Address_ID.Value));
+            }
+            else {
+                command.Parameters[4].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
