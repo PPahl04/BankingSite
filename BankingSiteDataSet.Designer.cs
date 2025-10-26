@@ -2477,7 +2477,7 @@ SELECT ID, IBAN, Balance, Number, Customer_ID FROM Account WHERE (ID = @ID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BankingSite.Properties.Settings.Default.BankingSiteConnectionString;
+            this._connection.ConnectionString = global::BankingSite.Properties.Settings.Default.BankingSiteConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2979,7 +2979,7 @@ SELECT ID, StreetName, StreetNumber, ZipCode, City FROM Address WHERE (ID = @ID)
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BankingSite.Properties.Settings.Default.BankingSiteConnectionString;
+            this._connection.ConnectionString = global::BankingSite.Properties.Settings.Default.BankingSiteConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3424,7 +3424,7 @@ SELECT ID, FirstName, LastName, PhoneNumber, EmailAddress, Address_ID FROM Custo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BankingSite.Properties.Settings.Default.BankingSiteConnectionString;
+            this._connection.ConnectionString = global::BankingSite.Properties.Settings.Default.BankingSiteConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3968,7 +3968,7 @@ SELECT ID, Date, Amount, IntendedUse, Type, AccountReceiver_ID, AccountSender_ID
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::BankingSite.Properties.Settings.Default.BankingSiteConnectionString;
+            this._connection.ConnectionString = global::BankingSite.Properties.Settings.Default.BankingSiteConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

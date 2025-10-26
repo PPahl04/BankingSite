@@ -60,12 +60,7 @@ namespace BankingSite
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void txtbPassword_Leave(object sender, EventArgs e)
-		{
-			LoadTables();
-		}
-
-		private void btnGetTables_Click(object sender, EventArgs e)
+		private void cbDbNames_DropDown(object sender, EventArgs e)
 		{
 			LoadTables();
 		}
@@ -109,6 +104,46 @@ namespace BankingSite
 			catch { }
 		}
 
+		/// <summary>
+		/// Will insert new data into the address, customer and account tables
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void btnInsertData_Click(object sender, EventArgs e)
+		{
+			InsertDataToTables();
+			btnInsertData.Enabled = false;
+		}
+
+		void InsertDataToTables()
+		{
+			if (!CanConnectToServer() || String.IsNullOrWhiteSpace(cbDbNames.Text))
+			{
+				MessageBox.Show("Please make sure to establish an connection to the server and database first.", "Error trying to connect.");
+				return;
+			}
+
+			using (SqlConnection cn = new SqlConnection(_connectionString))
+			{
+				cn.Open();
+				SqlCommand cmd = cn.CreateCommand();
+				cmd.CommandTimeout = 5;
+
+				string folderPath = @"..\..\InsertData\";
+
+				cmd.CommandText = File.ReadAllText(string.Concat(folderPath, "Address.sql"));
+				cmd.ExecuteNonQuery();
+
+				cmd.CommandText = File.ReadAllText(string.Concat(folderPath, "Customer.sql"));
+				cmd.ExecuteNonQuery();
+
+				cmd.CommandText = File.ReadAllText(string.Concat(folderPath, "Account.sql"));
+				cmd.ExecuteNonQuery();
+			}
+
+			MessageBox.Show("Data has been succsellfulyy been inserted into the Address, Customer and Account tables!", "Data succsessfully inserted");
+		}
+
 		private void btnConnectToDB_Click(object sender, EventArgs e)
 		{   //connect to the desired db
 			try
@@ -146,10 +181,10 @@ namespace BankingSite
 					MessageBox.Show("Succsessfully connected to database!", "Connection to database established.");
 				}
 
-				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
-				this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
-				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
 				this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
+				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
+				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+				this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
 			}
 			catch (Exception ex)
 			{
@@ -229,10 +264,11 @@ namespace BankingSite
 		}
 
 		/// <summary>
-		/// Will change the text of the window and allow changing the tab pages
+		/// Will change the text of the window and allow changing the tab pages and inserting data
 		/// </summary>
 		void ConnectedToDatabase()
 		{
+			btnInsertData.Enabled = true;
 			_isConnectedAndHasTables = true;
 			Text = string.Concat("BankingSite - Connected to ", cbDbNames.Text);
 		}
@@ -289,11 +325,12 @@ namespace BankingSite
 			}
 
 			int id = Convert.ToInt32(customerIDTextBox.Text);
-			if (MessageBox.Show(string.Concat("Are you sure you want to delete the customer with the ID: ", id, "?"), "Delete selected customer",
+			if (MessageBox.Show(string.Concat("Are you sure you want to delete the customer with the ID: ", id, "? This will also delete all account they own."), "Delete selected customer",
 						MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
 				customerTableAdapter.DeleteCustomerWithID(id);
 				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
+				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
 			}
 		}
 

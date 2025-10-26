@@ -44,17 +44,19 @@
 			System.Windows.Forms.Label iDLabel3;
 			this.tpTransactions = new System.Windows.Forms.TabPage();
 			this.tlpTransactions = new System.Windows.Forms.TableLayoutPanel();
+			this.dgvTransactions = new System.Windows.Forms.DataGridView();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnCreateNewTransaction = new System.Windows.Forms.Button();
 			this.btnDeleteTransaction = new System.Windows.Forms.Button();
 			this.transactionIDTextBox = new System.Windows.Forms.TextBox();
-			this.dgvTransactions = new System.Windows.Forms.DataGridView();
 			this.tpAccounts = new System.Windows.Forms.TabPage();
 			this.tlpAccounts = new System.Windows.Forms.TableLayoutPanel();
 			this.pnlAccountDetails = new System.Windows.Forms.Panel();
+			this.btnShowTransactions = new System.Windows.Forms.Button();
 			this.accountIDTextBox = new System.Windows.Forms.TextBox();
 			this.btnCreateNewAccount = new System.Windows.Forms.Button();
 			this.btnDeleteSelectedAccount = new System.Windows.Forms.Button();
+			this.dgvAccounts = new System.Windows.Forms.DataGridView();
 			this.tpCustomers = new System.Windows.Forms.TabPage();
 			this.tlpCostumerAddress = new System.Windows.Forms.TableLayoutPanel();
 			this.dgvCustomers = new System.Windows.Forms.DataGridView();
@@ -81,7 +83,7 @@
 			this.btnUpdateAddress = new System.Windows.Forms.Button();
 			this.tpDBConnection = new System.Windows.Forms.TabPage();
 			this.pnlDbConnection = new System.Windows.Forms.Panel();
-			this.btnGetTables = new System.Windows.Forms.Button();
+			this.btnInsertData = new System.Windows.Forms.Button();
 			this.lblDbConnectionTitle = new System.Windows.Forms.Label();
 			this.lblDataBaseName = new System.Windows.Forms.Label();
 			this.btnConnectToDB = new System.Windows.Forms.Button();
@@ -93,7 +95,6 @@
 			this.lblUsername = new System.Windows.Forms.Label();
 			this.txtbUsername = new System.Windows.Forms.TextBox();
 			this.tcWindow = new System.Windows.Forms.TabControl();
-			this.dgvAccounts = new System.Windows.Forms.DataGridView();
 			this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.lastNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -127,7 +128,6 @@
 			this.accountTableAdapter = new BankingSite.BankingSiteDataSetTableAdapters.AccountTableAdapter();
 			this.transactionTableAdapter = new BankingSite.BankingSiteDataSetTableAdapters.TransactionTableAdapter();
 			this.tableAdapterManager = new BankingSite.BankingSiteDataSetTableAdapters.TableAdapterManager();
-			this.btnShowTransactions = new System.Windows.Forms.Button();
 			iDLabel = new System.Windows.Forms.Label();
 			firstNameLabel = new System.Windows.Forms.Label();
 			lastNameLabel = new System.Windows.Forms.Label();
@@ -143,11 +143,12 @@
 			iDLabel3 = new System.Windows.Forms.Label();
 			this.tpTransactions.SuspendLayout();
 			this.tlpTransactions.SuspendLayout();
-			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).BeginInit();
+			this.panel1.SuspendLayout();
 			this.tpAccounts.SuspendLayout();
 			this.tlpAccounts.SuspendLayout();
 			this.pnlAccountDetails.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
 			this.tpCustomers.SuspendLayout();
 			this.tlpCostumerAddress.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
@@ -157,7 +158,6 @@
 			this.tpDBConnection.SuspendLayout();
 			this.pnlDbConnection.SuspendLayout();
 			this.tcWindow.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.bankingSiteDataSet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).BeginInit();
@@ -329,6 +329,31 @@
 			this.tlpTransactions.Size = new System.Drawing.Size(992, 614);
 			this.tlpTransactions.TabIndex = 36;
 			// 
+			// dgvTransactions
+			// 
+			this.dgvTransactions.AllowUserToAddRows = false;
+			this.dgvTransactions.AllowUserToDeleteRows = false;
+			this.dgvTransactions.AutoGenerateColumns = false;
+			this.dgvTransactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+			this.dgvTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvTransactions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.iDDataGridViewTextBoxColumn3,
+            this.dateDataGridViewTextBoxColumn,
+            this.amountDataGridViewTextBoxColumn,
+            this.intendedUseDataGridViewTextBoxColumn,
+            this.typeDataGridViewTextBoxColumn,
+            this.accountReceiverIDDataGridViewTextBoxColumn,
+            this.accountSenderIDDataGridViewTextBoxColumn});
+			this.dgvTransactions.DataSource = this.transactionBindingSource;
+			this.dgvTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dgvTransactions.Location = new System.Drawing.Point(4, 4);
+			this.dgvTransactions.Name = "dgvTransactions";
+			this.dgvTransactions.ReadOnly = true;
+			this.dgvTransactions.RowHeadersWidth = 21;
+			this.dgvTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dgvTransactions.Size = new System.Drawing.Size(984, 525);
+			this.dgvTransactions.TabIndex = 1;
+			// 
 			// panel1
 			// 
 			this.panel1.AutoScroll = true;
@@ -389,31 +414,6 @@
 			this.transactionIDTextBox.Size = new System.Drawing.Size(100, 30);
 			this.transactionIDTextBox.TabIndex = 2;
 			// 
-			// dgvTransactions
-			// 
-			this.dgvTransactions.AllowUserToAddRows = false;
-			this.dgvTransactions.AllowUserToDeleteRows = false;
-			this.dgvTransactions.AutoGenerateColumns = false;
-			this.dgvTransactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-			this.dgvTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvTransactions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iDDataGridViewTextBoxColumn3,
-            this.dateDataGridViewTextBoxColumn,
-            this.amountDataGridViewTextBoxColumn,
-            this.intendedUseDataGridViewTextBoxColumn,
-            this.typeDataGridViewTextBoxColumn,
-            this.accountReceiverIDDataGridViewTextBoxColumn,
-            this.accountSenderIDDataGridViewTextBoxColumn});
-			this.dgvTransactions.DataSource = this.transactionBindingSource;
-			this.dgvTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dgvTransactions.Location = new System.Drawing.Point(4, 4);
-			this.dgvTransactions.Name = "dgvTransactions";
-			this.dgvTransactions.ReadOnly = true;
-			this.dgvTransactions.RowHeadersWidth = 21;
-			this.dgvTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvTransactions.Size = new System.Drawing.Size(984, 525);
-			this.dgvTransactions.TabIndex = 1;
-			// 
 			// tpAccounts
 			// 
 			this.tpAccounts.AutoScroll = true;
@@ -455,6 +455,22 @@
 			this.pnlAccountDetails.Name = "pnlAccountDetails";
 			this.pnlAccountDetails.Size = new System.Drawing.Size(984, 74);
 			this.pnlAccountDetails.TabIndex = 12;
+			// 
+			// btnShowTransactions
+			// 
+			this.btnShowTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnShowTransactions.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
+			this.btnShowTransactions.Location = new System.Drawing.Point(612, 17);
+			this.btnShowTransactions.MaximumSize = new System.Drawing.Size(155, 40);
+			this.btnShowTransactions.MinimumSize = new System.Drawing.Size(155, 40);
+			this.btnShowTransactions.Name = "btnShowTransactions";
+			this.btnShowTransactions.Size = new System.Drawing.Size(155, 40);
+			this.btnShowTransactions.TabIndex = 35;
+			this.btnShowTransactions.Text = "Show Transactions...";
+			this.btnShowTransactions.UseVisualStyleBackColor = true;
+			this.btnShowTransactions.Click += new System.EventHandler(this.btnShowTransactions_Click);
 			// 
 			// accountIDTextBox
 			// 
@@ -502,6 +518,30 @@
 			this.btnDeleteSelectedAccount.Text = "Delete Account";
 			this.btnDeleteSelectedAccount.UseVisualStyleBackColor = true;
 			this.btnDeleteSelectedAccount.Click += new System.EventHandler(this.btnDeleteSelectedAccount_Click);
+			// 
+			// dgvAccounts
+			// 
+			this.dgvAccounts.AllowUserToAddRows = false;
+			this.dgvAccounts.AllowUserToDeleteRows = false;
+			this.dgvAccounts.AutoGenerateColumns = false;
+			this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+			this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvAccounts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.iDDataGridViewTextBoxColumn2,
+            this.iBANDataGridViewTextBoxColumn,
+            this.balanceDataGridViewTextBoxColumn,
+            this.numberDataGridViewTextBoxColumn,
+            this.customerIDDataGridViewTextBoxColumn});
+			this.dgvAccounts.DataSource = this.accountBindingSource;
+			this.dgvAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dgvAccounts.Location = new System.Drawing.Point(4, 4);
+			this.dgvAccounts.MultiSelect = false;
+			this.dgvAccounts.Name = "dgvAccounts";
+			this.dgvAccounts.ReadOnly = true;
+			this.dgvAccounts.RowHeadersWidth = 21;
+			this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dgvAccounts.Size = new System.Drawing.Size(984, 525);
+			this.dgvAccounts.TabIndex = 1;
 			// 
 			// tpCustomers
 			// 
@@ -830,7 +870,7 @@
 			// 
 			this.pnlDbConnection.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.pnlDbConnection.AutoSize = true;
-			this.pnlDbConnection.Controls.Add(this.btnGetTables);
+			this.pnlDbConnection.Controls.Add(this.btnInsertData);
 			this.pnlDbConnection.Controls.Add(this.lblDbConnectionTitle);
 			this.pnlDbConnection.Controls.Add(this.lblDataBaseName);
 			this.pnlDbConnection.Controls.Add(this.btnConnectToDB);
@@ -846,21 +886,22 @@
 			this.pnlDbConnection.Size = new System.Drawing.Size(456, 335);
 			this.pnlDbConnection.TabIndex = 24;
 			// 
-			// btnGetTables
+			// btnInsertData
 			// 
-			this.btnGetTables.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.btnInsertData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnGetTables.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnGetTables.Location = new System.Drawing.Point(238, 253);
-			this.btnGetTables.MaximumSize = new System.Drawing.Size(130, 54);
-			this.btnGetTables.MinimumSize = new System.Drawing.Size(130, 54);
-			this.btnGetTables.Name = "btnGetTables";
-			this.btnGetTables.Size = new System.Drawing.Size(130, 54);
-			this.btnGetTables.TabIndex = 24;
-			this.btnGetTables.Text = "Get Tables";
-			this.btnGetTables.UseVisualStyleBackColor = true;
-			this.btnGetTables.Click += new System.EventHandler(this.btnGetTables_Click);
+			this.btnInsertData.Enabled = false;
+			this.btnInsertData.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnInsertData.Location = new System.Drawing.Point(280, 253);
+			this.btnInsertData.MaximumSize = new System.Drawing.Size(130, 54);
+			this.btnInsertData.MinimumSize = new System.Drawing.Size(130, 54);
+			this.btnInsertData.Name = "btnInsertData";
+			this.btnInsertData.Size = new System.Drawing.Size(130, 54);
+			this.btnInsertData.TabIndex = 25;
+			this.btnInsertData.Text = "Insert Data";
+			this.btnInsertData.UseVisualStyleBackColor = true;
+			this.btnInsertData.Click += new System.EventHandler(this.btnInsertData_Click);
 			// 
 			// lblDbConnectionTitle
 			// 
@@ -896,7 +937,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnConnectToDB.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnConnectToDB.Location = new System.Drawing.Point(76, 253);
+			this.btnConnectToDB.Location = new System.Drawing.Point(83, 253);
 			this.btnConnectToDB.MaximumSize = new System.Drawing.Size(130, 54);
 			this.btnConnectToDB.MinimumSize = new System.Drawing.Size(130, 54);
 			this.btnConnectToDB.Name = "btnConnectToDB";
@@ -918,6 +959,7 @@
 			this.cbDbNames.Name = "cbDbNames";
 			this.cbDbNames.Size = new System.Drawing.Size(328, 26);
 			this.cbDbNames.TabIndex = 21;
+			this.cbDbNames.DropDown += new System.EventHandler(this.cbDbNames_DropDown);
 			// 
 			// lblServerName
 			// 
@@ -945,7 +987,6 @@
 			this.txtbPassword.Size = new System.Drawing.Size(328, 26);
 			this.txtbPassword.TabIndex = 20;
 			this.txtbPassword.UseSystemPasswordChar = true;
-			this.txtbPassword.Leave += new System.EventHandler(this.txtbPassword_Leave);
 			// 
 			// txtbServerName
 			// 
@@ -1012,30 +1053,6 @@
 			this.tcWindow.Size = new System.Drawing.Size(1006, 646);
 			this.tcWindow.TabIndex = 0;
 			this.tcWindow.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tcWindow_Selecting);
-			// 
-			// dgvAccounts
-			// 
-			this.dgvAccounts.AllowUserToAddRows = false;
-			this.dgvAccounts.AllowUserToDeleteRows = false;
-			this.dgvAccounts.AutoGenerateColumns = false;
-			this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-			this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvAccounts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iDDataGridViewTextBoxColumn2,
-            this.iBANDataGridViewTextBoxColumn,
-            this.balanceDataGridViewTextBoxColumn,
-            this.numberDataGridViewTextBoxColumn,
-            this.customerIDDataGridViewTextBoxColumn});
-			this.dgvAccounts.DataSource = this.accountBindingSource;
-			this.dgvAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dgvAccounts.Location = new System.Drawing.Point(4, 4);
-			this.dgvAccounts.MultiSelect = false;
-			this.dgvAccounts.Name = "dgvAccounts";
-			this.dgvAccounts.ReadOnly = true;
-			this.dgvAccounts.RowHeadersWidth = 21;
-			this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvAccounts.Size = new System.Drawing.Size(984, 525);
-			this.dgvAccounts.TabIndex = 1;
 			// 
 			// iDDataGridViewTextBoxColumn
 			// 
@@ -1289,22 +1306,6 @@
 			this.tableAdapterManager.TransactionTableAdapter = this.transactionTableAdapter;
 			this.tableAdapterManager.UpdateOrder = BankingSite.BankingSiteDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
 			// 
-			// btnShowTransactions
-			// 
-			this.btnShowTransactions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnShowTransactions.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnShowTransactions.Location = new System.Drawing.Point(612, 17);
-			this.btnShowTransactions.MaximumSize = new System.Drawing.Size(155, 40);
-			this.btnShowTransactions.MinimumSize = new System.Drawing.Size(155, 40);
-			this.btnShowTransactions.Name = "btnShowTransactions";
-			this.btnShowTransactions.Size = new System.Drawing.Size(155, 40);
-			this.btnShowTransactions.TabIndex = 35;
-			this.btnShowTransactions.Text = "Show Transactions...";
-			this.btnShowTransactions.UseVisualStyleBackColor = true;
-			this.btnShowTransactions.Click += new System.EventHandler(this.btnShowTransactions_Click);
-			// 
 			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1319,13 +1320,14 @@
 			this.Load += new System.EventHandler(this.Window_Load);
 			this.tpTransactions.ResumeLayout(false);
 			this.tlpTransactions.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).EndInit();
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).EndInit();
 			this.tpAccounts.ResumeLayout(false);
 			this.tlpAccounts.ResumeLayout(false);
 			this.pnlAccountDetails.ResumeLayout(false);
 			this.pnlAccountDetails.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
 			this.tpCustomers.ResumeLayout(false);
 			this.tlpCostumerAddress.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
@@ -1339,7 +1341,6 @@
 			this.pnlDbConnection.ResumeLayout(false);
 			this.pnlDbConnection.PerformLayout();
 			this.tcWindow.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.customerBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.bankingSiteDataSet)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).EndInit();
@@ -1411,7 +1412,6 @@
 		private System.Windows.Forms.Button btnDeleteTransaction;
 		private System.Windows.Forms.TableLayoutPanel tlpTransactions;
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Button btnGetTables;
 		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
@@ -1437,5 +1437,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn customerIDDataGridViewTextBoxColumn;
 		private System.Windows.Forms.Button btnShowTransactions;
+		private System.Windows.Forms.Button btnInsertData;
 	}
 }
