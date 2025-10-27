@@ -114,7 +114,6 @@ namespace BankingSite
 		private void btnInsertData_Click(object sender, EventArgs e)
 		{
 			InsertDataToTables();
-			btnInsertData.Enabled = false;
 		}
 
 		void InsertDataToTables()
@@ -123,6 +122,20 @@ namespace BankingSite
 			{
 				MessageBox.Show("Please make sure to establish an connection to the server and database first.", "Error trying to connect.");
 				return;
+			}
+
+			if (_missingTables.Count != 0)
+			{
+				if (DialogResult.Yes == MessageBox.Show("In order to insert data the database needs to contain all required tables: customer, address, account and transaction." +
+						"\nDo you want to create these tables?", "Tables missing", MessageBoxButtons.YesNo))
+				{
+					CreateTables();
+					MessageBox.Show("Missing tables have been succssessfully created, so all of them are empty.", "Empty tables created.");
+				}
+				else
+				{
+					return;
+				}
 			}
 
 			using (SqlConnection cn = new SqlConnection(_connectionString))
@@ -144,6 +157,8 @@ namespace BankingSite
 			}
 
 			RefillDGVs();
+			btnInsertData.Enabled = false;
+			_isConnectedAndHasTables = true;
 			MessageBox.Show("Data has been succsessfully been inserted into the Address, Customer and Account tables!", "Data succsessfully inserted");
 		}
 
@@ -166,22 +181,25 @@ namespace BankingSite
 
 				if (!DatabaseContainsAllTables())
 				{
+					ConnectedToDatabase();
 					if (DialogResult.Yes ==  MessageBox.Show("The selected database does not contain the required tables customer, address, account and transaction." +
 								"\nDo you want to create these tables?", "Tables missing", MessageBoxButtons.YesNo))
 					{
 						CreateTables();
-						ConnectedToDatabase();
 						MessageBox.Show("Missing tables have been succssessfully created, so all of them are empty.", "Empty tables created.");
+					}
+					else
+					{
+						_isConnectedAndHasTables = false;
 					}
 					return; 
 				}
 				else 
 				{
+					RefillDGVs();
 					ConnectedToDatabase();
 					MessageBox.Show("Succsessfully connected to database!", "Connection to database established.");
 				}
-
-				RefillDGVs();
 			}
 			catch (Exception ex)
 			{
@@ -277,6 +295,7 @@ namespace BankingSite
 					}
 				}
 			}
+			RefillDGVs();
 		}
 
 		/// <summary>
