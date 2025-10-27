@@ -157,6 +157,9 @@ namespace BankingSite
 
 					cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Account.sql"));
 					cmd.ExecuteNonQuery();
+
+					cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Transaction.sql"));
+					cmd.ExecuteNonQuery();
 				}
 
 				RefillDGVs();
