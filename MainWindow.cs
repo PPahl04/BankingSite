@@ -13,6 +13,9 @@ namespace BankingSite
 		string _connectionString;
 		List<string> _missingTables;
 		bool _isConnectedAndHasTables;
+		const string SQL_FOLDER = @"..\..\SQL\";
+		const string INSERT_DATA_FOLDER = SQL_FOLDER + @"InsertData\";
+		const string CREATE_TABLE_FOLDER = SQL_FOLDER + @"CreateTable\";
 
 		//ToDo: Test every case and fix it. Goodluck!
 
@@ -130,7 +133,7 @@ namespace BankingSite
 						"\nDo you want to create these tables?", "Tables missing", MessageBoxButtons.YesNo))
 				{
 					CreateTables();
-					MessageBox.Show("Missing tables have been succssessfully created, so all of them are empty.", "Empty tables created.");
+					MessageBox.Show("Missing tables have been succssessfully created!", "Required tables created.");
 				}
 				else
 				{
@@ -138,28 +141,30 @@ namespace BankingSite
 				}
 			}
 
-			using (SqlConnection cn = new SqlConnection(_connectionString))
+			try
 			{
-				cn.Open();
-				SqlCommand cmd = cn.CreateCommand();
-				cmd.CommandTimeout = 5;
+				using (SqlConnection cn = new SqlConnection(_connectionString))
+				{
+					cn.Open();
+					SqlCommand cmd = cn.CreateCommand();
+					cmd.CommandTimeout = 5;
 
-				string folderPath = @"..\..\InsertData\";
+					cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Address.sql"));
+					cmd.ExecuteNonQuery();
 
-				cmd.CommandText = File.ReadAllText(string.Concat(folderPath, "Address.sql"));
-				cmd.ExecuteNonQuery();
+					cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Customer.sql"));
+					cmd.ExecuteNonQuery();
 
-				cmd.CommandText = File.ReadAllText(string.Concat(folderPath, "Customer.sql"));
-				cmd.ExecuteNonQuery();
+					cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Account.sql"));
+					cmd.ExecuteNonQuery();
+				}
 
-				cmd.CommandText = File.ReadAllText(string.Concat(folderPath, "Account.sql"));
-				cmd.ExecuteNonQuery();
+				RefillDGVs();
+				btnInsertData.Enabled = false;
+				_isConnectedAndHasTables = true;
+				MessageBox.Show("Data has been succsessfully been inserted into the Address, Customer and Account tables!", "Data succsessfully inserted");
 			}
-
-			RefillDGVs();
-			btnInsertData.Enabled = false;
-			_isConnectedAndHasTables = true;
-			MessageBox.Show("Data has been succsessfully been inserted into the Address, Customer and Account tables!", "Data succsessfully inserted");
+			catch { }
 		}
 
 		private void btnConnectToDB_Click(object sender, EventArgs e)
@@ -264,37 +269,36 @@ namespace BankingSite
 					SqlCommand cmd = cn.CreateCommand();
 					cmd.CommandTimeout = 5;
 					
-					string folderPath = @"..\..\CreateTableQuery\";
-
 					if (missingTable.Equals("Address"))
 					{
-						cmd.CommandText = File.ReadAllText(string.Concat(folderPath, "Address.sql"));
+						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Address.sql"));
 						cmd.ExecuteNonQuery();
 						continue;
 					}
 
 					if (missingTable.Equals("Customer"))
 					{
-						cmd.CommandText = File.ReadAllText(string.Concat(folderPath, "Customer.sql"));
+						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Customer.sql"));
 						cmd.ExecuteNonQuery();
 						continue;
 					}
 
 					if (missingTable.Equals("Account"))
 					{
-						cmd.CommandText = File.ReadAllText(string.Concat(folderPath, "Account.sql"));
+						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Account.sql"));
 						cmd.ExecuteNonQuery();
 						continue;
 					}
 
 					if (missingTable.Equals("Transaction"))
 					{
-						cmd.CommandText = File.ReadAllText(string.Concat(folderPath, "Transaction.sql"));
+						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Transaction.sql"));
 						cmd.ExecuteNonQuery();
 						continue;
 					}
 				}
 			}
+			_missingTables.Clear();
 			RefillDGVs();
 		}
 
