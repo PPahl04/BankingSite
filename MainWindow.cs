@@ -165,7 +165,7 @@ namespace BankingSite
 				RefillDGVs();
 				btnInsertData.Enabled = false;
 				_isConnectedAndHasTables = true;
-				MessageBox.Show("Data has been succsessfully been inserted into the Address, Customer and Account tables!", "Data succsessfully inserted");
+				MessageBox.Show("Data has been succsessfully been inserted into the all tables!", "Data succsessfully inserted");
 			}
 			catch { }
 		}
@@ -219,11 +219,21 @@ namespace BankingSite
 		/// Uses the TableAdapters to refill all dataGridViews.
 		/// </summary>
 		void RefillDGVs()
-		{
-			this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
-			this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
-			this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
-			this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+		{	//An error occures when filling customers for some reason that doesnt happen on a second try
+			try
+			{
+				this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
+				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
+				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+				this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+			}
+			catch
+			{
+
+				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
+				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+				this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+			}
 		}
 
 		/// <summary>
