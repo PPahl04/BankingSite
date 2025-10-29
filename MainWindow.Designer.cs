@@ -95,7 +95,7 @@
 			this.lastNameTextBox = new System.Windows.Forms.TextBox();
 			this.phoneNumberTextBox = new System.Windows.Forms.TextBox();
 			this.emailAddressTextBox = new System.Windows.Forms.TextBox();
-			this.address_IDTextBox = new System.Windows.Forms.TextBox();
+			this.customerAddressIDTextBox = new System.Windows.Forms.TextBox();
 			this.btnShowOwnedAccounts = new System.Windows.Forms.Button();
 			this.btnDeleteCustomer = new System.Windows.Forms.Button();
 			this.btnCreateNewCustomer = new System.Windows.Forms.Button();
@@ -866,7 +866,7 @@
 			this.pnlCustomerDetails.Controls.Add(emailAddressLabel);
 			this.pnlCustomerDetails.Controls.Add(this.emailAddressTextBox);
 			this.pnlCustomerDetails.Controls.Add(address_IDLabel);
-			this.pnlCustomerDetails.Controls.Add(this.address_IDTextBox);
+			this.pnlCustomerDetails.Controls.Add(this.customerAddressIDTextBox);
 			this.pnlCustomerDetails.Controls.Add(this.btnShowOwnedAccounts);
 			this.pnlCustomerDetails.Controls.Add(this.btnDeleteCustomer);
 			this.pnlCustomerDetails.Controls.Add(this.btnCreateNewCustomer);
@@ -928,15 +928,15 @@
 			this.emailAddressTextBox.Size = new System.Drawing.Size(171, 30);
 			this.emailAddressTextBox.TabIndex = 32;
 			// 
-			// address_IDTextBox
+			// customerAddressIDTextBox
 			// 
-			this.address_IDTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.address_IDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customerBindingSource, "Address_ID", true));
-			this.address_IDTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.address_IDTextBox.Location = new System.Drawing.Point(155, 182);
-			this.address_IDTextBox.Name = "address_IDTextBox";
-			this.address_IDTextBox.Size = new System.Drawing.Size(171, 30);
-			this.address_IDTextBox.TabIndex = 34;
+			this.customerAddressIDTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.customerAddressIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.customerBindingSource, "Address_ID", true));
+			this.customerAddressIDTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
+			this.customerAddressIDTextBox.Location = new System.Drawing.Point(155, 182);
+			this.customerAddressIDTextBox.Name = "customerAddressIDTextBox";
+			this.customerAddressIDTextBox.Size = new System.Drawing.Size(171, 30);
+			this.customerAddressIDTextBox.TabIndex = 34;
 			// 
 			// btnShowOwnedAccounts
 			// 
@@ -1412,7 +1412,7 @@
 		private System.Windows.Forms.TextBox lastNameTextBox;
 		private System.Windows.Forms.TextBox phoneNumberTextBox;
 		private System.Windows.Forms.TextBox emailAddressTextBox;
-		private System.Windows.Forms.TextBox address_IDTextBox;
+		private System.Windows.Forms.TextBox customerAddressIDTextBox;
 		private System.Windows.Forms.TextBox addressIDTextBox;
 		private System.Windows.Forms.TextBox streetNameTextBox;
 		private System.Windows.Forms.TextBox streetNumberTextBox;

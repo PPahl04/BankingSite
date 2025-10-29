@@ -1,21 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.IO;
-using System;
+using System.Windows.Forms;
 
 namespace BankingSite
 {
 	public partial class MainWindow : Form
 	{
-		string _connectionString;
 		List<string> _missingTables;
 		bool _isConnectedAndHasTables;
-		const string SQL_FOLDER = @"..\..\SQL\";
-		const string INSERT_DATA_FOLDER = SQL_FOLDER + @"InsertData\";
-		const string CREATE_TABLE_FOLDER = SQL_FOLDER + @"CreateTable\";
+
+		DataTable _addressTable;
+		DataTable _customerTable;
+		DataTable _accountTable;
+		DataTable _transactionTable;
+
+		DatabaseInteraction _dbInt;
 
 		//ToDo: Test every case and fix it. Goodluck!
 
@@ -23,6 +23,8 @@ namespace BankingSite
 		public MainWindow()
 		{
 			InitializeComponent();
+
+			_dbInt = new DatabaseInteraction();
 		}
 
 		private void Window_Load(object sender, EventArgs e)
@@ -33,29 +35,6 @@ namespace BankingSite
 		private void tcWindow_Selecting(object sender, TabControlCancelEventArgs e)
 		{
 			e.Cancel = !_isConnectedAndHasTables;
-		}
-
-		bool CanConnectToServer()
-		{	
-			string startDbName = string.IsNullOrWhiteSpace(cbDbNames.Text) ? "master" : cbDbNames.Text;
-			string cnString = string.Concat("Data Source=", txtbServerName.Text, ";Initial Catalog=", startDbName, ";UID=", txtbUsername.Text, ";Password=", txtbPassword.Text,
-						";Integrated Security=False;TrustServerCertificate=True");
-			SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(cnString);
-			builder.ConnectTimeout = 5;
-
-			using(SqlConnection cn = new SqlConnection(builder.ConnectionString))
-			{
-				try
-				{
-					cn.Open();
-					_connectionString = cnString;
-					return true;
-				}
-				catch 
-				{
-					return false;
-				}
-			}
 		}
 
 		/// <summary>
@@ -81,30 +60,9 @@ namespace BankingSite
 					return;
 				}
 
-				using (SqlConnection cn = new SqlConnection(_connectionString))
-				{
-					cn.Open();
-
-					SqlCommand cmd = cn.CreateCommand();
-					cmd.CommandText = "SELECT name FROM sys.databases";
-					cmd.CommandTimeout = 5;
-
-					using (SqlDataReader reader = cmd.ExecuteReader())
-					{
-						string[] systemDatabases = { "master", "tempdb", "model", "msdb" };
-						cbDbNames.Items.Clear();
-
-						while (reader.Read())
-						{
-							string databaseName = reader.GetString(0);
-
-							if (!systemDatabases.Contains(databaseName))
-							{
-								cbDbNames.Items.Add(databaseName);
-							}
-						}
-					}
-				}
+				cbDbNames.Items.Clear();
+				string[] databaseNames = _dbInt.GetDatabases();
+				cbDbNames.Items.AddRange(databaseNames);
 			}
 			catch { }
 		}
@@ -143,24 +101,7 @@ namespace BankingSite
 
 			try
 			{
-				using (SqlConnection cn = new SqlConnection(_connectionString))
-				{
-					cn.Open();
-					SqlCommand cmd = cn.CreateCommand();
-					cmd.CommandTimeout = 5;
-
-					cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Address.sql"));
-					cmd.ExecuteNonQuery();
-
-					cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Customer.sql"));
-					cmd.ExecuteNonQuery();
-
-					cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Account.sql"));
-					cmd.ExecuteNonQuery();
-
-					cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Transaction.sql"));
-					cmd.ExecuteNonQuery();
-				}
+				_dbInt.InsertToAllTables();
 
 				RefillDGVs();
 				btnInsertData.Enabled = false;
@@ -179,13 +120,6 @@ namespace BankingSite
 					MessageBox.Show("Error occurred while connecting to server", "Error");
 					return;
 				}
-
-				accountTableAdapter.Connection.ConnectionString = _connectionString;
-				customerTableAdapter.Connection.ConnectionString = _connectionString;
-				transactionTableAdapter.Connection.ConnectionString = _connectionString;
-				addressTableAdapter.Connection.ConnectionString = _connectionString;
-
-				tableAdapterManager.Connection.ConnectionString = _connectionString;
 
 				if (!DatabaseContainsAllTables())
 				{
@@ -215,15 +149,56 @@ namespace BankingSite
 			}
 		}
 
+		bool CanConnectToServer()
+		{
+			return _dbInt.CanConnectToServer(String.IsNullOrWhiteSpace(cbDbNames.Text) ? "master" : cbDbNames.Text, txtbServerName.Text, txtbUsername.Text, txtbPassword.Text);
+		}
+
 		/// <summary>
 		/// Uses the TableAdapters to refill all dataGridViews.
 		/// </summary>
 		void RefillDGVs()
 		{
-			this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
-			this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
-			this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
-			this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+			_addressTable = _dbInt.GetDataTable("SELECT * FROM [dbo].[Address]");
+			_customerTable = _dbInt.GetDataTable("SELECT * FROM [dbo].[Customer]");
+			_accountTable = _dbInt.GetDataTable("SELECT * FROM [dbo].[Account]");
+			_transactionTable = _dbInt.GetDataTable("SELECT * FROM [dbo].[Transaction]");
+
+			dgvAddresses.DataSource = _addressTable;
+			dgvCustomers.DataSource = _customerTable;
+			dgvAccounts.DataSource = _accountTable;
+			dgvTransactions.DataSource = _transactionTable;
+
+			//customer ui controls
+			SetDataBindings(customerIDTextBox, _customerTable, "ID");
+			SetDataBindings(firstNameTextBox, _customerTable, "FirstName");
+			SetDataBindings(lastNameTextBox, _customerTable, "LastName");
+			SetDataBindings(phoneNumberTextBox, _customerTable, "PhoneNumber");
+			SetDataBindings(emailAddressTextBox, _customerTable, "EmailAddress");
+			SetDataBindings(customerAddressIDTextBox, _customerTable, "Address_ID");
+
+			//address ui controls
+			SetDataBindings(addressIDTextBox, _addressTable, "ID");
+			SetDataBindings(streetNameTextBox, _addressTable, "StreetName");
+			SetDataBindings(streetNumberTextBox, _addressTable, "StreetNumber");
+			SetDataBindings(zipCodeTextBox, _addressTable, "ZipCode");
+			SetDataBindings(cityTextBox, _addressTable, "City");
+
+			//account and transaction ui control
+			SetDataBindings(accountIDTextBox, _accountTable, "ID");
+			SetDataBindings(transactionIDTextBox, _transactionTable, "ID");
+		}
+
+		/// <summary>
+		/// Will re-set the DataBinding for myUiElement.
+		/// </summary>
+		/// <param name="myUiElement"></param>
+		/// <param name="myDataSource"></param>
+		/// <param name="myDataMember"></param>
+		void SetDataBindings(Control myUiElement, DataTable myDataSource, string myDataMember)
+		{
+			myUiElement.DataBindings.Clear();
+			myUiElement.DataBindings.Add(new Binding("Text", myDataSource, myDataMember));
 		}
 
 		/// <summary>
@@ -233,29 +208,7 @@ namespace BankingSite
 		/// <returns></returns>
 		bool DatabaseContainsAllTables()
 		{
-			using (SqlConnection cn = new SqlConnection(_connectionString))
-			{
-				cn.Open();
-
-				SqlCommand cmd = cn.CreateCommand();
-				cmd.CommandText = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES";
-				cmd.CommandTimeout = 5;
-
-				List<string> tableNames = new List<string>{ "Address", "Customer", "Account", "Transaction" };
-
-				using (SqlDataReader reader = cmd.ExecuteReader())
-				{
-					while (reader.Read())
-					{
-						string currentTableName = reader.GetString(0);
-						if (tableNames.Contains(currentTableName))
-						{
-							tableNames.Remove(currentTableName);
-						}
-					}
-					_missingTables = new List<string>(tableNames);
-				}
-			}
+			_missingTables = _dbInt.GetMissingTables();
 			return _missingTables.Count == 0;
 		}
 
@@ -264,43 +217,7 @@ namespace BankingSite
 		/// </summary>
 		void CreateTables()
 		{
-			foreach (string missingTable in _missingTables)
-			{
-				using(SqlConnection cn =  new SqlConnection(_connectionString))
-				{
-					cn.Open();
-					SqlCommand cmd = cn.CreateCommand();
-					cmd.CommandTimeout = 5;
-					
-					if (missingTable.Equals("Address"))
-					{
-						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Address.sql"));
-						cmd.ExecuteNonQuery();
-						continue;
-					}
-
-					if (missingTable.Equals("Customer"))
-					{
-						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Customer.sql"));
-						cmd.ExecuteNonQuery();
-						continue;
-					}
-
-					if (missingTable.Equals("Account"))
-					{
-						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Account.sql"));
-						cmd.ExecuteNonQuery();
-						continue;
-					}
-
-					if (missingTable.Equals("Transaction"))
-					{
-						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Transaction.sql"));
-						cmd.ExecuteNonQuery();
-						continue;
-					}
-				}
-			}
+			_dbInt.CreateTables(_missingTables);
 			_missingTables.Clear();
 			RefillDGVs();
 		}
@@ -314,6 +231,7 @@ namespace BankingSite
 			_isConnectedAndHasTables = true;
 			Text = string.Concat("BankingSite - Connected to ", cbDbNames.Text);
 		}
+
 		#endregion 
 
 		#region Customer Tab
@@ -332,7 +250,7 @@ namespace BankingSite
 
 		void btnUpdateCustomer_Click(object sender, EventArgs e)
 		{   //Update the dataTable but check if all of them are valid first
-			if (!int.TryParse(customerIDTextBox.Text, out int custID) || !int.TryParse(address_IDTextBox.Text, out int addrID) || !int.TryParse(phoneNumberTextBox.Text, out int phoneN))
+			if (!int.TryParse(customerIDTextBox.Text, out int custID) || !int.TryParse(customerAddressIDTextBox.Text, out int addrID) || !int.TryParse(phoneNumberTextBox.Text, out int phoneN))
 			{
 				MessageBox.Show("Please make sure to only input numbers for the address ID and phonenumber.", "Error using inputs for updating dataset");
 				return;

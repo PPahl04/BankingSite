@@ -403,13 +403,13 @@
 			this.emailAddressTextBox.Size = new System.Drawing.Size(132, 30);
 			this.emailAddressTextBox.TabIndex = 9;
 			// 
-			// address_IDTextBox
+			// customerAddressIDTextBox
 			// 
 			this.address_IDTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.address_IDTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.address_IDTextBox.Location = new System.Drawing.Point(142, 200);
 			this.address_IDTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.address_IDTextBox.Name = "address_IDTextBox";
+			this.address_IDTextBox.Name = "customerAddressIDTextBox";
 			this.address_IDTextBox.Size = new System.Drawing.Size(132, 30);
 			this.address_IDTextBox.TabIndex = 11;
 			// 

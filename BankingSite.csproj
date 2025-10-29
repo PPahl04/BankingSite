@@ -80,6 +80,7 @@
     <Compile Include="CreateNew.Designer.cs">
       <DependentUpon>CreateNew.cs</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseInteraction.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
