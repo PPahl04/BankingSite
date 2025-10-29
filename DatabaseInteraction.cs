@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankingSite
 {
@@ -17,6 +14,15 @@ namespace BankingSite
 		const string INSERT_DATA_FOLDER = SQL_FOLDER + @"InsertData\";
 		const string CREATE_TABLE_FOLDER = SQL_FOLDER + @"CreateTable\";
 		const string GET_DATA_FOLDER = SQL_FOLDER + @"GetData\";
+		const string UPDATE_TABLE_FOLDER = SQL_FOLDER + @"UpdateTable\";
+		const string DELETE_FOLDER = SQL_FOLDER + @"DeleteData\";
+
+		const string ADDRESS = "Address";
+		const string CUSTOMER = "Customer";
+		const string ACCOUNT = "Account";
+		const string TRANSACTION = "Transaction";
+
+		const string SQL_EXTENSION = ".sql";
 
 		/// <summary>
 		/// If a connection can be made then the connection string will be changed to that.
@@ -119,7 +125,6 @@ namespace BankingSite
 			}
 		}
 
-
 		public List<string> GetMissingTables()
 		{
 			using (SqlConnection cn = new SqlConnection(_connectionString))
@@ -130,7 +135,7 @@ namespace BankingSite
 				cmd.CommandText = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES";
 				cmd.CommandTimeout = 5;
 
-				List<string> tableNames = new List<string> { "Address", "Customer", "Account", "Transaction" };
+				List<string> tableNames = new List<string> { ADDRESS, CUSTOMER, ACCOUNT, TRANSACTION };
 
 				using (SqlDataReader reader = cmd.ExecuteReader())
 				{
@@ -160,30 +165,30 @@ namespace BankingSite
 					SqlCommand cmd = cn.CreateCommand();
 					cmd.CommandTimeout = 5;
 
-					if (missingTable.Equals("Address"))
+					if (missingTable.Equals(ADDRESS))
 					{
-						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Address.sql"));
+						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, ADDRESS, SQL_EXTENSION));
 						cmd.ExecuteNonQuery();
 						continue;
 					}
 
-					if (missingTable.Equals("Customer"))
+					if (missingTable.Equals(CUSTOMER))
 					{
-						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Customer.sql"));
+						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, CUSTOMER, SQL_EXTENSION));
 						cmd.ExecuteNonQuery();
 						continue;
 					}
 
-					if (missingTable.Equals("Account"))
+					if (missingTable.Equals(ACCOUNT))
 					{
-						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Account.sql"));
+						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, ACCOUNT, SQL_EXTENSION));
 						cmd.ExecuteNonQuery();
 						continue;
 					}
 
-					if (missingTable.Equals("Transaction"))
+					if (missingTable.Equals(TRANSACTION))
 					{
-						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Transaction.sql"));
+						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, TRANSACTION, SQL_EXTENSION));
 						cmd.ExecuteNonQuery();
 						continue;
 					}
@@ -199,18 +204,99 @@ namespace BankingSite
 				SqlCommand cmd = cn.CreateCommand();
 				cmd.CommandTimeout = 5;
 
-				cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Address.sql"));
+				cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, ADDRESS, SQL_EXTENSION));
 				cmd.ExecuteNonQuery();
 
-				cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Customer.sql"));
+				cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, CUSTOMER, SQL_EXTENSION));
 				cmd.ExecuteNonQuery();
 
-				cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Account.sql"));
+				cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, ACCOUNT, SQL_EXTENSION));
 				cmd.ExecuteNonQuery();
 
-				cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Transaction.sql"));
+				cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, TRANSACTION, SQL_EXTENSION));
 				cmd.ExecuteNonQuery();
 			}
+		}
+
+		public void UpdateCustomer(string myFirstName, string myLastName, int myPhoneNumber, string myEmail, int myAddressID, int myCustomerID)
+		{
+			using (SqlConnection cn = new SqlConnection(_connectionString))
+			{
+				cn.Open();
+				SqlCommand cmd = cn.CreateCommand();
+				cmd.CommandText = File.ReadAllText(string.Concat(UPDATE_TABLE_FOLDER, CUSTOMER, SQL_EXTENSION));
+				cmd.CommandTimeout = 5; 
+				
+				cmd.Parameters.AddWithValue("@FirstName", myFirstName);
+				cmd.Parameters.AddWithValue("@LastName", myLastName);
+				cmd.Parameters.AddWithValue("@PhoneNumber", myPhoneNumber);
+				cmd.Parameters.AddWithValue("@EmailAddress", myEmail);
+				cmd.Parameters.AddWithValue("@AddressID", myAddressID);
+				cmd.Parameters.AddWithValue("@ID", myCustomerID);
+				cmd.ExecuteNonQuery();
+			}
+		}
+
+		public void UpdateAddress(string myStreetName, int myStreetNumber, int myZipCode, string myCity, int myID)
+		{
+			using (SqlConnection cn = new SqlConnection(_connectionString))
+			{
+				cn.Open();
+				SqlCommand cmd = cn.CreateCommand();
+				cmd.CommandText = File.ReadAllText(string.Concat(UPDATE_TABLE_FOLDER, ADDRESS, SQL_EXTENSION));
+				cmd.CommandTimeout = 5;
+
+				cmd.Parameters.AddWithValue("@StreetName", myStreetName);
+				cmd.Parameters.AddWithValue("@StreetNumber", myStreetNumber);
+				cmd.Parameters.AddWithValue("@ZipCode", myZipCode);
+				cmd.Parameters.AddWithValue("@City", myCity);
+				cmd.Parameters.AddWithValue("@ID", myID);
+				cmd.ExecuteNonQuery();
+			}
+		}
+
+		void DeleteData(string myType, int myID)
+		{
+			using (SqlConnection cn = new SqlConnection(_connectionString))
+			{
+				cn.Open();
+				SqlCommand cmd = cn.CreateCommand();
+				cmd.CommandText = File.ReadAllText(string.Concat(DELETE_FOLDER, myType, SQL_EXTENSION));
+				cmd.CommandTimeout = 5;
+
+				cmd.Parameters.AddWithValue("@ID", myID);
+				cmd.ExecuteNonQuery();
+			}
+		}
+
+		public void DeleteCustomerWithID(int myCustomerID)
+		{
+			DeleteData(CUSTOMER, myCustomerID);
+		}
+
+		public void DeleteAccountWithID(int myAccountID)
+		{
+			DeleteData(ACCOUNT, myAccountID);
+		}
+
+		public void DeleteTransactionWithID(int myTransactionID)
+		{
+			DeleteData(TRANSACTION, myTransactionID);
+		}
+
+		public void DeleteAddressWithID(int myAddressID)
+		{
+			DeleteData(ADDRESS, myAddressID);
+		}
+
+		public DataTable GetOwnedAccountsByCustomerID(int myCustomerID)
+		{
+			return GetDataTable(string.Concat("SELECT * FROM Account WHERE Customer_ID = ", myCustomerID));
+		}
+
+		public DataTable GetAllTransactionsFromAccountID(int myAccountID)
+		{
+			return GetDataTable(string.Concat("SELECT * FROM [dbo].[Transaction] WHERE AccountSender_ID = ", myAccountID, " OR AccountReceiver_ID = ", myAccountID));
 		}
 	}
 }

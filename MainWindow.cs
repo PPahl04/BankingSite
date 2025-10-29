@@ -244,8 +244,7 @@ namespace BankingSite
 			{ 
 				return;
 			}
-
-			customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
+			RefillDGVs();
 		}
 
 		void btnUpdateCustomer_Click(object sender, EventArgs e)
@@ -268,7 +267,7 @@ namespace BankingSite
 
 			try
 			{
-				customerTableAdapter.UpdateCustomer(firstN, lastN, phoneN, email, custID, addrID);
+				_dbInt.UpdateCustomer(firstN, lastN, phoneN, email, addrID, custID);
 				dgvCustomers.Refresh();
 			}
 			catch (Exception ex)
@@ -289,9 +288,8 @@ namespace BankingSite
 				"\nThis will also delete all accounts they own."), "Delete selected customer",
 						MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
-				customerTableAdapter.DeleteCustomerWithID(id);
-				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
-				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+				_dbInt.DeleteCustomerWithID(id);
+				RefillDGVs();
 			}
 		}
 
@@ -303,7 +301,7 @@ namespace BankingSite
 		private void btnShowOwnedAccounts_Click(object sender, EventArgs e)
 		{
 			int custID = Convert.ToInt32(customerIDTextBox.Text);
-			DataTable accounts = accountTableAdapter.GetOwnedAccountsByCustomerID(Convert.ToInt32(custID));
+			DataTable accounts = _dbInt.GetOwnedAccountsByCustomerID(custID);
 
 			if (accounts.Rows.Count == 0)
 			{
@@ -328,7 +326,7 @@ namespace BankingSite
 				return;
 			}
 
-			addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
+			RefillDGVs();
 		}
 
 		void btnUpdateAddress_Click(object sender, EventArgs e)
@@ -350,8 +348,8 @@ namespace BankingSite
 
 			try
 			{
-				addressTableAdapter.UpdateAddress(streetName, streetNumber, zipCode, city, Convert.ToInt32(addressIDTextBox.Text));
-				dgvAddresses.Refresh();
+				_dbInt.UpdateAddress(streetName, streetNumber, zipCode, city, Convert.ToInt32(addressIDTextBox.Text));
+				RefillDGVs();
 			}
 			catch (Exception ex)
 			{
@@ -371,9 +369,8 @@ namespace BankingSite
 				"\nCustomers living at this place will become homeless."), "Delete selected address",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
-				addressTableAdapter.DeleteAddressWithID(id);
-				this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
-				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
+				_dbInt.DeleteAddressWithID(id);
+				RefillDGVs();
 			}
 		}
 		#endregion
@@ -389,7 +386,7 @@ namespace BankingSite
 				return;
 			}
 
-			accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+			RefillDGVs();
 		}
 
 		/// <summary>
@@ -400,7 +397,7 @@ namespace BankingSite
 		private void btnShowTransactions_Click(object sender, EventArgs e)
 		{
 			int accID = Convert.ToInt32(accountIDTextBox.Text);
-			DataTable transactions = transactionTableAdapter.GetAllTransactionsFromAccountID(Convert.ToInt32(accID));
+			DataTable transactions = _dbInt.GetAllTransactionsFromAccountID(accID);
 
 			if (transactions.Rows.Count == 0)
 			{
@@ -425,9 +422,8 @@ namespace BankingSite
 				"\n this may also delete transactions assosiated with this account."), "Delete selected account",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
-				accountTableAdapter.DeleteAccountWithID(id);
-				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
-				this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+				_dbInt.DeleteAccountWithID(id);
+				RefillDGVs();
 			}
 		}
 		#endregion
@@ -438,15 +434,11 @@ namespace BankingSite
 			CreateNew cnForm = new CreateNew();
 			cnForm.SetUp(transactionTableAdapter, CreateNew.CreateType.Transaction);
 
-			cnForm.GetAccountTableAdapter(accountTableAdapter);
-
 			if (cnForm.ShowDialog() == DialogResult.Cancel)
 			{
 				return;
 			}
-
-			transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
-			accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+			RefillDGVs();
 		}
 	
 		private void btnDeleteTransaction_Click(object sender, EventArgs e)
@@ -460,8 +452,8 @@ namespace BankingSite
 			if (MessageBox.Show(string.Concat("Are you sure you want to delete the transaction with the ID: ", transactionIDTextBox.Text, "?"), "Delete selected Transaction",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
-				transactionTableAdapter.DeleteTransactionWithID(id);
-				this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+				_dbInt.DeleteTransactionWithID(id);
+				RefillDGVs();
 			}
 		}
 		#endregion

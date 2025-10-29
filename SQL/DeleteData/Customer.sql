@@ -1,0 +1,2 @@
+DELETE Customer
+WHERE ID = @ID

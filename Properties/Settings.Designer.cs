@@ -26,6 +26,8 @@ namespace BankingSite.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-E8I2SBPS\\sqlexpress;Initial Catalog=1;Persist Security Info=Tr" +
+            "ue;User ID=testbenutzer;Password=Password;TrustServerCertificate=True")]
         public string BankingSiteConnectionString1 {
             get {
                 return ((string)(this["BankingSiteConnectionString1"]));
