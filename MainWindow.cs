@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Data;
+using System;
 
 namespace BankingSite
 {
@@ -159,10 +159,10 @@ namespace BankingSite
 		/// </summary>
 		void RefillDGVs()
 		{
-			_addressTable = _dbInt.GetDataTable("SELECT * FROM [dbo].[Address]");
-			_customerTable = _dbInt.GetDataTable("SELECT * FROM [dbo].[Customer]");
-			_accountTable = _dbInt.GetDataTable("SELECT * FROM [dbo].[Account]");
-			_transactionTable = _dbInt.GetDataTable("SELECT * FROM [dbo].[Transaction]");
+			_addressTable = _dbInt.GetAllAddresses();
+			_customerTable = _dbInt.GetAllCustomers();
+			_accountTable = _dbInt.GetAllAccounts();
+			_transactionTable = _dbInt.GetAllTransactions();
 
 			dgvAddresses.DataSource = _addressTable;
 			dgvCustomers.DataSource = _customerTable;
@@ -237,9 +237,7 @@ namespace BankingSite
 		#region Customer Tab
 		private void btnCreateNewCustomer_Click(object sender, EventArgs e)
 		{
-			CreateNew cnForm = new CreateNew();
-			cnForm.SetUp(customerTableAdapter, CreateNew.CreateType.Customer);
-
+			CreateNew cnForm = new CreateNew(_dbInt, CreateNew.CreateType.Customer);
 			if (cnForm.ShowDialog() == DialogResult.Cancel)
 			{ 
 				return;
@@ -318,8 +316,7 @@ namespace BankingSite
 		#region Address Tab
 		private void btnCreateNewAddress_Click(object sender, EventArgs e)
 		{
-			CreateNew cnForm = new CreateNew();
-			cnForm.SetUp(addressTableAdapter, CreateNew.CreateType.Address);
+			CreateNew cnForm = new CreateNew(_dbInt, CreateNew.CreateType.Address);
 
 			if (cnForm.ShowDialog() == DialogResult.Cancel)
 			{
@@ -378,9 +375,7 @@ namespace BankingSite
 		#region Account Tab
 		private void btnCreateNewAccount_Click(object sender, EventArgs e)
 		{
-			CreateNew cnForm = new CreateNew();
-			cnForm.SetUp(accountTableAdapter, CreateNew.CreateType.Account);
-
+			CreateNew cnForm = new CreateNew(_dbInt, CreateNew.CreateType.Account);
 			if (cnForm.ShowDialog() == DialogResult.Cancel)
 			{
 				return;
@@ -406,7 +401,7 @@ namespace BankingSite
 			}
 
 			AssotiatedDataTables owned = new AssotiatedDataTables(transactions);
-			owned.Text = string.Concat("Assotiated transactions from Account with ID ", accID);
+			owned.Text = string.Concat("Associated transactions from Account with ID ", accID);
 			owned.Show();
 		}
 
@@ -431,9 +426,7 @@ namespace BankingSite
 		#region Transaction Tab
 		private void btnCreateNewTransaction_Click(object sender, EventArgs e)
 		{
-			CreateNew cnForm = new CreateNew();
-			cnForm.SetUp(transactionTableAdapter, CreateNew.CreateType.Transaction);
-
+			CreateNew cnForm = new CreateNew(_dbInt, CreateNew.CreateType.Transaction);
 			if (cnForm.ShowDialog() == DialogResult.Cancel)
 			{
 				return;
