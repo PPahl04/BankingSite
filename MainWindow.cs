@@ -17,8 +17,6 @@ namespace BankingSite
 
 		DatabaseInteraction _dbInt;
 
-		//ToDo: Test every case and fix it. Goodluck!
-
 		#region Server Connection
 		public MainWindow()
 		{
@@ -159,34 +157,10 @@ namespace BankingSite
 		/// </summary>
 		void RefillDGVs()
 		{
-			_addressTable = _dbInt.GetAllAddresses();
-			_customerTable = _dbInt.GetAllCustomers();
-			_accountTable = _dbInt.GetAllAccounts();
-			_transactionTable = _dbInt.GetAllTransactions();
-
-			dgvAddresses.DataSource = _addressTable;
-			dgvCustomers.DataSource = _customerTable;
-			dgvAccounts.DataSource = _accountTable;
-			dgvTransactions.DataSource = _transactionTable;
-
-			//customer ui controls
-			SetDataBindings(customerIDTextBox, _customerTable, "ID");
-			SetDataBindings(firstNameTextBox, _customerTable, "FirstName");
-			SetDataBindings(lastNameTextBox, _customerTable, "LastName");
-			SetDataBindings(phoneNumberTextBox, _customerTable, "PhoneNumber");
-			SetDataBindings(emailAddressTextBox, _customerTable, "EmailAddress");
-			SetDataBindings(customerAddressIDTextBox, _customerTable, "Address_ID");
-
-			//address ui controls
-			SetDataBindings(addressIDTextBox, _addressTable, "ID");
-			SetDataBindings(streetNameTextBox, _addressTable, "StreetName");
-			SetDataBindings(streetNumberTextBox, _addressTable, "StreetNumber");
-			SetDataBindings(zipCodeTextBox, _addressTable, "ZipCode");
-			SetDataBindings(cityTextBox, _addressTable, "City");
-
-			//account and transaction ui control
-			SetDataBindings(accountIDTextBox, _accountTable, "ID");
-			SetDataBindings(transactionIDTextBox, _transactionTable, "ID");
+			RefreshCustomerDataBingingsSources();
+			RefreshAddressDataBindingsSources();
+			RefreshAccountDataBindingsSources();
+			RefreshTransactionDataBindingsSources();
 		}
 
 		/// <summary>
@@ -242,7 +216,7 @@ namespace BankingSite
 			{ 
 				return;
 			}
-			RefillDGVs();
+			RefreshCustomerDataBingingsSources();
 		}
 
 		void btnUpdateCustomer_Click(object sender, EventArgs e)
@@ -292,7 +266,8 @@ namespace BankingSite
 						MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
 				_dbInt.DeleteCustomerWithID(id);
-				RefillDGVs();
+				RefreshCustomerDataBingingsSources();
+				RefreshAccountDataBindingsSources();
 			}
 		}
 
@@ -321,6 +296,22 @@ namespace BankingSite
 			owned.Text = string.Concat("Owned Accounts From Customer with ID ", custID);
 			owned.Show();
 		}
+
+		/// <summary>
+		/// Refreshes the customerTable, its dataGridViev DataSource and all Controls associated with it.
+		/// </summary>
+		void RefreshCustomerDataBingingsSources()
+		{
+			_customerTable = _dbInt.GetAllCustomers();
+			dgvCustomers.DataSource = _customerTable;
+
+			SetDataBindings(customerIDTextBox, _customerTable, "ID");
+			SetDataBindings(firstNameTextBox, _customerTable, "FirstName");
+			SetDataBindings(lastNameTextBox, _customerTable, "LastName");
+			SetDataBindings(phoneNumberTextBox, _customerTable, "PhoneNumber");
+			SetDataBindings(emailAddressTextBox, _customerTable, "EmailAddress");
+			SetDataBindings(customerAddressIDTextBox, _customerTable, "Address_ID");
+		}
 		#endregion
 
 		#region Address Tab
@@ -333,7 +324,7 @@ namespace BankingSite
 				return;
 			}
 
-			RefillDGVs();
+			RefreshAddressDataBindingsSources();
 		}
 
 		void btnUpdateAddress_Click(object sender, EventArgs e)
@@ -362,7 +353,7 @@ namespace BankingSite
 			try
 			{
 				_dbInt.UpdateAddress(streetName, streetNumber, zipCode, city, addrID);
-				RefillDGVs();
+				RefreshAddressDataBindingsSources();
 			}
 			catch (Exception ex)
 			{
@@ -382,8 +373,25 @@ namespace BankingSite
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
 				_dbInt.DeleteAddressWithID(id);
-				RefillDGVs();
+				RefreshAddressDataBindingsSources();
+				RefreshCustomerDataBingingsSources();
 			}
+		}
+
+		/// <summary>
+		/// Refreshes the addressTable, its dataGridViev DataSource and all Controls associated with it.
+		/// </summary>
+		void RefreshAddressDataBindingsSources()
+		{
+			_addressTable = _dbInt.GetAllAddresses();
+			dgvAddresses.DataSource = _addressTable;
+
+			//address ui controls
+			SetDataBindings(addressIDTextBox, _addressTable, "ID");
+			SetDataBindings(streetNameTextBox, _addressTable, "StreetName");
+			SetDataBindings(streetNumberTextBox, _addressTable, "StreetNumber");
+			SetDataBindings(zipCodeTextBox, _addressTable, "ZipCode");
+			SetDataBindings(cityTextBox, _addressTable, "City");
 		}
 		#endregion
 
@@ -396,7 +404,7 @@ namespace BankingSite
 				return;
 			}
 
-			RefillDGVs();
+			RefreshAccountDataBindingsSources();
 		}
 
 		/// <summary>
@@ -436,8 +444,20 @@ namespace BankingSite
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
 				_dbInt.DeleteAccountWithID(id);
-				RefillDGVs();
+				RefreshAccountDataBindingsSources();
+				RefreshTransactionDataBindingsSources();
 			}
+		}
+
+		/// <summary>
+		/// Refreshes the accountTable, its dataGridViev DataSource and all Controls associated with it.
+		/// </summary>
+		void RefreshAccountDataBindingsSources()
+		{
+			_accountTable = _dbInt.GetAllAccounts();
+			dgvAccounts.DataSource = _accountTable;
+			SetDataBindings(accountIDTextBox, _accountTable, "ID");
+
 		}
 		#endregion
 
@@ -449,7 +469,7 @@ namespace BankingSite
 			{
 				return;
 			}
-			RefillDGVs();
+			RefreshTransactionDataBindingsSources();
 		}
 	
 		private void btnDeleteTransaction_Click(object sender, EventArgs e)
@@ -463,8 +483,18 @@ namespace BankingSite
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
 				_dbInt.DeleteTransactionWithID(id);
-				RefillDGVs();
+				RefreshTransactionDataBindingsSources();
 			}
+		}
+
+		/// <summary>
+		/// Refreshes the transactionTable, its dataGridViev DataSource and all Controls associated with it.
+		/// </summary>
+		void RefreshTransactionDataBindingsSources()
+		{
+			_transactionTable = _dbInt.GetAllTransactions();
+			dgvTransactions.DataSource = _transactionTable;
+			SetDataBindings(transactionIDTextBox, _transactionTable, "ID");
 		}
 		#endregion
 	}

@@ -56,23 +56,6 @@ namespace BankingSite
 		}
 
 		/// <summary>
-		/// Will execute any INSERT and DELETE clauses.
-		/// </summary>
-		/// <param name="myCommandText"></param>
-		public void ExecuteSQL(string myCommandText)
-		{
-			using (SqlConnection cn = new SqlConnection(_connectionString))
-			{
-				cn.Open();
-				SqlCommand cmd = cn.CreateCommand();
-				cmd.CommandTimeout = 5;
-
-				cmd.CommandText = myCommandText;
-				cmd.ExecuteNonQuery();
-			}
-		}
-
-		/// <summary>
 		/// Gets all Database Names within the currently connected server.
 		/// </summary>
 		/// <returns></returns>
@@ -387,7 +370,6 @@ namespace BankingSite
 			string cmdText = File.ReadAllText(string.Concat(GET_DATA_FOLDER, "AllAssociatedTransactions", SQL_EXTENSION));
 			return GetDataTable(string.Format(cmdText, myAccountID));
 		}
-
 
 		public DataTable GetAllAccountIDs()
 		{
