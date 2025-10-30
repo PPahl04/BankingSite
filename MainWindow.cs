@@ -246,8 +246,14 @@ namespace BankingSite
 		}
 
 		void btnUpdateCustomer_Click(object sender, EventArgs e)
-		{   //Update the dataTable but check if all of them are valid first
-			if (!int.TryParse(customerIDTextBox.Text, out int custID) || !int.TryParse(customerAddressIDTextBox.Text, out int addrID) || !int.TryParse(phoneNumberTextBox.Text, out int phoneN))
+		{   //the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(customerIDTextBox.Text, out int custID))
+			{
+				return;			
+			}
+
+			//Update the dataTable but check if all of them are valid first
+			if (!int.TryParse(customerAddressIDTextBox.Text, out int addrID) || !int.TryParse(phoneNumberTextBox.Text, out int phoneN))
 			{
 				MessageBox.Show("Please make sure to only input numbers for the address ID and phonenumber.", "Error using inputs for updating dataset");
 				return;
@@ -275,13 +281,12 @@ namespace BankingSite
 		}
 
 		private void btnDeleteCustomer_Click(object sender, EventArgs e)
-		{
-			if (String.IsNullOrWhiteSpace(customerIDTextBox.Text))
+		{   //the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(customerIDTextBox.Text, out int id))
 			{
 				return;
 			}
 
-			int id = Convert.ToInt32(customerIDTextBox.Text);
 			if (MessageBox.Show(string.Concat("Are you sure you want to delete the customer with the ID: ", id, "?" +
 				"\nThis will also delete all accounts they own."), "Delete selected customer",
 						MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -297,7 +302,12 @@ namespace BankingSite
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void btnShowOwnedAccounts_Click(object sender, EventArgs e)
-		{
+		{	//the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(customerIDTextBox.Text, out int id))
+			{
+				return;
+			}
+
 			int custID = Convert.ToInt32(customerIDTextBox.Text);
 			DataTable accounts = _dbInt.GetOwnedAccountsByCustomerID(custID);
 
@@ -327,7 +337,13 @@ namespace BankingSite
 		}
 
 		void btnUpdateAddress_Click(object sender, EventArgs e)
-		{	//Update the dataTable but check if all of them are valid first
+		{   //the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(addressIDTextBox.Text, out int addrID))
+			{
+				return;			
+			}
+
+			//Update the dataTable but check if all of them are valid first
 			if (!int.TryParse(streetNumberTextBox.Text, out int streetNumber) || !int.TryParse(zipCodeTextBox.Text, out int zipCode))
 			{
 				MessageBox.Show("Please make sure to only input numbers for the street number and zip code.", "Error using inputs for updating dataset");
@@ -345,7 +361,7 @@ namespace BankingSite
 
 			try
 			{
-				_dbInt.UpdateAddress(streetName, streetNumber, zipCode, city, Convert.ToInt32(addressIDTextBox.Text));
+				_dbInt.UpdateAddress(streetName, streetNumber, zipCode, city, addrID);
 				RefillDGVs();
 			}
 			catch (Exception ex)
@@ -355,13 +371,12 @@ namespace BankingSite
 		}
 
 		private void btnDeleteAddress_Click(object sender, EventArgs e)
-		{
-			if (String.IsNullOrWhiteSpace(addressIDTextBox.Text))
+		{   //the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(addressIDTextBox.Text, out int id))
 			{
-				return;
+				return;         
 			}
 
-			int id = Convert.ToInt32(addressIDTextBox.Text);
 			if (MessageBox.Show(string.Concat("Are you sure you want to delete the address with the ID: ", id, "?" +
 				"\nCustomers living at this place will become homeless."), "Delete selected address",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -390,10 +405,13 @@ namespace BankingSite
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void btnShowTransactions_Click(object sender, EventArgs e)
-		{
-			int accID = Convert.ToInt32(accountIDTextBox.Text);
-			DataTable transactions = _dbInt.GetAllTransactionsFromAccountID(accID);
+		{	//the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(accountIDTextBox.Text, out int accID))
+			{
+				return;
+			}
 
+			DataTable transactions = _dbInt.GetAllTransactionsFromAccountID(accID);
 			if (transactions.Rows.Count == 0)
 			{
 				MessageBox.Show("The selected account is not assostiated with any transactions.", "Account has no transactions.");
@@ -406,8 +424,8 @@ namespace BankingSite
 		}
 
 		private void btnDeleteSelectedAccount_Click(object sender, EventArgs e)
-		{
-			if (String.IsNullOrWhiteSpace(accountIDTextBox.Text))
+		{	//the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(accountIDTextBox.Text, out int accID))
 			{
 				return;
 			}
@@ -435,13 +453,12 @@ namespace BankingSite
 		}
 	
 		private void btnDeleteTransaction_Click(object sender, EventArgs e)
-		{
-			if (String.IsNullOrWhiteSpace(transactionIDTextBox.Text))
+		{	//the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(transactionIDTextBox.Text, out int id))
 			{
 				return;
 			}
 
-			int id = Convert.ToInt32(transactionIDTextBox.Text);
 			if (MessageBox.Show(string.Concat("Are you sure you want to delete the transaction with the ID: ", transactionIDTextBox.Text, "?"), "Delete selected Transaction",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
