@@ -1,0 +1,2 @@
+DELETE Account
+WHERE ID = @ID

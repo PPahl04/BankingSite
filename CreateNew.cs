@@ -1,59 +1,49 @@
-﻿using BankingSite.BankingSiteDataSetTableAdapters;
-using System.Windows.Forms;
-using System.Drawing;
+﻿using System;
 using System.Data;
-using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace BankingSite
 {
 	public partial class CreateNew : Form
 	{
-		TransactionTableAdapter _transactionTableAdapter;
-		CustomerTableAdapter _customerTableAdapter;
-		AddressTableAdapter _addressTableAdapter;
-		AccountTableAdapter _accountTableAdapter;
-
+		DatabaseInteraction _dbInt;
 		bool _hasCanceled = true;
 		CreateType _type;
 
-		public CreateNew()
-		{
-			InitializeComponent();
-		}
-
 		/// <summary>
-		/// Will determine which tableAdapter and panel (which holds all neccesary UI) to use by its parameters
+		/// Will determine which panel (that holds all neccesary UI) to use by its parameters
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
-		/// <param name="myTableAdapter"></param>
 		/// <param name="myCreateType"></param>
-		public void SetUp<T> (T myTableAdapter, CreateType myCreateType) 
+		public CreateNew(DatabaseInteraction myDbInt, CreateType myCreateType)
 		{
+			InitializeComponent();
+
+			_dbInt = myDbInt;
 			_type = myCreateType;
 			string title = "Create New ";
 
 			switch (_type)
 			{
 				case CreateType.Customer:
-					_customerTableAdapter = myTableAdapter as CustomerTableAdapter;
 					UsePanel(pnlCustomer);
+					GetAddressIDs();
 					title += "Customer";
-				break;
+					break;
 
 				case CreateType.Address:
-					_addressTableAdapter = myTableAdapter as AddressTableAdapter;
 					UsePanel(pnlAddress);
 					title += "Address";
-				break;
+					break;
 
 				case CreateType.Account:
-					_accountTableAdapter = myTableAdapter as AccountTableAdapter;
 					UsePanel(pnlAccount);
+					GetCustomerIDs();
 					title += "Account";
-				break;
+					break;
 
 				case CreateType.Transaction:
-					_transactionTableAdapter = myTableAdapter as TransactionTableAdapter;
 					UsePanel(pnlTransaction);
 					title += "Transaction";
 
@@ -68,10 +58,11 @@ namespace BankingSite
 					typeComboBox.DataSource = table;
 					typeComboBox.DisplayMember = "Type";
 
+					GetAccountIDs();
 					accountReceiver_IDComboBox.Enabled = false;
-				break;
+					break;
 			}
-			
+
 			Text = title;
 		}
 
@@ -82,17 +73,45 @@ namespace BankingSite
 			myPanel.Location = new Point(0, 0);
 		}
 
+
 		/// <summary>
-		/// Gets the Account Table Adapter to get all account ids and use the adapter when creating the transaction.
+		/// Gets all address ids for its dropdown control.
 		/// </summary>
-		/// <param name="myATA"></param>
-		public void GetAccountTableAdapter(AccountTableAdapter myATA)
+		void GetAddressIDs()
 		{
-			_accountTableAdapter = myATA;
-			DataTable myAccountIDs = _accountTableAdapter.GetData();
+			DataTable addrIDs = _dbInt.GetAllAddresses();
+
+			foreach (DataColumn dc in addrIDs.Columns)
+			{
+				dc.AllowDBNull = true;
+				dc.AutoIncrement = false;
+			}
+
+			addrIDs.Rows.Add();
+			address_IDComboBox.DataSource = addrIDs;
+			address_IDComboBox.DisplayMember = "ID";
+		}
+
+		/// <summary>
+		/// Gets all customer ids for its dropdown control.
+		/// </summary>
+		void GetCustomerIDs()
+		{
+			DataTable custIDs = _dbInt.GetAllCustomers();
+
+			customer_IDComboBox.DataSource = custIDs;
+			customer_IDComboBox.DisplayMember = "ID";
+		}
+
+		/// <summary>
+		/// Gets all account ids for its dropdown control.
+		/// </summary>
+		void GetAccountIDs()
+		{
+			DataTable accIDs = _dbInt.GetAllAccounts();
 		
-			accountReceiver_IDComboBox.DataSource = new DataView(myAccountIDs.Columns["ID"].Table);
-			accountSender_IDComboBox.DataSource = new DataView(myAccountIDs.Columns["ID"].Table);
+			accountReceiver_IDComboBox.DataSource = new DataView(accIDs);
+			accountSender_IDComboBox.DataSource = new DataView(accIDs);
 
 			accountReceiver_IDComboBox.DisplayMember = "ID";
 			accountSender_IDComboBox.DisplayMember = "ID";
@@ -127,9 +146,9 @@ namespace BankingSite
 
 		void CreateNewCustomer()
 		{   //Create a new Customer dataTable but check if all of the inputs are valid first
-			if (!int.TryParse(address_IDTextBox.Text, out int addrID) || !int.TryParse(phoneNumberTextBox.Text, out int phoneN))
+			if (!int.TryParse(phoneNumberTextBox.Text, out int phoneN))
 			{
-				MessageBox.Show("Please make sure to only input numbers for the address ID and phonenumber.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input numbers for the phone number.", "Error using inputs for creating new customer");
 				return;
 			}
 
@@ -139,13 +158,22 @@ namespace BankingSite
 
 			if (int.TryParse(firstN, out int a) || int.TryParse(lastN, out int b) || int.TryParse(email, out int c))
 			{
-				MessageBox.Show("Please make sure to only input strings for the names and email.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input strings for the names and email.", "Error using inputs for creating new customer");
 				return;
 			}
 
 			try
 			{
-				_customerTableAdapter.InsertNewCustomer(firstN, lastN, phoneN, email, addrID);
+				//address to update may be set to null
+				if (String.IsNullOrWhiteSpace(address_IDComboBox.Text))
+				{
+					_dbInt.InsertCustomerNoAddress(firstN, lastN, phoneN, email);
+				}
+				else
+				{
+					int addrID = Convert.ToInt32(address_IDComboBox.Text);
+					_dbInt.InsertCustomer(firstN, lastN, phoneN, email, addrID);
+				}
 				_hasCanceled = false;
 				Close();
 			}
@@ -159,7 +187,7 @@ namespace BankingSite
 		{	//Create new address dataTable but check if all of them are valid first
 			if (!int.TryParse(streetNumberTextBox.Text, out int streetNumber) || !int.TryParse(zipCodeTextBox.Text, out int zipCode))
 			{
-				MessageBox.Show("Please make sure to only input numbers for the street receiverID and zip code.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input numbers for the street number and zip code.", "Error using inputs for creating new address");
 				return;
 			}
 
@@ -168,13 +196,13 @@ namespace BankingSite
 
 			if (int.TryParse(streetName, out int a) || int.TryParse(city, out int b))
 			{
-				MessageBox.Show("Please make sure to only input strings for the street name and city.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input strings for the street name and city.", "Error using inputs for creating new address");
 				return;
 			}
 
 			try
 			{
-				_addressTableAdapter.Insert(streetName, streetNumber, zipCode, city);
+				_dbInt.InsertAddress(streetName, streetNumber, zipCode, city);
 				_hasCanceled = false;
 				Close();
 			}
@@ -186,28 +214,28 @@ namespace BankingSite
 
 		void CreateNewAccount()
 		{   //Create a new Account dataTable but check if all of the inputs are valid first
-			if (!int.TryParse(balanceTextBox.Text, out int balance) || !int.TryParse(numberTextBox.Text, out int number) || !int.TryParse(customer_IDTextBox.Text, out int custID))
+			if (!int.TryParse(balanceTextBox.Text, out int balance) || !int.TryParse(numberTextBox.Text, out int number))
 			{
-				MessageBox.Show("Please make sure to only input numbers for the amount, bumber and customer id.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input numbers for the balance and number.", "Error using inputs for creating new account");
 				return;
 			}
 
 			string iban = iBANTextBox.Text;
 			if (int.TryParse(iban, out int a))
 			{
-				MessageBox.Show("Please make sure to only input strings for the intendedUse.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input strings for the IBAN.", "Error using inputs for creating new account");
 				return;
 			}
 
 			try
 			{
-				_accountTableAdapter.InsertNewAccount(iban, balance, number, custID);
+				_dbInt.InsertAccount(iban, balance, number, Convert.ToInt32(customer_IDComboBox.Text));
 				_hasCanceled = false;
 				Close();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, "Error oocurred while creating a new customer.");
+				MessageBox.Show(ex.Message, "Error oocurred while creating a new account.");
 			}
 		}
 
@@ -216,9 +244,9 @@ namespace BankingSite
 		/// </summary>
 		void CreateNewTransaction()
 		{	//Create a new transaction but check if all of the inputs are valid first
-			if (!int.TryParse(amountTextBox.Text, out int amount) || !int.TryParse(accountReceiver_IDComboBox.Text, out int receiverID) || !int.TryParse(accountSender_IDComboBox.Text, out int senderID))
+			if (!int.TryParse(amountTextBox.Text, out int amount))
 			{
-				MessageBox.Show("Please make sure to only input numbers for the amount, account receiver and sender id.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input numbers for the amount.", "Error using inputs for creating new transaction");
 				return;
 			}
 
@@ -228,39 +256,42 @@ namespace BankingSite
 				return;
 			}
 
+			int receiverID = Convert.ToInt32(accountReceiver_IDComboBox.Text);
+			int senderID = Convert.ToInt32(accountSender_IDComboBox.Text);
+
 			string intendedUse = intendedUseTextBox.Text;
 			string type = typeComboBox.Text;
 
 			if (int.TryParse(intendedUse, out int a))
 			{
-				MessageBox.Show("Please make sure to only input strings for the intended use.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input strings for the intended use.", "Error using inputs for creating new transaction");
 				return;
 			}
 
 			try
 			{
-				_transactionTableAdapter.InsertNewTransaction(dateDateTimePicker.Value.ToString(), amount, intendedUse, type, receiverID, senderID);
+				_dbInt.InsertTransaction(dateDateTimePicker.Value, amount, intendedUse, type, receiverID, senderID);
 				_hasCanceled = false;
 				Close();
 
 				//get balance from sender and update it based on the transaction balance
 				if (type == TransactionType.Withdrawal.ToString())
 				{
-					WithdrawFromAccount(senderID, amount);
+					_dbInt.WithdrawFromAccount(senderID, amount);
 					return;
 				}
 
 				//get balance from sender and update it based on the transaction balance
 				if (type == TransactionType.Deposit.ToString())
 				{
-					DepositToAccount(senderID, amount);
+					_dbInt.DepositToAccount(senderID, amount);
 					return;
 				}
 
 				//get balance from both ids and update it based on the transaction balance
 				if (type == TransactionType.Transfer.ToString())
 				{
-					TransferFromSenderToReceiver(senderID, receiverID, amount);
+					_dbInt.TransferFromSenderToReceiver(senderID, receiverID, amount);
 					return;
 				}               
 				
@@ -276,41 +307,7 @@ namespace BankingSite
 			}
 		}
 
-		/// <summary>
-		///Will remove myAmount from balance of Account with ID myAccountID.
-		/// </summary>
-		/// <param name="myAccountID"></param>
-		/// <param name="myAmount"></param>
-		void WithdrawFromAccount(int myAccountID, int myAmount)
-		{
-			int currentBalance = (int)_accountTableAdapter.GetBalanceFromAccountWithID(myAccountID);
-			int newBalance = currentBalance - myAmount;
-			_accountTableAdapter.UpdateBalanceFromAccountWithID(newBalance, myAccountID);
-		}
 
-		/// <summary>
-		///Will add myAmount to balance of Account with ID myAccountID.
-		/// </summary>
-		/// <param name="myAccountID"></param>
-		/// <param name="myAmount"></param>
-		void DepositToAccount(int myAccountID, int myAmount)
-		{
-			int currentBalance = (int)_accountTableAdapter.GetBalanceFromAccountWithID(myAccountID);
-			int newBalance = currentBalance + myAmount;
-			_accountTableAdapter.UpdateBalanceFromAccountWithID(newBalance, myAccountID);
-		}
-
-		/// <summary>
-		///Will remove myAmount from balance of the sender and add it into the balance of the receiver Account.
-		/// </summary>
-		/// <param name="mySenderID"></param>
-		/// <param name="myReceiverID"></param>
-		/// <param name="myAmount"></param>
-		void TransferFromSenderToReceiver(int mySenderID, int myReceiverID, int myAmount)
-		{
-			WithdrawFromAccount(mySenderID, myAmount);
-			DepositToAccount(myReceiverID, myAmount);
-		}
 
 		void CreateNew_FormClosing(object sender, FormClosingEventArgs e)
 		{

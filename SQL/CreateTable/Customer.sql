@@ -1,5 +1,4 @@
-﻿/****** Object:  Table [dbo].[Customer]    Script Date: 25.10.2025 16:25:41 ******/
-SET ANSI_NULLS ON
+﻿SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 
 CREATE TABLE [dbo].[Customer](

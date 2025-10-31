@@ -66,20 +66,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BankingSiteDataSet.cs">
-      <DependentUpon>BankingSiteDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="BankingSiteDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BankingSiteDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="CreateNew.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CreateNew.Designer.cs">
       <DependentUpon>CreateNew.cs</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseInteraction.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,17 +106,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="BankingSiteDataSet.xsc">
-      <DependentUpon>BankingSiteDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="BankingSiteDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>BankingSiteDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="BankingSiteDataSet.xss">
-      <DependentUpon>BankingSiteDataSet.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -140,9 +122,7 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\DataSources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>

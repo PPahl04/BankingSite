@@ -53,7 +53,6 @@
 			this.lastNameTextBox = new System.Windows.Forms.TextBox();
 			this.phoneNumberTextBox = new System.Windows.Forms.TextBox();
 			this.emailAddressTextBox = new System.Windows.Forms.TextBox();
-			this.address_IDTextBox = new System.Windows.Forms.TextBox();
 			this.pnlAddress = new System.Windows.Forms.Panel();
 			this.streetNameTextBox = new System.Windows.Forms.TextBox();
 			this.streetNumberTextBox = new System.Windows.Forms.TextBox();
@@ -64,7 +63,6 @@
 			this.iBANTextBox = new System.Windows.Forms.TextBox();
 			this.balanceTextBox = new System.Windows.Forms.TextBox();
 			this.numberTextBox = new System.Windows.Forms.TextBox();
-			this.customer_IDTextBox = new System.Windows.Forms.TextBox();
 			this.btnCreateAccount = new System.Windows.Forms.Button();
 			this.pnlTransaction = new System.Windows.Forms.Panel();
 			this.accountReceiver_IDComboBox = new System.Windows.Forms.ComboBox();
@@ -74,6 +72,8 @@
 			this.amountTextBox = new System.Windows.Forms.TextBox();
 			this.intendedUseTextBox = new System.Windows.Forms.TextBox();
 			this.btnTransaction = new System.Windows.Forms.Button();
+			this.customer_IDComboBox = new System.Windows.Forms.ComboBox();
+			this.address_IDComboBox = new System.Windows.Forms.ComboBox();
 			firstNameLabel = new System.Windows.Forms.Label();
 			lastNameLabel = new System.Windows.Forms.Label();
 			phoneNumberLabel = new System.Windows.Forms.Label();
@@ -331,6 +331,7 @@
 			// 
 			this.pnlCustomer.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.pnlCustomer.AutoSize = true;
+			this.pnlCustomer.Controls.Add(this.address_IDComboBox);
 			this.pnlCustomer.Controls.Add(this.btnCreateNewCustomer);
 			this.pnlCustomer.Controls.Add(firstNameLabel);
 			this.pnlCustomer.Controls.Add(this.firstNameTextBox);
@@ -341,7 +342,6 @@
 			this.pnlCustomer.Controls.Add(emailAddressLabel);
 			this.pnlCustomer.Controls.Add(this.emailAddressTextBox);
 			this.pnlCustomer.Controls.Add(address_IDLabel);
-			this.pnlCustomer.Controls.Add(this.address_IDTextBox);
 			this.pnlCustomer.Location = new System.Drawing.Point(518, 7);
 			this.pnlCustomer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.pnlCustomer.Name = "pnlCustomer";
@@ -402,16 +402,6 @@
 			this.emailAddressTextBox.Name = "emailAddressTextBox";
 			this.emailAddressTextBox.Size = new System.Drawing.Size(132, 30);
 			this.emailAddressTextBox.TabIndex = 9;
-			// 
-			// address_IDTextBox
-			// 
-			this.address_IDTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.address_IDTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.address_IDTextBox.Location = new System.Drawing.Point(142, 200);
-			this.address_IDTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.address_IDTextBox.Name = "address_IDTextBox";
-			this.address_IDTextBox.Size = new System.Drawing.Size(132, 30);
-			this.address_IDTextBox.TabIndex = 11;
 			// 
 			// pnlAddress
 			// 
@@ -491,6 +481,7 @@
 			// 
 			this.pnlAccount.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.pnlAccount.AutoSize = true;
+			this.pnlAccount.Controls.Add(this.customer_IDComboBox);
 			this.pnlAccount.Controls.Add(iBANLabel);
 			this.pnlAccount.Controls.Add(this.iBANTextBox);
 			this.pnlAccount.Controls.Add(balanceLabel);
@@ -498,7 +489,6 @@
 			this.pnlAccount.Controls.Add(numberLabel);
 			this.pnlAccount.Controls.Add(this.numberTextBox);
 			this.pnlAccount.Controls.Add(customer_IDLabel);
-			this.pnlAccount.Controls.Add(this.customer_IDTextBox);
 			this.pnlAccount.Controls.Add(this.btnCreateAccount);
 			this.pnlAccount.Location = new System.Drawing.Point(11, 394);
 			this.pnlAccount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -536,16 +526,6 @@
 			this.numberTextBox.Name = "numberTextBox";
 			this.numberTextBox.Size = new System.Drawing.Size(132, 30);
 			this.numberTextBox.TabIndex = 29;
-			// 
-			// customer_IDTextBox
-			// 
-			this.customer_IDTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.customer_IDTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.customer_IDTextBox.Location = new System.Drawing.Point(123, 167);
-			this.customer_IDTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.customer_IDTextBox.Name = "customer_IDTextBox";
-			this.customer_IDTextBox.Size = new System.Drawing.Size(132, 30);
-			this.customer_IDTextBox.TabIndex = 31;
 			// 
 			// btnCreateAccount
 			// 
@@ -621,10 +601,12 @@
 			// dateDateTimePicker
 			// 
 			this.dateDateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.dateDateTimePicker.CalendarFont = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.dateDateTimePicker.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.dateDateTimePicker.Location = new System.Drawing.Point(193, 19);
 			this.dateDateTimePicker.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.dateDateTimePicker.MaxDate = new System.DateTime(2025, 10, 23, 0, 0, 0, 0);
+			this.dateDateTimePicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
 			this.dateDateTimePicker.Name = "dateDateTimePicker";
 			this.dateDateTimePicker.Size = new System.Drawing.Size(265, 30);
 			this.dateDateTimePicker.TabIndex = 25;
@@ -664,6 +646,26 @@
 			this.btnTransaction.UseVisualStyleBackColor = true;
 			this.btnTransaction.Click += new System.EventHandler(this.btnCreateNew_Click);
 			// 
+			// customer_IDComboBox
+			// 
+			this.customer_IDComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.customer_IDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.customer_IDComboBox.FormattingEnabled = true;
+			this.customer_IDComboBox.Location = new System.Drawing.Point(123, 167);
+			this.customer_IDComboBox.Name = "customer_IDComboBox";
+			this.customer_IDComboBox.Size = new System.Drawing.Size(132, 31);
+			this.customer_IDComboBox.TabIndex = 39;
+			// 
+			// address_IDComboBox
+			// 
+			this.address_IDComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.address_IDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.address_IDComboBox.FormattingEnabled = true;
+			this.address_IDComboBox.Location = new System.Drawing.Point(142, 200);
+			this.address_IDComboBox.Name = "address_IDComboBox";
+			this.address_IDComboBox.Size = new System.Drawing.Size(132, 31);
+			this.address_IDComboBox.TabIndex = 40;
+			// 
 			// CreateNew
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 23F);
@@ -675,7 +677,9 @@
 			this.Controls.Add(this.pnlAddress);
 			this.Controls.Add(this.pnlCustomer);
 			this.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.MaximizeBox = false;
 			this.Name = "CreateNew";
 			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -701,7 +705,6 @@
 		private System.Windows.Forms.TextBox lastNameTextBox;
 		private System.Windows.Forms.TextBox phoneNumberTextBox;
 		private System.Windows.Forms.TextBox emailAddressTextBox;
-		private System.Windows.Forms.TextBox address_IDTextBox;
 		private System.Windows.Forms.Button btnCreateNewCustomer;
 		private System.Windows.Forms.Panel pnlAddress;
 		private System.Windows.Forms.Button btnCreateAddress;
@@ -716,12 +719,13 @@
 		private System.Windows.Forms.TextBox iBANTextBox;
 		private System.Windows.Forms.TextBox balanceTextBox;
 		private System.Windows.Forms.TextBox numberTextBox;
-		private System.Windows.Forms.TextBox customer_IDTextBox;
 		private System.Windows.Forms.DateTimePicker dateDateTimePicker;
 		private System.Windows.Forms.TextBox amountTextBox;
 		private System.Windows.Forms.TextBox intendedUseTextBox;
 		private System.Windows.Forms.ComboBox typeComboBox;
 		private System.Windows.Forms.ComboBox accountReceiver_IDComboBox;
 		private System.Windows.Forms.ComboBox accountSender_IDComboBox;
+		private System.Windows.Forms.ComboBox customer_IDComboBox;
+		private System.Windows.Forms.ComboBox address_IDComboBox;
 	}
 }

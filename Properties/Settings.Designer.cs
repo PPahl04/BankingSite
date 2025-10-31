@@ -22,14 +22,5 @@ namespace BankingSite.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        public string BankingSiteConnectionString1 {
-            get {
-                return ((string)(this["BankingSiteConnectionString1"]));
-            }
-        }
     }
 }

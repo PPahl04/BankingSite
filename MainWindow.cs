@@ -1,28 +1,28 @@
 ﻿using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Data;
-using System.Linq;
-using System.IO;
 using System;
 
 namespace BankingSite
 {
 	public partial class MainWindow : Form
 	{
-		string _connectionString;
 		List<string> _missingTables;
 		bool _isConnectedAndHasTables;
-		const string SQL_FOLDER = @"..\..\SQL\";
-		const string INSERT_DATA_FOLDER = SQL_FOLDER + @"InsertData\";
-		const string CREATE_TABLE_FOLDER = SQL_FOLDER + @"CreateTable\";
 
-		//ToDo: Test every case and fix it. Goodluck!
+		DataTable _addressTable;
+		DataTable _customerTable;
+		DataTable _accountTable;
+		DataTable _transactionTable;
+
+		DatabaseInteraction _dbInt;
 
 		#region Server Connection
 		public MainWindow()
 		{
 			InitializeComponent();
+
+			_dbInt = new DatabaseInteraction();
 		}
 
 		private void Window_Load(object sender, EventArgs e)
@@ -33,29 +33,6 @@ namespace BankingSite
 		private void tcWindow_Selecting(object sender, TabControlCancelEventArgs e)
 		{
 			e.Cancel = !_isConnectedAndHasTables;
-		}
-
-		bool CanConnectToServer()
-		{	
-			string startDbName = string.IsNullOrWhiteSpace(cbDbNames.Text) ? "master" : cbDbNames.Text;
-			string cnString = string.Concat("Data Source=", txtbServerName.Text, ";Initial Catalog=", startDbName, ";UID=", txtbUsername.Text, ";Password=", txtbPassword.Text,
-						";Integrated Security=False;TrustServerCertificate=True");
-			SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(cnString);
-			builder.ConnectTimeout = 5;
-
-			using(SqlConnection cn = new SqlConnection(builder.ConnectionString))
-			{
-				try
-				{
-					cn.Open();
-					_connectionString = cnString;
-					return true;
-				}
-				catch 
-				{
-					return false;
-				}
-			}
 		}
 
 		/// <summary>
@@ -81,32 +58,14 @@ namespace BankingSite
 					return;
 				}
 
-				using (SqlConnection cn = new SqlConnection(_connectionString))
-				{
-					cn.Open();
-
-					SqlCommand cmd = cn.CreateCommand();
-					cmd.CommandText = "SELECT name FROM sys.databases";
-					cmd.CommandTimeout = 5;
-
-					using (SqlDataReader reader = cmd.ExecuteReader())
-					{
-						string[] systemDatabases = { "master", "tempdb", "model", "msdb" };
-						cbDbNames.Items.Clear();
-
-						while (reader.Read())
-						{
-							string databaseName = reader.GetString(0);
-
-							if (!systemDatabases.Contains(databaseName))
-							{
-								cbDbNames.Items.Add(databaseName);
-							}
-						}
-					}
-				}
+				cbDbNames.Items.Clear();
+				string[] databaseNames = _dbInt.GetDatabases();
+				cbDbNames.Items.AddRange(databaseNames);
 			}
-			catch { }
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "An Error ocurred");
+			}
 		}
 
 		/// <summary>
@@ -130,7 +89,7 @@ namespace BankingSite
 			if (_missingTables.Count != 0)
 			{
 				if (DialogResult.Yes == MessageBox.Show("In order to insert data the database needs to contain all required tables: customer, address, account and transaction." +
-						"\nDo you want to create these tables?", "Tables missing", MessageBoxButtons.YesNo))
+						"\n\nDo you want to create these tables?", "Tables missing", MessageBoxButtons.YesNo))
 				{
 					CreateTables();
 					MessageBox.Show("Missing tables have been succssessfully created!", "Required tables created.");
@@ -143,31 +102,16 @@ namespace BankingSite
 
 			try
 			{
-				using (SqlConnection cn = new SqlConnection(_connectionString))
-				{
-					cn.Open();
-					SqlCommand cmd = cn.CreateCommand();
-					cmd.CommandTimeout = 5;
-
-					cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Address.sql"));
-					cmd.ExecuteNonQuery();
-
-					cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Customer.sql"));
-					cmd.ExecuteNonQuery();
-
-					cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Account.sql"));
-					cmd.ExecuteNonQuery();
-
-					cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "Transaction.sql"));
-					cmd.ExecuteNonQuery();
-				}
+				_dbInt.InsertToAllTables();
 
 				RefillDGVs();
-				btnInsertData.Enabled = false;
 				_isConnectedAndHasTables = true;
-				MessageBox.Show("Data has been succsessfully been inserted into the all tables!", "Data succsessfully inserted");
+				MessageBox.Show("Data has succsessfully been inserted into all tables!", "Data succsessfully inserted");
 			}
-			catch { }
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "An Error ocurred");
+			}
 		}
 
 		private void btnConnectToDB_Click(object sender, EventArgs e)
@@ -179,13 +123,6 @@ namespace BankingSite
 					MessageBox.Show("Error occurred while connecting to server", "Error");
 					return;
 				}
-
-				accountTableAdapter.Connection.ConnectionString = _connectionString;
-				customerTableAdapter.Connection.ConnectionString = _connectionString;
-				transactionTableAdapter.Connection.ConnectionString = _connectionString;
-				addressTableAdapter.Connection.ConnectionString = _connectionString;
-
-				tableAdapterManager.Connection.ConnectionString = _connectionString;
 
 				if (!DatabaseContainsAllTables())
 				{
@@ -215,24 +152,36 @@ namespace BankingSite
 			}
 		}
 
+		bool CanConnectToServer()
+		{
+			return _dbInt.CanConnectToServer(String.IsNullOrWhiteSpace(cbDbNames.Text) ? "master" : cbDbNames.Text, txtbServerName.Text, txtbUsername.Text, txtbPassword.Text);
+		}
+
 		/// <summary>
 		/// Uses the TableAdapters to refill all dataGridViews.
 		/// </summary>
 		void RefillDGVs()
-		{	//An error occures when filling customers for some reason that doesnt happen on a second try
-			try
-			{
-				this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
-				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
-				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
-				this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
-			}
-			catch
-			{
+		{
+			RefreshAddressDataBindingsSources();
+			RefreshCustomerDataBingingsSources();
+			RefreshAccountDataBindingsSources();
+			RefreshTransactionDataBindingsSources();
+		}
 
-				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
-				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
-				this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+		/// <summary>
+		/// Will re-set the DataBinding for myUiElement.
+		/// </summary>
+		/// <param name="myUiElement"></param>
+		/// <param name="myDataSource"></param>
+		/// <param name="myDataMember"></param>
+		void SetDataBindings(Control myUiElement, DataTable myDataSource, string myDataMember)
+		{
+			myUiElement.DataBindings.Clear();
+			myUiElement.DataBindings.Add(new Binding("Text", myDataSource, myDataMember));
+
+			if (myDataSource.Rows.Count == 0)
+			{
+				myUiElement.Text = string.Empty;
 			}
 		}
 
@@ -243,29 +192,7 @@ namespace BankingSite
 		/// <returns></returns>
 		bool DatabaseContainsAllTables()
 		{
-			using (SqlConnection cn = new SqlConnection(_connectionString))
-			{
-				cn.Open();
-
-				SqlCommand cmd = cn.CreateCommand();
-				cmd.CommandText = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES";
-				cmd.CommandTimeout = 5;
-
-				List<string> tableNames = new List<string>{ "Address", "Customer", "Account", "Transaction" };
-
-				using (SqlDataReader reader = cmd.ExecuteReader())
-				{
-					while (reader.Read())
-					{
-						string currentTableName = reader.GetString(0);
-						if (tableNames.Contains(currentTableName))
-						{
-							tableNames.Remove(currentTableName);
-						}
-					}
-					_missingTables = new List<string>(tableNames);
-				}
-			}
+			_missingTables = _dbInt.GetMissingTables();
 			return _missingTables.Count == 0;
 		}
 
@@ -274,43 +201,7 @@ namespace BankingSite
 		/// </summary>
 		void CreateTables()
 		{
-			foreach (string missingTable in _missingTables)
-			{
-				using(SqlConnection cn =  new SqlConnection(_connectionString))
-				{
-					cn.Open();
-					SqlCommand cmd = cn.CreateCommand();
-					cmd.CommandTimeout = 5;
-					
-					if (missingTable.Equals("Address"))
-					{
-						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Address.sql"));
-						cmd.ExecuteNonQuery();
-						continue;
-					}
-
-					if (missingTable.Equals("Customer"))
-					{
-						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Customer.sql"));
-						cmd.ExecuteNonQuery();
-						continue;
-					}
-
-					if (missingTable.Equals("Account"))
-					{
-						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Account.sql"));
-						cmd.ExecuteNonQuery();
-						continue;
-					}
-
-					if (missingTable.Equals("Transaction"))
-					{
-						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "Transaction.sql"));
-						cmd.ExecuteNonQuery();
-						continue;
-					}
-				}
-			}
+			_dbInt.CreateTables(_missingTables);
 			_missingTables.Clear();
 			RefillDGVs();
 		}
@@ -324,27 +215,30 @@ namespace BankingSite
 			_isConnectedAndHasTables = true;
 			Text = string.Concat("BankingSite - Connected to ", cbDbNames.Text);
 		}
+
 		#endregion 
 
 		#region Customer Tab
 		private void btnCreateNewCustomer_Click(object sender, EventArgs e)
 		{
-			CreateNew cnForm = new CreateNew();
-			cnForm.SetUp(customerTableAdapter, CreateNew.CreateType.Customer);
-
+			CreateNew cnForm = new CreateNew(_dbInt, CreateNew.CreateType.Customer);
 			if (cnForm.ShowDialog() == DialogResult.Cancel)
 			{ 
 				return;
 			}
-
-			customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
+			RefreshCustomerDataBingingsSources();
 		}
 
 		void btnUpdateCustomer_Click(object sender, EventArgs e)
-		{   //Update the dataTable but check if all of them are valid first
-			if (!int.TryParse(customerIDTextBox.Text, out int custID) || !int.TryParse(address_IDTextBox.Text, out int addrID) || !int.TryParse(phoneNumberTextBox.Text, out int phoneN))
+		{   //the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(customerIDTextBox.Text, out int custID))
 			{
-				MessageBox.Show("Please make sure to only input numbers for the address ID and phonenumber.", "Error using inputs for updating dataset");
+				return;			
+			}
+			//Update the dataTable but check if all of them are valid first
+			if (!int.TryParse(phoneNumberTextBox.Text, out int phoneN))
+			{
+				MessageBox.Show("Please make sure to only input numbers for the phone number.", "Error using inputs for updating customer");
 				return;
 			}
 			
@@ -354,14 +248,23 @@ namespace BankingSite
 
 			if (int.TryParse(firstN, out int a) || int.TryParse(lastN, out int b) || int.TryParse(email, out int c))
 			{
-				MessageBox.Show("Please make sure to only input strings for the names and email.", "Error using inputs for updating dataset");
+				MessageBox.Show("Please make sure to only input strings for the names and email.", "Error using inputs for updating customer");
 				return;
 			}
 
 			try
 			{
-				customerTableAdapter.UpdateCustomer(firstN, lastN, phoneN, email, custID, addrID);
-				dgvCustomers.Refresh();
+				//address to update may be set to null
+				if (String.IsNullOrWhiteSpace(customerAddressIDComboBox.Text))
+				{
+					_dbInt.UpdateCustomerNoAddress(firstN, lastN, phoneN, email, custID);
+				}
+				else
+				{
+					int addrID = Convert.ToInt32(customerAddressIDComboBox.Text);
+					_dbInt.UpdateCustomer(firstN, lastN, phoneN, email, addrID, custID);
+				}
+				RefreshCustomerDataBingingsSources();
 			}
 			catch (Exception ex)
 			{
@@ -370,20 +273,20 @@ namespace BankingSite
 		}
 
 		private void btnDeleteCustomer_Click(object sender, EventArgs e)
-		{
-			if (String.IsNullOrWhiteSpace(customerIDTextBox.Text))
+		{   //the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(customerIDTextBox.Text, out int id))
 			{
 				return;
 			}
 
-			int id = Convert.ToInt32(customerIDTextBox.Text);
 			if (MessageBox.Show(string.Concat("Are you sure you want to delete the customer with the ID: ", id, "?" +
 				"\nThis will also delete all accounts they own."), "Delete selected customer",
 						MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
-				customerTableAdapter.DeleteCustomerWithID(id);
-				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
-				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+				_dbInt.DeleteCustomerWithID(id);
+				RefreshCustomerDataBingingsSources();
+				RefreshAccountDataBindingsSources();
+				RefreshTransactionDataBindingsSources();
 			}
 		}
 
@@ -393,9 +296,14 @@ namespace BankingSite
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void btnShowOwnedAccounts_Click(object sender, EventArgs e)
-		{
+		{	//the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(customerIDTextBox.Text, out int id))
+			{
+				return;
+			}
+
 			int custID = Convert.ToInt32(customerIDTextBox.Text);
-			DataTable accounts = accountTableAdapter.GetOwnedAccountsByCustomerID(Convert.ToInt32(custID));
+			DataTable accounts = _dbInt.GetOwnedAccountsByCustomerID(custID);
 
 			if (accounts.Rows.Count == 0)
 			{
@@ -407,27 +315,92 @@ namespace BankingSite
 			owned.Text = string.Concat("Owned Accounts From Customer with ID ", custID);
 			owned.Show();
 		}
+
+		private void customerAddressIDComboBox_DropDown(object sender, EventArgs e)
+		{
+			//DataTable addressIDs = _dbInt.GetDataTable();
+			
+			//customerAddressIDComboBox.D
+		}
+
+		/// <summary>
+		/// Refreshes the customerTable, its dataGridViev DataSource and all Controls associated with it.
+		/// </summary>
+		void RefreshCustomerDataBingingsSources()
+		{
+			_customerTable = _dbInt.GetAllCustomers();
+			dgvCustomers.DataSource = _customerTable;
+
+			SetDataBindings(customerIDTextBox, _customerTable, "ID");
+			SetDataBindings(firstNameTextBox, _customerTable, "FirstName");
+			SetDataBindings(lastNameTextBox, _customerTable, "LastName");
+			SetDataBindings(phoneNumberTextBox, _customerTable, "PhoneNumber");
+			SetDataBindings(emailAddressTextBox, _customerTable, "EmailAddress");
+			RefreshCustomerAddressDropDown();
+		}
+
+		/// <summary>
+		/// Will add every available address ID to the dropdown
+		/// </summary>
+		void RefreshCustomerAddressDropDown()
+		{
+			DataTable addressIDsCopy = _addressTable.Copy();
+			foreach (DataColumn dc in addressIDsCopy.Columns)
+			{
+				dc.AllowDBNull = true;
+				dc.AutoIncrement = false;
+			}
+			
+			addressIDsCopy.Rows.Add();
+			customerAddressIDComboBox.DataSource = addressIDsCopy;
+			customerAddressIDComboBox.DisplayMember = "ID";
+
+			//to make sure that the correct address id is being shown
+			dgvCustomers_SelectionChanged(new object(), new EventArgs());
+		}
+
+		/// <summary>
+		/// Makes sure that the correct Address ID is selected for the current customer
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void dgvCustomers_SelectionChanged(object sender, EventArgs e)
+		{
+			if (dgvCustomers.SelectedCells.Count != 6)
+			{
+				return;
+			}
+			DataGridViewCell currentCell = dgvCustomers.SelectedCells[5];
+			string val = currentCell.Value.ToString();
+			customerAddressIDComboBox.Text = val;
+		}
 		#endregion
 
 		#region Address Tab
 		private void btnCreateNewAddress_Click(object sender, EventArgs e)
 		{
-			CreateNew cnForm = new CreateNew();
-			cnForm.SetUp(addressTableAdapter, CreateNew.CreateType.Address);
+			CreateNew cnForm = new CreateNew(_dbInt, CreateNew.CreateType.Address);
 
 			if (cnForm.ShowDialog() == DialogResult.Cancel)
 			{
 				return;
 			}
 
-			addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
+			RefreshAddressDataBindingsSources();
+			RefreshCustomerAddressDropDown();
 		}
 
 		void btnUpdateAddress_Click(object sender, EventArgs e)
-		{	//Update the dataTable but check if all of them are valid first
+		{   //the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(addressIDTextBox.Text, out int addrID))
+			{
+				return;			
+			}
+
+			//Update the dataTable but check if all of them are valid first
 			if (!int.TryParse(streetNumberTextBox.Text, out int streetNumber) || !int.TryParse(zipCodeTextBox.Text, out int zipCode))
 			{
-				MessageBox.Show("Please make sure to only input numbers for the street number and zip code.", "Error using inputs for updating dataset");
+				MessageBox.Show("Please make sure to only input numbers for the street number and zip code.", "Error using inputs for updating address");
 				return;
 			}
 
@@ -436,14 +409,14 @@ namespace BankingSite
 
 			if (int.TryParse(streetName, out int a) || int.TryParse(city, out int b))
 			{
-				MessageBox.Show("Please make sure to only input strings for the street name and city.", "Error using inputs for updating dataset");
+				MessageBox.Show("Please make sure to only input strings for the street name and city.", "Error using inputs for updating address");
 				return;
 			}
 
 			try
 			{
-				addressTableAdapter.UpdateAddress(streetName, streetNumber, zipCode, city, Convert.ToInt32(addressIDTextBox.Text));
-				dgvAddresses.Refresh();
+				_dbInt.UpdateAddress(streetName, streetNumber, zipCode, city, addrID);
+				RefreshAddressDataBindingsSources();
 			}
 			catch (Exception ex)
 			{
@@ -452,36 +425,55 @@ namespace BankingSite
 		}
 
 		private void btnDeleteAddress_Click(object sender, EventArgs e)
-		{
-			if (String.IsNullOrWhiteSpace(addressIDTextBox.Text))
+		{   //the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(addressIDTextBox.Text, out int id))
 			{
-				return;
+				return;         
 			}
 
-			int id = Convert.ToInt32(addressIDTextBox.Text);
 			if (MessageBox.Show(string.Concat("Are you sure you want to delete the address with the ID: ", id, "?" +
 				"\nCustomers living at this place will become homeless."), "Delete selected address",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
-				addressTableAdapter.DeleteAddressWithID(id);
-				this.addressTableAdapter.Fill(this.bankingSiteDataSet.Address);
-				this.customerTableAdapter.Fill(this.bankingSiteDataSet.Customer);
+				_dbInt.DeleteAddressWithID(id);
+				RefreshAddressDataBindingsSources();
+				RefreshCustomerDataBingingsSources();
 			}
+		}
+
+		/// <summary>
+		/// Refreshes the addressTable, its dataGridViev DataSource and all Controls associated with it.
+		/// </summary>
+		void RefreshAddressDataBindingsSources()
+		{
+			_addressTable = _dbInt.GetAllAddresses();
+			dgvAddresses.DataSource = _addressTable;
+
+			//address ui controls
+			SetDataBindings(addressIDTextBox, _addressTable, "ID");
+			SetDataBindings(streetNameTextBox, _addressTable, "StreetName");
+			SetDataBindings(streetNumberTextBox, _addressTable, "StreetNumber");
+			SetDataBindings(zipCodeTextBox, _addressTable, "ZipCode");
+			SetDataBindings(cityTextBox, _addressTable, "City");
 		}
 		#endregion
 
 		#region Account Tab
 		private void btnCreateNewAccount_Click(object sender, EventArgs e)
 		{
-			CreateNew cnForm = new CreateNew();
-			cnForm.SetUp(accountTableAdapter, CreateNew.CreateType.Account);
-
+			if (_customerTable.Rows.Count == 0)
+			{
+				MessageBox.Show("Can't create an account without any customers. Please create a customer then try again.", "No Customers available");
+				return;
+			}
+			
+			CreateNew cnForm = new CreateNew(_dbInt, CreateNew.CreateType.Account);
 			if (cnForm.ShowDialog() == DialogResult.Cancel)
 			{
 				return;
 			}
 
-			accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+			RefreshAccountDataBindingsSources();
 		}
 
 		/// <summary>
@@ -490,71 +482,94 @@ namespace BankingSite
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		private void btnShowTransactions_Click(object sender, EventArgs e)
-		{
-			int accID = Convert.ToInt32(accountIDTextBox.Text);
-			DataTable transactions = transactionTableAdapter.GetAllTransactionsFromAccountID(Convert.ToInt32(accID));
+		{	//the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(accountIDTextBox.Text, out int accID))
+			{
+				return;
+			}
 
+			DataTable transactions = _dbInt.GetAllTransactionsFromAccountID(accID);
 			if (transactions.Rows.Count == 0)
 			{
-				MessageBox.Show("The selected account is not assostiated with any transactions.", "Account has no transactions.");
+				MessageBox.Show("The selected account is not associated with any transactions.", "Account has no transactions.");
 				return;
 			}
 
 			AssotiatedDataTables owned = new AssotiatedDataTables(transactions);
-			owned.Text = string.Concat("Assotiated transactions from Account with ID ", accID);
+			owned.Text = string.Concat("Transactions Associated with Account ID ", accID);
 			owned.Show();
 		}
 
 		private void btnDeleteSelectedAccount_Click(object sender, EventArgs e)
-		{
-			if (String.IsNullOrWhiteSpace(accountIDTextBox.Text))
+		{	//the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(accountIDTextBox.Text, out int accID))
 			{
 				return;
 			}
 
 			int id = Convert.ToInt32(accountIDTextBox.Text);
 			if (MessageBox.Show(string.Concat("Are you sure you want to delete the account with the ID: ", id, "?" +
-				"\n this may also delete transactions assosiated with this account."), "Delete selected account",
+				"\n this will also delete transactions associated with this account."), "Delete selected account",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
-				accountTableAdapter.DeleteAccountWithID(id);
-				this.accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
-				this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+				_dbInt.DeleteAccountWithID(id);
+				RefreshAccountDataBindingsSources();
+				RefreshTransactionDataBindingsSources();
 			}
+		}
+
+		/// <summary>
+		/// Refreshes the accountTable, its dataGridViev DataSource and all Controls associated with it.
+		/// </summary>
+		void RefreshAccountDataBindingsSources()
+		{
+			_accountTable = _dbInt.GetAllAccounts();
+			dgvAccounts.DataSource = _accountTable;
+			SetDataBindings(accountIDTextBox, _accountTable, "ID");
+
 		}
 		#endregion
 
 		#region Transaction Tab
 		private void btnCreateNewTransaction_Click(object sender, EventArgs e)
 		{
-			CreateNew cnForm = new CreateNew();
-			cnForm.SetUp(transactionTableAdapter, CreateNew.CreateType.Transaction);
+			if (_accountTable.Rows.Count == 0)
+			{
+				MessageBox.Show("Can't create a transaction without any accounts. Please create an account then try again.", "No Accounts available");
+				return;
+			}
 
-			cnForm.GetAccountTableAdapter(accountTableAdapter);
-
+			CreateNew cnForm = new CreateNew(_dbInt, CreateNew.CreateType.Transaction);
 			if (cnForm.ShowDialog() == DialogResult.Cancel)
 			{
 				return;
 			}
-
-			transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
-			accountTableAdapter.Fill(this.bankingSiteDataSet.Account);
+			RefreshTransactionDataBindingsSources();
 		}
 	
 		private void btnDeleteTransaction_Click(object sender, EventArgs e)
-		{
-			if (String.IsNullOrWhiteSpace(transactionIDTextBox.Text))
+		{	//the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
+			if (!int.TryParse(transactionIDTextBox.Text, out int id))
 			{
 				return;
 			}
 
-			int id = Convert.ToInt32(transactionIDTextBox.Text);
 			if (MessageBox.Show(string.Concat("Are you sure you want to delete the transaction with the ID: ", transactionIDTextBox.Text, "?"), "Delete selected Transaction",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
-				transactionTableAdapter.DeleteTransactionWithID(id);
-				this.transactionTableAdapter.Fill(this.bankingSiteDataSet.Transaction);
+				_dbInt.DeleteTransactionWithID(id);
+				RefreshTransactionDataBindingsSources();
 			}
+		}
+
+		/// <summary>
+		/// Refreshes the transactionTable, its dataGridViev DataSource and all Controls associated with it.
+		/// </summary>
+		void RefreshTransactionDataBindingsSources()
+		{
+			_transactionTable = _dbInt.GetAllTransactions();
+			dgvTransactions.DataSource = _transactionTable;
+			SetDataBindings(transactionIDTextBox, _transactionTable, "ID");
 		}
 		#endregion
 	}
