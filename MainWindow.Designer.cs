@@ -44,7 +44,7 @@
 			this.tpTransactions = new System.Windows.Forms.TabPage();
 			this.tlpTransactions = new System.Windows.Forms.TableLayoutPanel();
 			this.dgvTransactions = new System.Windows.Forms.DataGridView();
-			this.panel1 = new System.Windows.Forms.Panel();
+			this.pnlTransactionDetails = new System.Windows.Forms.Panel();
 			this.btnCreateNewTransaction = new System.Windows.Forms.Button();
 			this.btnDeleteTransaction = new System.Windows.Forms.Button();
 			this.transactionIDTextBox = new System.Windows.Forms.TextBox();
@@ -110,7 +110,7 @@
 			this.tpTransactions.SuspendLayout();
 			this.tlpTransactions.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).BeginInit();
-			this.panel1.SuspendLayout();
+			this.pnlTransactionDetails.SuspendLayout();
 			this.tpAccounts.SuspendLayout();
 			this.tlpAccounts.SuspendLayout();
 			this.pnlAccountDetails.SuspendLayout();
@@ -287,7 +287,7 @@
 			this.tlpTransactions.ColumnCount = 1;
 			this.tlpTransactions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tlpTransactions.Controls.Add(this.dgvTransactions, 0, 0);
-			this.tlpTransactions.Controls.Add(this.panel1, 0, 1);
+			this.tlpTransactions.Controls.Add(this.pnlTransactionDetails, 0, 1);
 			this.tlpTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tlpTransactions.Location = new System.Drawing.Point(3, 3);
 			this.tlpTransactions.Name = "tlpTransactions";
@@ -313,18 +313,18 @@
 			this.dgvTransactions.Size = new System.Drawing.Size(984, 530);
 			this.dgvTransactions.TabIndex = 1;
 			// 
-			// panel1
+			// pnlTransactionDetails
 			// 
-			this.panel1.AutoScroll = true;
-			this.panel1.Controls.Add(this.btnCreateNewTransaction);
-			this.panel1.Controls.Add(iDLabel3);
-			this.panel1.Controls.Add(this.btnDeleteTransaction);
-			this.panel1.Controls.Add(this.transactionIDTextBox);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(4, 541);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(984, 74);
-			this.panel1.TabIndex = 12;
+			this.pnlTransactionDetails.AutoScroll = true;
+			this.pnlTransactionDetails.Controls.Add(this.btnCreateNewTransaction);
+			this.pnlTransactionDetails.Controls.Add(iDLabel3);
+			this.pnlTransactionDetails.Controls.Add(this.btnDeleteTransaction);
+			this.pnlTransactionDetails.Controls.Add(this.transactionIDTextBox);
+			this.pnlTransactionDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnlTransactionDetails.Location = new System.Drawing.Point(4, 541);
+			this.pnlTransactionDetails.Name = "pnlTransactionDetails";
+			this.pnlTransactionDetails.Size = new System.Drawing.Size(984, 74);
+			this.pnlTransactionDetails.TabIndex = 12;
 			// 
 			// btnCreateNewTransaction
 			// 
@@ -983,8 +983,8 @@
 			this.tpTransactions.ResumeLayout(false);
 			this.tlpTransactions.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgvTransactions)).EndInit();
-			this.panel1.ResumeLayout(false);
-			this.panel1.PerformLayout();
+			this.pnlTransactionDetails.ResumeLayout(false);
+			this.pnlTransactionDetails.PerformLayout();
 			this.tpAccounts.ResumeLayout(false);
 			this.tlpAccounts.ResumeLayout(false);
 			this.pnlAccountDetails.ResumeLayout(false);
@@ -1057,31 +1057,8 @@
 		private System.Windows.Forms.Button btnCreateNewTransaction;
 		private System.Windows.Forms.Button btnDeleteTransaction;
 		private System.Windows.Forms.TableLayoutPanel tlpTransactions;
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumberDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn emailAddressDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn addressIDDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn3;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn intendedUseDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn accountReceiverIDDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn accountSenderIDDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn streetNameDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn streetNumberDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn zipCodeDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn cityDataGridViewTextBoxColumn;
+		private System.Windows.Forms.Panel pnlTransactionDetails;
 		private System.Windows.Forms.DataGridView dgvAccounts;
-		private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn iBANDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn balanceDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn customerIDDataGridViewTextBoxColumn;
 		private System.Windows.Forms.Button btnShowTransactions;
 		private System.Windows.Forms.Button btnInsertData;
 		private System.Windows.Forms.ComboBox customerAddressIDComboBox;
