@@ -131,7 +131,7 @@
 			iDLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			iDLabel.AutoSize = true;
 			iDLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			iDLabel.Location = new System.Drawing.Point(13, 19);
+			iDLabel.Location = new System.Drawing.Point(13, 21);
 			iDLabel.Name = "iDLabel";
 			iDLabel.Size = new System.Drawing.Size(24, 23);
 			iDLabel.TabIndex = 23;
@@ -142,7 +142,7 @@
 			firstNameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			firstNameLabel.AutoSize = true;
 			firstNameLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			firstNameLabel.Location = new System.Drawing.Point(13, 53);
+			firstNameLabel.Location = new System.Drawing.Point(13, 55);
 			firstNameLabel.Name = "firstNameLabel";
 			firstNameLabel.Size = new System.Drawing.Size(81, 23);
 			firstNameLabel.TabIndex = 25;
@@ -153,7 +153,7 @@
 			lastNameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			lastNameLabel.AutoSize = true;
 			lastNameLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			lastNameLabel.Location = new System.Drawing.Point(13, 87);
+			lastNameLabel.Location = new System.Drawing.Point(13, 89);
 			lastNameLabel.Name = "lastNameLabel";
 			lastNameLabel.Size = new System.Drawing.Size(79, 23);
 			lastNameLabel.TabIndex = 27;
@@ -164,7 +164,7 @@
 			phoneNumberLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			phoneNumberLabel.AutoSize = true;
 			phoneNumberLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			phoneNumberLabel.Location = new System.Drawing.Point(13, 121);
+			phoneNumberLabel.Location = new System.Drawing.Point(13, 123);
 			phoneNumberLabel.Name = "phoneNumberLabel";
 			phoneNumberLabel.Size = new System.Drawing.Size(103, 23);
 			phoneNumberLabel.TabIndex = 29;
@@ -175,7 +175,7 @@
 			emailAddressLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			emailAddressLabel.AutoSize = true;
 			emailAddressLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			emailAddressLabel.Location = new System.Drawing.Point(13, 155);
+			emailAddressLabel.Location = new System.Drawing.Point(13, 157);
 			emailAddressLabel.Name = "emailAddressLabel";
 			emailAddressLabel.Size = new System.Drawing.Size(103, 23);
 			emailAddressLabel.TabIndex = 31;
@@ -186,7 +186,7 @@
 			address_IDLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			address_IDLabel.AutoSize = true;
 			address_IDLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			address_IDLabel.Location = new System.Drawing.Point(13, 189);
+			address_IDLabel.Location = new System.Drawing.Point(13, 191);
 			address_IDLabel.Name = "address_IDLabel";
 			address_IDLabel.Size = new System.Drawing.Size(79, 23);
 			address_IDLabel.TabIndex = 33;
@@ -197,7 +197,7 @@
 			iDLabel1.Anchor = System.Windows.Forms.AnchorStyles.None;
 			iDLabel1.AutoSize = true;
 			iDLabel1.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			iDLabel1.Location = new System.Drawing.Point(13, 24);
+			iDLabel1.Location = new System.Drawing.Point(13, 25);
 			iDLabel1.Name = "iDLabel1";
 			iDLabel1.Size = new System.Drawing.Size(24, 23);
 			iDLabel1.TabIndex = 23;
@@ -208,7 +208,7 @@
 			streetNameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			streetNameLabel.AutoSize = true;
 			streetNameLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			streetNameLabel.Location = new System.Drawing.Point(13, 58);
+			streetNameLabel.Location = new System.Drawing.Point(13, 59);
 			streetNameLabel.Name = "streetNameLabel";
 			streetNameLabel.Size = new System.Drawing.Size(90, 23);
 			streetNameLabel.TabIndex = 25;
@@ -219,7 +219,7 @@
 			streetNumberLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			streetNumberLabel.AutoSize = true;
 			streetNumberLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			streetNumberLabel.Location = new System.Drawing.Point(13, 92);
+			streetNumberLabel.Location = new System.Drawing.Point(13, 93);
 			streetNumberLabel.Name = "streetNumberLabel";
 			streetNumberLabel.Size = new System.Drawing.Size(103, 23);
 			streetNumberLabel.TabIndex = 27;
@@ -230,7 +230,7 @@
 			zipCodeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			zipCodeLabel.AutoSize = true;
 			zipCodeLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			zipCodeLabel.Location = new System.Drawing.Point(13, 126);
+			zipCodeLabel.Location = new System.Drawing.Point(13, 127);
 			zipCodeLabel.Name = "zipCodeLabel";
 			zipCodeLabel.Size = new System.Drawing.Size(66, 23);
 			zipCodeLabel.TabIndex = 29;
@@ -241,7 +241,7 @@
 			cityLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			cityLabel.AutoSize = true;
 			cityLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			cityLabel.Location = new System.Drawing.Point(13, 160);
+			cityLabel.Location = new System.Drawing.Point(13, 161);
 			cityLabel.Name = "cityLabel";
 			cityLabel.Size = new System.Drawing.Size(36, 23);
 			cityLabel.TabIndex = 31;
@@ -273,10 +273,10 @@
 			// 
 			this.tpTransactions.AutoScroll = true;
 			this.tpTransactions.Controls.Add(this.tlpTransactions);
-			this.tpTransactions.Location = new System.Drawing.Point(4, 22);
+			this.tpTransactions.Location = new System.Drawing.Point(4, 27);
 			this.tpTransactions.Name = "tpTransactions";
-			this.tpTransactions.Padding = new System.Windows.Forms.Padding(3);
-			this.tpTransactions.Size = new System.Drawing.Size(998, 620);
+			this.tpTransactions.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+			this.tpTransactions.Size = new System.Drawing.Size(998, 625);
 			this.tpTransactions.TabIndex = 3;
 			this.tpTransactions.Text = "Transactions";
 			this.tpTransactions.UseVisualStyleBackColor = true;
@@ -294,7 +294,7 @@
 			this.tlpTransactions.RowCount = 2;
 			this.tlpTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tlpTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-			this.tlpTransactions.Size = new System.Drawing.Size(992, 614);
+			this.tlpTransactions.Size = new System.Drawing.Size(992, 619);
 			this.tlpTransactions.TabIndex = 36;
 			// 
 			// dgvTransactions
@@ -310,7 +310,7 @@
 			this.dgvTransactions.ReadOnly = true;
 			this.dgvTransactions.RowHeadersWidth = 21;
 			this.dgvTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvTransactions.Size = new System.Drawing.Size(984, 525);
+			this.dgvTransactions.Size = new System.Drawing.Size(984, 530);
 			this.dgvTransactions.TabIndex = 1;
 			// 
 			// panel1
@@ -321,7 +321,7 @@
 			this.panel1.Controls.Add(this.btnDeleteTransaction);
 			this.panel1.Controls.Add(this.transactionIDTextBox);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(4, 536);
+			this.panel1.Location = new System.Drawing.Point(4, 541);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(984, 74);
 			this.panel1.TabIndex = 12;
@@ -372,10 +372,10 @@
 			// 
 			this.tpAccounts.AutoScroll = true;
 			this.tpAccounts.Controls.Add(this.tlpAccounts);
-			this.tpAccounts.Location = new System.Drawing.Point(4, 22);
+			this.tpAccounts.Location = new System.Drawing.Point(4, 27);
 			this.tpAccounts.Name = "tpAccounts";
-			this.tpAccounts.Padding = new System.Windows.Forms.Padding(3);
-			this.tpAccounts.Size = new System.Drawing.Size(998, 620);
+			this.tpAccounts.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+			this.tpAccounts.Size = new System.Drawing.Size(998, 625);
 			this.tpAccounts.TabIndex = 2;
 			this.tpAccounts.Text = "Accounts";
 			this.tpAccounts.UseVisualStyleBackColor = true;
@@ -393,7 +393,7 @@
 			this.tlpAccounts.RowCount = 2;
 			this.tlpAccounts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tlpAccounts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-			this.tlpAccounts.Size = new System.Drawing.Size(992, 614);
+			this.tlpAccounts.Size = new System.Drawing.Size(992, 619);
 			this.tlpAccounts.TabIndex = 11;
 			// 
 			// pnlAccountDetails
@@ -405,7 +405,7 @@
 			this.pnlAccountDetails.Controls.Add(this.btnCreateNewAccount);
 			this.pnlAccountDetails.Controls.Add(this.btnDeleteSelectedAccount);
 			this.pnlAccountDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnlAccountDetails.Location = new System.Drawing.Point(4, 536);
+			this.pnlAccountDetails.Location = new System.Drawing.Point(4, 541);
 			this.pnlAccountDetails.Name = "pnlAccountDetails";
 			this.pnlAccountDetails.Size = new System.Drawing.Size(984, 74);
 			this.pnlAccountDetails.TabIndex = 12;
@@ -480,16 +480,16 @@
 			this.dgvAccounts.ReadOnly = true;
 			this.dgvAccounts.RowHeadersWidth = 21;
 			this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvAccounts.Size = new System.Drawing.Size(984, 525);
+			this.dgvAccounts.Size = new System.Drawing.Size(984, 530);
 			this.dgvAccounts.TabIndex = 1;
 			// 
 			// tpCustomers
 			// 
 			this.tpCustomers.Controls.Add(this.tlpCostumerAddress);
-			this.tpCustomers.Location = new System.Drawing.Point(4, 22);
+			this.tpCustomers.Location = new System.Drawing.Point(4, 27);
 			this.tpCustomers.Name = "tpCustomers";
-			this.tpCustomers.Padding = new System.Windows.Forms.Padding(3);
-			this.tpCustomers.Size = new System.Drawing.Size(998, 620);
+			this.tpCustomers.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+			this.tpCustomers.Size = new System.Drawing.Size(998, 625);
 			this.tpCustomers.TabIndex = 1;
 			this.tpCustomers.Text = "Customers";
 			this.tpCustomers.UseVisualStyleBackColor = true;
@@ -510,7 +510,7 @@
 			this.tlpCostumerAddress.RowCount = 2;
 			this.tlpCostumerAddress.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tlpCostumerAddress.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tlpCostumerAddress.Size = new System.Drawing.Size(992, 614);
+			this.tlpCostumerAddress.Size = new System.Drawing.Size(992, 619);
 			this.tlpCostumerAddress.TabIndex = 14;
 			// 
 			// dgvCustomers
@@ -528,7 +528,7 @@
 			this.dgvCustomers.RowHeadersWidth = 21;
 			this.dgvCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvCustomers.ShowEditingIcon = false;
-			this.dgvCustomers.Size = new System.Drawing.Size(642, 299);
+			this.dgvCustomers.Size = new System.Drawing.Size(642, 302);
 			this.dgvCustomers.TabIndex = 0;
 			this.dgvCustomers.SelectionChanged += new System.EventHandler(this.dgvCustomers_SelectionChanged);
 			// 
@@ -540,14 +540,14 @@
 			this.dgvAddresses.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
 			this.dgvAddresses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.dgvAddresses.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dgvAddresses.Location = new System.Drawing.Point(346, 310);
+			this.dgvAddresses.Location = new System.Drawing.Point(346, 313);
 			this.dgvAddresses.MultiSelect = false;
 			this.dgvAddresses.Name = "dgvAddresses";
 			this.dgvAddresses.ReadOnly = true;
 			this.dgvAddresses.RowHeadersWidth = 21;
 			this.dgvAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvAddresses.ShowEditingIcon = false;
-			this.dgvAddresses.Size = new System.Drawing.Size(642, 300);
+			this.dgvAddresses.Size = new System.Drawing.Size(642, 302);
 			this.dgvAddresses.TabIndex = 1;
 			// 
 			// pnlCustomerDetails
@@ -572,7 +572,7 @@
 			this.pnlCustomerDetails.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnlCustomerDetails.Location = new System.Drawing.Point(4, 4);
 			this.pnlCustomerDetails.Name = "pnlCustomerDetails";
-			this.pnlCustomerDetails.Size = new System.Drawing.Size(335, 299);
+			this.pnlCustomerDetails.Size = new System.Drawing.Size(335, 302);
 			this.pnlCustomerDetails.TabIndex = 21;
 			// 
 			// customerAddressIDComboBox
@@ -581,7 +581,7 @@
 			this.customerAddressIDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.customerAddressIDComboBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.customerAddressIDComboBox.FormattingEnabled = true;
-			this.customerAddressIDComboBox.Location = new System.Drawing.Point(155, 182);
+			this.customerAddressIDComboBox.Location = new System.Drawing.Point(155, 184);
 			this.customerAddressIDComboBox.Name = "customerAddressIDComboBox";
 			this.customerAddressIDComboBox.Size = new System.Drawing.Size(171, 31);
 			this.customerAddressIDComboBox.TabIndex = 38;
@@ -591,7 +591,7 @@
 			// 
 			this.customerIDTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.customerIDTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.customerIDTextBox.Location = new System.Drawing.Point(155, 12);
+			this.customerIDTextBox.Location = new System.Drawing.Point(155, 14);
 			this.customerIDTextBox.Name = "customerIDTextBox";
 			this.customerIDTextBox.ReadOnly = true;
 			this.customerIDTextBox.Size = new System.Drawing.Size(171, 30);
@@ -601,7 +601,7 @@
 			// 
 			this.firstNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.firstNameTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.firstNameTextBox.Location = new System.Drawing.Point(155, 46);
+			this.firstNameTextBox.Location = new System.Drawing.Point(155, 48);
 			this.firstNameTextBox.Name = "firstNameTextBox";
 			this.firstNameTextBox.Size = new System.Drawing.Size(171, 30);
 			this.firstNameTextBox.TabIndex = 26;
@@ -610,7 +610,7 @@
 			// 
 			this.lastNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lastNameTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.lastNameTextBox.Location = new System.Drawing.Point(155, 80);
+			this.lastNameTextBox.Location = new System.Drawing.Point(155, 82);
 			this.lastNameTextBox.Name = "lastNameTextBox";
 			this.lastNameTextBox.Size = new System.Drawing.Size(171, 30);
 			this.lastNameTextBox.TabIndex = 28;
@@ -619,7 +619,7 @@
 			// 
 			this.phoneNumberTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.phoneNumberTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.phoneNumberTextBox.Location = new System.Drawing.Point(155, 114);
+			this.phoneNumberTextBox.Location = new System.Drawing.Point(155, 116);
 			this.phoneNumberTextBox.Name = "phoneNumberTextBox";
 			this.phoneNumberTextBox.Size = new System.Drawing.Size(171, 30);
 			this.phoneNumberTextBox.TabIndex = 30;
@@ -628,7 +628,7 @@
 			// 
 			this.emailAddressTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.emailAddressTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.emailAddressTextBox.Location = new System.Drawing.Point(155, 148);
+			this.emailAddressTextBox.Location = new System.Drawing.Point(155, 150);
 			this.emailAddressTextBox.Name = "emailAddressTextBox";
 			this.emailAddressTextBox.Size = new System.Drawing.Size(171, 30);
 			this.emailAddressTextBox.TabIndex = 32;
@@ -637,7 +637,7 @@
 			// 
 			this.btnShowOwnedAccounts.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnShowOwnedAccounts.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnShowOwnedAccounts.Location = new System.Drawing.Point(155, 255);
+			this.btnShowOwnedAccounts.Location = new System.Drawing.Point(9, 257);
 			this.btnShowOwnedAccounts.Name = "btnShowOwnedAccounts";
 			this.btnShowOwnedAccounts.Size = new System.Drawing.Size(171, 32);
 			this.btnShowOwnedAccounts.TabIndex = 23;
@@ -649,7 +649,7 @@
 			// 
 			this.btnDeleteCustomer.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnDeleteCustomer.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnDeleteCustomer.Location = new System.Drawing.Point(9, 255);
+			this.btnDeleteCustomer.Location = new System.Drawing.Point(186, 257);
 			this.btnDeleteCustomer.Name = "btnDeleteCustomer";
 			this.btnDeleteCustomer.Size = new System.Drawing.Size(140, 32);
 			this.btnDeleteCustomer.TabIndex = 22;
@@ -661,7 +661,7 @@
 			// 
 			this.btnCreateNewCustomer.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnCreateNewCustomer.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnCreateNewCustomer.Location = new System.Drawing.Point(155, 217);
+			this.btnCreateNewCustomer.Location = new System.Drawing.Point(9, 221);
 			this.btnCreateNewCustomer.Name = "btnCreateNewCustomer";
 			this.btnCreateNewCustomer.Size = new System.Drawing.Size(171, 32);
 			this.btnCreateNewCustomer.TabIndex = 21;
@@ -673,7 +673,7 @@
 			// 
 			this.btnUpdateCustomer.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnUpdateCustomer.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnUpdateCustomer.Location = new System.Drawing.Point(9, 217);
+			this.btnUpdateCustomer.Location = new System.Drawing.Point(186, 221);
 			this.btnUpdateCustomer.Name = "btnUpdateCustomer";
 			this.btnUpdateCustomer.Size = new System.Drawing.Size(140, 32);
 			this.btnUpdateCustomer.TabIndex = 20;
@@ -698,16 +698,16 @@
 			this.pnlAddressTableAdapter.Controls.Add(this.btnCreateNewAddress);
 			this.pnlAddressTableAdapter.Controls.Add(this.btnUpdateAddress);
 			this.pnlAddressTableAdapter.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnlAddressTableAdapter.Location = new System.Drawing.Point(4, 310);
+			this.pnlAddressTableAdapter.Location = new System.Drawing.Point(4, 313);
 			this.pnlAddressTableAdapter.Name = "pnlAddressTableAdapter";
-			this.pnlAddressTableAdapter.Size = new System.Drawing.Size(335, 300);
+			this.pnlAddressTableAdapter.Size = new System.Drawing.Size(335, 302);
 			this.pnlAddressTableAdapter.TabIndex = 22;
 			// 
 			// addressIDTextBox
 			// 
 			this.addressIDTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.addressIDTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.addressIDTextBox.Location = new System.Drawing.Point(166, 22);
+			this.addressIDTextBox.Location = new System.Drawing.Point(166, 23);
 			this.addressIDTextBox.Name = "addressIDTextBox";
 			this.addressIDTextBox.ReadOnly = true;
 			this.addressIDTextBox.Size = new System.Drawing.Size(157, 30);
@@ -717,7 +717,7 @@
 			// 
 			this.streetNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.streetNameTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.streetNameTextBox.Location = new System.Drawing.Point(166, 56);
+			this.streetNameTextBox.Location = new System.Drawing.Point(166, 57);
 			this.streetNameTextBox.Name = "streetNameTextBox";
 			this.streetNameTextBox.Size = new System.Drawing.Size(157, 30);
 			this.streetNameTextBox.TabIndex = 26;
@@ -726,7 +726,7 @@
 			// 
 			this.streetNumberTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.streetNumberTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.streetNumberTextBox.Location = new System.Drawing.Point(166, 90);
+			this.streetNumberTextBox.Location = new System.Drawing.Point(166, 91);
 			this.streetNumberTextBox.Name = "streetNumberTextBox";
 			this.streetNumberTextBox.Size = new System.Drawing.Size(157, 30);
 			this.streetNumberTextBox.TabIndex = 28;
@@ -735,7 +735,7 @@
 			// 
 			this.zipCodeTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.zipCodeTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.zipCodeTextBox.Location = new System.Drawing.Point(166, 124);
+			this.zipCodeTextBox.Location = new System.Drawing.Point(166, 125);
 			this.zipCodeTextBox.Name = "zipCodeTextBox";
 			this.zipCodeTextBox.Size = new System.Drawing.Size(157, 30);
 			this.zipCodeTextBox.TabIndex = 30;
@@ -744,7 +744,7 @@
 			// 
 			this.cityTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.cityTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.cityTextBox.Location = new System.Drawing.Point(166, 158);
+			this.cityTextBox.Location = new System.Drawing.Point(166, 159);
 			this.cityTextBox.Name = "cityTextBox";
 			this.cityTextBox.Size = new System.Drawing.Size(157, 30);
 			this.cityTextBox.TabIndex = 32;
@@ -753,9 +753,9 @@
 			// 
 			this.btnDeleteAddress.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnDeleteAddress.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnDeleteAddress.Location = new System.Drawing.Point(89, 247);
+			this.btnDeleteAddress.Location = new System.Drawing.Point(186, 248);
 			this.btnDeleteAddress.Name = "btnDeleteAddress";
-			this.btnDeleteAddress.Size = new System.Drawing.Size(157, 32);
+			this.btnDeleteAddress.Size = new System.Drawing.Size(140, 32);
 			this.btnDeleteAddress.TabIndex = 23;
 			this.btnDeleteAddress.Text = "Delete Address";
 			this.btnDeleteAddress.UseVisualStyleBackColor = true;
@@ -765,9 +765,9 @@
 			// 
 			this.btnCreateNewAddress.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnCreateNewAddress.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnCreateNewAddress.Location = new System.Drawing.Point(166, 209);
+			this.btnCreateNewAddress.Location = new System.Drawing.Point(9, 210);
 			this.btnCreateNewAddress.Name = "btnCreateNewAddress";
-			this.btnCreateNewAddress.Size = new System.Drawing.Size(157, 32);
+			this.btnCreateNewAddress.Size = new System.Drawing.Size(171, 32);
 			this.btnCreateNewAddress.TabIndex = 23;
 			this.btnCreateNewAddress.Text = "Create New Address...";
 			this.btnCreateNewAddress.UseVisualStyleBackColor = true;
@@ -777,7 +777,7 @@
 			// 
 			this.btnUpdateAddress.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnUpdateAddress.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnUpdateAddress.Location = new System.Drawing.Point(11, 209);
+			this.btnUpdateAddress.Location = new System.Drawing.Point(186, 210);
 			this.btnUpdateAddress.Name = "btnUpdateAddress";
 			this.btnUpdateAddress.Size = new System.Drawing.Size(140, 32);
 			this.btnUpdateAddress.TabIndex = 22;
@@ -789,10 +789,10 @@
 			// 
 			this.tpDBConnection.BackColor = System.Drawing.Color.Gainsboro;
 			this.tpDBConnection.Controls.Add(this.pnlDbConnection);
-			this.tpDBConnection.Location = new System.Drawing.Point(4, 22);
+			this.tpDBConnection.Location = new System.Drawing.Point(4, 27);
 			this.tpDBConnection.Name = "tpDBConnection";
-			this.tpDBConnection.Padding = new System.Windows.Forms.Padding(3);
-			this.tpDBConnection.Size = new System.Drawing.Size(998, 620);
+			this.tpDBConnection.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+			this.tpDBConnection.Size = new System.Drawing.Size(998, 569);
 			this.tpDBConnection.TabIndex = 0;
 			this.tpDBConnection.Text = "DB Connection";
 			// 
@@ -812,7 +812,7 @@
 			this.pnlDbConnection.Controls.Add(this.lblPasword);
 			this.pnlDbConnection.Controls.Add(this.lblUsername);
 			this.pnlDbConnection.Controls.Add(this.txtbUsername);
-			this.pnlDbConnection.Location = new System.Drawing.Point(238, 128);
+			this.pnlDbConnection.Location = new System.Drawing.Point(238, 107);
 			this.pnlDbConnection.Name = "pnlDbConnection";
 			this.pnlDbConnection.Size = new System.Drawing.Size(522, 365);
 			this.pnlDbConnection.TabIndex = 24;
@@ -820,26 +820,27 @@
 			// btnInsertData
 			// 
 			this.btnInsertData.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnInsertData.BackColor = System.Drawing.SystemColors.Window;
 			this.btnInsertData.Enabled = false;
 			this.btnInsertData.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnInsertData.Location = new System.Drawing.Point(295, 281);
-			this.btnInsertData.MaximumSize = new System.Drawing.Size(130, 54);
-			this.btnInsertData.MinimumSize = new System.Drawing.Size(130, 54);
+			this.btnInsertData.Location = new System.Drawing.Point(295, 294);
+			this.btnInsertData.MaximumSize = new System.Drawing.Size(130, 40);
+			this.btnInsertData.MinimumSize = new System.Drawing.Size(130, 40);
 			this.btnInsertData.Name = "btnInsertData";
-			this.btnInsertData.Size = new System.Drawing.Size(130, 54);
+			this.btnInsertData.Size = new System.Drawing.Size(130, 40);
 			this.btnInsertData.TabIndex = 25;
 			this.btnInsertData.Text = "Insert Data";
-			this.btnInsertData.UseVisualStyleBackColor = true;
+			this.btnInsertData.UseVisualStyleBackColor = false;
 			this.btnInsertData.Click += new System.EventHandler(this.btnInsertData_Click);
 			// 
 			// lblDbConnectionTitle
 			// 
 			this.lblDbConnectionTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lblDbConnectionTitle.AutoSize = true;
-			this.lblDbConnectionTitle.Font = new System.Drawing.Font("Bahnschrift", 15F);
-			this.lblDbConnectionTitle.Location = new System.Drawing.Point(134, 30);
+			this.lblDbConnectionTitle.Font = new System.Drawing.Font("Bahnschrift Condensed", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblDbConnectionTitle.Location = new System.Drawing.Point(122, 30);
 			this.lblDbConnectionTitle.Name = "lblDbConnectionTitle";
-			this.lblDbConnectionTitle.Size = new System.Drawing.Size(279, 24);
+			this.lblDbConnectionTitle.Size = new System.Drawing.Size(278, 33);
 			this.lblDbConnectionTitle.TabIndex = 23;
 			this.lblDbConnectionTitle.Text = "Connect to a Database Server";
 			this.lblDbConnectionTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -848,10 +849,10 @@
 			// 
 			this.lblDataBaseName.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lblDataBaseName.AutoSize = true;
-			this.lblDataBaseName.Font = new System.Drawing.Font("Bahnschrift", 12F);
+			this.lblDataBaseName.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.lblDataBaseName.Location = new System.Drawing.Point(48, 228);
 			this.lblDataBaseName.Name = "lblDataBaseName";
-			this.lblDataBaseName.Size = new System.Drawing.Size(102, 19);
+			this.lblDataBaseName.Size = new System.Drawing.Size(86, 23);
 			this.lblDataBaseName.TabIndex = 22;
 			this.lblDataBaseName.Text = "Selected DB:";
 			this.lblDataBaseName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -859,26 +860,27 @@
 			// btnConnectToDB
 			// 
 			this.btnConnectToDB.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnConnectToDB.BackColor = System.Drawing.SystemColors.Window;
 			this.btnConnectToDB.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnConnectToDB.Location = new System.Drawing.Point(98, 281);
-			this.btnConnectToDB.MaximumSize = new System.Drawing.Size(130, 54);
-			this.btnConnectToDB.MinimumSize = new System.Drawing.Size(130, 54);
+			this.btnConnectToDB.Location = new System.Drawing.Point(98, 294);
+			this.btnConnectToDB.MaximumSize = new System.Drawing.Size(130, 40);
+			this.btnConnectToDB.MinimumSize = new System.Drawing.Size(130, 40);
 			this.btnConnectToDB.Name = "btnConnectToDB";
-			this.btnConnectToDB.Size = new System.Drawing.Size(130, 54);
+			this.btnConnectToDB.Size = new System.Drawing.Size(130, 40);
 			this.btnConnectToDB.TabIndex = 13;
 			this.btnConnectToDB.Text = "Connect";
-			this.btnConnectToDB.UseVisualStyleBackColor = true;
+			this.btnConnectToDB.UseVisualStyleBackColor = false;
 			this.btnConnectToDB.Click += new System.EventHandler(this.btnConnectToDB_Click);
 			// 
 			// cbDbNames
 			// 
 			this.cbDbNames.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.cbDbNames.Font = new System.Drawing.Font("Bahnschrift", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cbDbNames.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.cbDbNames.FormattingEnabled = true;
 			this.cbDbNames.Location = new System.Drawing.Point(164, 226);
 			this.cbDbNames.MinimumSize = new System.Drawing.Size(255, 0);
 			this.cbDbNames.Name = "cbDbNames";
-			this.cbDbNames.Size = new System.Drawing.Size(311, 26);
+			this.cbDbNames.Size = new System.Drawing.Size(311, 31);
 			this.cbDbNames.TabIndex = 21;
 			this.cbDbNames.DropDown += new System.EventHandler(this.cbDbNames_DropDown);
 			// 
@@ -886,10 +888,10 @@
 			// 
 			this.lblServerName.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lblServerName.AutoSize = true;
-			this.lblServerName.Font = new System.Drawing.Font("Bahnschrift", 12F);
+			this.lblServerName.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.lblServerName.Location = new System.Drawing.Point(48, 90);
 			this.lblServerName.Name = "lblServerName";
-			this.lblServerName.Size = new System.Drawing.Size(110, 19);
+			this.lblServerName.Size = new System.Drawing.Size(93, 23);
 			this.lblServerName.TabIndex = 14;
 			this.lblServerName.Text = "Server Name:";
 			this.lblServerName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -897,32 +899,32 @@
 			// txtbPassword
 			// 
 			this.txtbPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.txtbPassword.Font = new System.Drawing.Font("Bahnschrift", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.txtbPassword.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.txtbPassword.Location = new System.Drawing.Point(164, 180);
 			this.txtbPassword.MinimumSize = new System.Drawing.Size(255, 27);
 			this.txtbPassword.Name = "txtbPassword";
-			this.txtbPassword.Size = new System.Drawing.Size(311, 26);
+			this.txtbPassword.Size = new System.Drawing.Size(311, 30);
 			this.txtbPassword.TabIndex = 20;
 			this.txtbPassword.UseSystemPasswordChar = true;
 			// 
 			// txtbServerName
 			// 
 			this.txtbServerName.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.txtbServerName.Font = new System.Drawing.Font("Bahnschrift", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.txtbServerName.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.txtbServerName.Location = new System.Drawing.Point(164, 88);
 			this.txtbServerName.MinimumSize = new System.Drawing.Size(255, 27);
 			this.txtbServerName.Name = "txtbServerName";
-			this.txtbServerName.Size = new System.Drawing.Size(311, 26);
+			this.txtbServerName.Size = new System.Drawing.Size(311, 30);
 			this.txtbServerName.TabIndex = 16;
 			// 
 			// lblPasword
 			// 
 			this.lblPasword.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lblPasword.AutoSize = true;
-			this.lblPasword.Font = new System.Drawing.Font("Bahnschrift", 12F);
+			this.lblPasword.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.lblPasword.Location = new System.Drawing.Point(48, 182);
 			this.lblPasword.Name = "lblPasword";
-			this.lblPasword.Size = new System.Drawing.Size(85, 19);
+			this.lblPasword.Size = new System.Drawing.Size(75, 23);
 			this.lblPasword.TabIndex = 19;
 			this.lblPasword.Text = "Password:";
 			this.lblPasword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -931,10 +933,10 @@
 			// 
 			this.lblUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lblUsername.AutoSize = true;
-			this.lblUsername.Font = new System.Drawing.Font("Bahnschrift", 12F);
+			this.lblUsername.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.lblUsername.Location = new System.Drawing.Point(48, 136);
 			this.lblUsername.Name = "lblUsername";
-			this.lblUsername.Size = new System.Drawing.Size(88, 19);
+			this.lblUsername.Size = new System.Drawing.Size(76, 23);
 			this.lblUsername.TabIndex = 17;
 			this.lblUsername.Text = "Username:";
 			this.lblUsername.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -942,11 +944,11 @@
 			// txtbUsername
 			// 
 			this.txtbUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.txtbUsername.Font = new System.Drawing.Font("Bahnschrift", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.txtbUsername.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.txtbUsername.Location = new System.Drawing.Point(164, 134);
 			this.txtbUsername.MinimumSize = new System.Drawing.Size(255, 27);
 			this.txtbUsername.Name = "txtbUsername";
-			this.txtbUsername.Size = new System.Drawing.Size(311, 26);
+			this.txtbUsername.Size = new System.Drawing.Size(311, 30);
 			this.txtbUsername.TabIndex = 18;
 			// 
 			// tcWindow
@@ -956,10 +958,11 @@
 			this.tcWindow.Controls.Add(this.tpAccounts);
 			this.tcWindow.Controls.Add(this.tpTransactions);
 			this.tcWindow.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tcWindow.Font = new System.Drawing.Font("Bahnschrift Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.tcWindow.Location = new System.Drawing.Point(0, 0);
 			this.tcWindow.Name = "tcWindow";
 			this.tcWindow.SelectedIndex = 0;
-			this.tcWindow.Size = new System.Drawing.Size(1006, 646);
+			this.tcWindow.Size = new System.Drawing.Size(1006, 656);
 			this.tcWindow.TabIndex = 0;
 			this.tcWindow.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tcWindow_Selecting);
 			// 
@@ -968,9 +971,9 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Control;
-			this.ClientSize = new System.Drawing.Size(1006, 646);
+			this.ClientSize = new System.Drawing.Size(1006, 656);
 			this.Controls.Add(this.tcWindow);
-			this.MinimumSize = new System.Drawing.Size(1022, 685);
+			this.MinimumSize = new System.Drawing.Size(1022, 599);
 			this.Name = "MainWindow";
 			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
