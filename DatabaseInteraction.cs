@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Linq;
+using System.Data.SqlClient;
 using System.IO;
-using System;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace BankingSite
 {
@@ -424,7 +425,10 @@ namespace BankingSite
 					dt.Load(reader);
 				}
 			}
-			catch { }
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "An Error ocurred");
+			}
 			return dt;
 		}
 		

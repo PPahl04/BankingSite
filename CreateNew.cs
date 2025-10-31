@@ -15,7 +15,6 @@ namespace BankingSite
 		/// Will determine which panel (that holds all neccesary UI) to use by its parameters
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
-		/// <param name="myTableAdapter"></param>
 		/// <param name="myCreateType"></param>
 		public CreateNew(DatabaseInteraction myDbInt, CreateType myCreateType)
 		{
@@ -149,7 +148,7 @@ namespace BankingSite
 		{   //Create a new Customer dataTable but check if all of the inputs are valid first
 			if (!int.TryParse(phoneNumberTextBox.Text, out int phoneN))
 			{
-				MessageBox.Show("Please make sure to only input numbers for the phone number.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input numbers for the phone number.", "Error using inputs for creating new customer");
 				return;
 			}
 
@@ -159,7 +158,7 @@ namespace BankingSite
 
 			if (int.TryParse(firstN, out int a) || int.TryParse(lastN, out int b) || int.TryParse(email, out int c))
 			{
-				MessageBox.Show("Please make sure to only input strings for the names and email.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input strings for the names and email.", "Error using inputs for creating new customer");
 				return;
 			}
 
@@ -188,7 +187,7 @@ namespace BankingSite
 		{	//Create new address dataTable but check if all of them are valid first
 			if (!int.TryParse(streetNumberTextBox.Text, out int streetNumber) || !int.TryParse(zipCodeTextBox.Text, out int zipCode))
 			{
-				MessageBox.Show("Please make sure to only input numbers for the street receiverID and zip code.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input numbers for the street number and zip code.", "Error using inputs for creating new address");
 				return;
 			}
 
@@ -197,7 +196,7 @@ namespace BankingSite
 
 			if (int.TryParse(streetName, out int a) || int.TryParse(city, out int b))
 			{
-				MessageBox.Show("Please make sure to only input strings for the street name and city.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input strings for the street name and city.", "Error using inputs for creating new address");
 				return;
 			}
 
@@ -215,28 +214,28 @@ namespace BankingSite
 
 		void CreateNewAccount()
 		{   //Create a new Account dataTable but check if all of the inputs are valid first
-			if (!int.TryParse(balanceTextBox.Text, out int balance) || !int.TryParse(numberTextBox.Text, out int number) || !int.TryParse(customer_IDComboBox.Text, out int custID))
+			if (!int.TryParse(balanceTextBox.Text, out int balance) || !int.TryParse(numberTextBox.Text, out int number))
 			{
-				MessageBox.Show("Please make sure to only input numbers for the amount, bumber and customer id.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input numbers for the balance and number.", "Error using inputs for creating new account");
 				return;
 			}
 
 			string iban = iBANTextBox.Text;
 			if (int.TryParse(iban, out int a))
 			{
-				MessageBox.Show("Please make sure to only input strings for the intendedUse.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input strings for the IBAN.", "Error using inputs for creating new account");
 				return;
 			}
 
 			try
 			{
-				_dbInt.InsertAccount(iban, balance, number, custID);
+				_dbInt.InsertAccount(iban, balance, number, Convert.ToInt32(customer_IDComboBox.Text));
 				_hasCanceled = false;
 				Close();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, "Error oocurred while creating a new customer.");
+				MessageBox.Show(ex.Message, "Error oocurred while creating a new account.");
 			}
 		}
 
@@ -245,9 +244,9 @@ namespace BankingSite
 		/// </summary>
 		void CreateNewTransaction()
 		{	//Create a new transaction but check if all of the inputs are valid first
-			if (!int.TryParse(amountTextBox.Text, out int amount) || !int.TryParse(accountReceiver_IDComboBox.Text, out int receiverID) || !int.TryParse(accountSender_IDComboBox.Text, out int senderID))
+			if (!int.TryParse(amountTextBox.Text, out int amount))
 			{
-				MessageBox.Show("Please make sure to only input numbers for the amount, account receiver and sender id.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input numbers for the amount.", "Error using inputs for creating new transaction");
 				return;
 			}
 
@@ -257,12 +256,15 @@ namespace BankingSite
 				return;
 			}
 
+			int receiverID = Convert.ToInt32(accountReceiver_IDComboBox.Text);
+			int senderID = Convert.ToInt32(accountSender_IDComboBox.Text);
+
 			string intendedUse = intendedUseTextBox.Text;
 			string type = typeComboBox.Text;
 
 			if (int.TryParse(intendedUse, out int a))
 			{
-				MessageBox.Show("Please make sure to only input strings for the intended use.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input strings for the intended use.", "Error using inputs for creating new transaction");
 				return;
 			}
 

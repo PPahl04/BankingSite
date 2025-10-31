@@ -275,7 +275,7 @@
 			this.tpTransactions.Controls.Add(this.tlpTransactions);
 			this.tpTransactions.Location = new System.Drawing.Point(4, 27);
 			this.tpTransactions.Name = "tpTransactions";
-			this.tpTransactions.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+			this.tpTransactions.Padding = new System.Windows.Forms.Padding(3);
 			this.tpTransactions.Size = new System.Drawing.Size(998, 625);
 			this.tpTransactions.TabIndex = 3;
 			this.tpTransactions.Text = "Transactions";
@@ -374,7 +374,7 @@
 			this.tpAccounts.Controls.Add(this.tlpAccounts);
 			this.tpAccounts.Location = new System.Drawing.Point(4, 27);
 			this.tpAccounts.Name = "tpAccounts";
-			this.tpAccounts.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+			this.tpAccounts.Padding = new System.Windows.Forms.Padding(3);
 			this.tpAccounts.Size = new System.Drawing.Size(998, 625);
 			this.tpAccounts.TabIndex = 2;
 			this.tpAccounts.Text = "Accounts";
@@ -488,7 +488,7 @@
 			this.tpCustomers.Controls.Add(this.tlpCostumerAddress);
 			this.tpCustomers.Location = new System.Drawing.Point(4, 27);
 			this.tpCustomers.Name = "tpCustomers";
-			this.tpCustomers.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+			this.tpCustomers.Padding = new System.Windows.Forms.Padding(3);
 			this.tpCustomers.Size = new System.Drawing.Size(998, 625);
 			this.tpCustomers.TabIndex = 1;
 			this.tpCustomers.Text = "Customers";
@@ -791,8 +791,8 @@
 			this.tpDBConnection.Controls.Add(this.pnlDbConnection);
 			this.tpDBConnection.Location = new System.Drawing.Point(4, 27);
 			this.tpDBConnection.Name = "tpDBConnection";
-			this.tpDBConnection.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-			this.tpDBConnection.Size = new System.Drawing.Size(998, 569);
+			this.tpDBConnection.Padding = new System.Windows.Forms.Padding(3);
+			this.tpDBConnection.Size = new System.Drawing.Size(998, 625);
 			this.tpDBConnection.TabIndex = 0;
 			this.tpDBConnection.Text = "DB Connection";
 			// 
@@ -801,6 +801,7 @@
 			this.pnlDbConnection.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.pnlDbConnection.AutoSize = true;
 			this.pnlDbConnection.BackColor = System.Drawing.SystemColors.Control;
+			this.pnlDbConnection.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.pnlDbConnection.Controls.Add(this.btnInsertData);
 			this.pnlDbConnection.Controls.Add(this.lblDbConnectionTitle);
 			this.pnlDbConnection.Controls.Add(this.lblDataBaseName);
@@ -812,7 +813,7 @@
 			this.pnlDbConnection.Controls.Add(this.lblPasword);
 			this.pnlDbConnection.Controls.Add(this.lblUsername);
 			this.pnlDbConnection.Controls.Add(this.txtbUsername);
-			this.pnlDbConnection.Location = new System.Drawing.Point(238, 107);
+			this.pnlDbConnection.Location = new System.Drawing.Point(238, 130);
 			this.pnlDbConnection.Name = "pnlDbConnection";
 			this.pnlDbConnection.Size = new System.Drawing.Size(522, 365);
 			this.pnlDbConnection.TabIndex = 24;
@@ -823,7 +824,7 @@
 			this.btnInsertData.BackColor = System.Drawing.SystemColors.Window;
 			this.btnInsertData.Enabled = false;
 			this.btnInsertData.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnInsertData.Location = new System.Drawing.Point(295, 294);
+			this.btnInsertData.Location = new System.Drawing.Point(294, 293);
 			this.btnInsertData.MaximumSize = new System.Drawing.Size(130, 40);
 			this.btnInsertData.MinimumSize = new System.Drawing.Size(130, 40);
 			this.btnInsertData.Name = "btnInsertData";
@@ -838,7 +839,7 @@
 			this.lblDbConnectionTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lblDbConnectionTitle.AutoSize = true;
 			this.lblDbConnectionTitle.Font = new System.Drawing.Font("Bahnschrift Condensed", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblDbConnectionTitle.Location = new System.Drawing.Point(122, 30);
+			this.lblDbConnectionTitle.Location = new System.Drawing.Point(121, 29);
 			this.lblDbConnectionTitle.Name = "lblDbConnectionTitle";
 			this.lblDbConnectionTitle.Size = new System.Drawing.Size(278, 33);
 			this.lblDbConnectionTitle.TabIndex = 23;
@@ -850,7 +851,7 @@
 			this.lblDataBaseName.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lblDataBaseName.AutoSize = true;
 			this.lblDataBaseName.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.lblDataBaseName.Location = new System.Drawing.Point(48, 228);
+			this.lblDataBaseName.Location = new System.Drawing.Point(47, 227);
 			this.lblDataBaseName.Name = "lblDataBaseName";
 			this.lblDataBaseName.Size = new System.Drawing.Size(86, 23);
 			this.lblDataBaseName.TabIndex = 22;
@@ -862,7 +863,7 @@
 			this.btnConnectToDB.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnConnectToDB.BackColor = System.Drawing.SystemColors.Window;
 			this.btnConnectToDB.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnConnectToDB.Location = new System.Drawing.Point(98, 294);
+			this.btnConnectToDB.Location = new System.Drawing.Point(97, 293);
 			this.btnConnectToDB.MaximumSize = new System.Drawing.Size(130, 40);
 			this.btnConnectToDB.MinimumSize = new System.Drawing.Size(130, 40);
 			this.btnConnectToDB.Name = "btnConnectToDB";
@@ -877,7 +878,7 @@
 			this.cbDbNames.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.cbDbNames.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.cbDbNames.FormattingEnabled = true;
-			this.cbDbNames.Location = new System.Drawing.Point(164, 226);
+			this.cbDbNames.Location = new System.Drawing.Point(163, 225);
 			this.cbDbNames.MinimumSize = new System.Drawing.Size(255, 0);
 			this.cbDbNames.Name = "cbDbNames";
 			this.cbDbNames.Size = new System.Drawing.Size(311, 31);
@@ -889,7 +890,7 @@
 			this.lblServerName.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lblServerName.AutoSize = true;
 			this.lblServerName.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.lblServerName.Location = new System.Drawing.Point(48, 90);
+			this.lblServerName.Location = new System.Drawing.Point(47, 89);
 			this.lblServerName.Name = "lblServerName";
 			this.lblServerName.Size = new System.Drawing.Size(93, 23);
 			this.lblServerName.TabIndex = 14;
@@ -900,18 +901,18 @@
 			// 
 			this.txtbPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.txtbPassword.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.txtbPassword.Location = new System.Drawing.Point(164, 180);
+			this.txtbPassword.Location = new System.Drawing.Point(163, 179);
 			this.txtbPassword.MinimumSize = new System.Drawing.Size(255, 27);
 			this.txtbPassword.Name = "txtbPassword";
+			this.txtbPassword.PasswordChar = '*';
 			this.txtbPassword.Size = new System.Drawing.Size(311, 30);
 			this.txtbPassword.TabIndex = 20;
-			this.txtbPassword.UseSystemPasswordChar = true;
 			// 
 			// txtbServerName
 			// 
 			this.txtbServerName.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.txtbServerName.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.txtbServerName.Location = new System.Drawing.Point(164, 88);
+			this.txtbServerName.Location = new System.Drawing.Point(163, 87);
 			this.txtbServerName.MinimumSize = new System.Drawing.Size(255, 27);
 			this.txtbServerName.Name = "txtbServerName";
 			this.txtbServerName.Size = new System.Drawing.Size(311, 30);
@@ -922,7 +923,7 @@
 			this.lblPasword.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lblPasword.AutoSize = true;
 			this.lblPasword.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.lblPasword.Location = new System.Drawing.Point(48, 182);
+			this.lblPasword.Location = new System.Drawing.Point(47, 181);
 			this.lblPasword.Name = "lblPasword";
 			this.lblPasword.Size = new System.Drawing.Size(75, 23);
 			this.lblPasword.TabIndex = 19;
@@ -934,7 +935,7 @@
 			this.lblUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lblUsername.AutoSize = true;
 			this.lblUsername.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.lblUsername.Location = new System.Drawing.Point(48, 136);
+			this.lblUsername.Location = new System.Drawing.Point(47, 135);
 			this.lblUsername.Name = "lblUsername";
 			this.lblUsername.Size = new System.Drawing.Size(76, 23);
 			this.lblUsername.TabIndex = 17;
@@ -945,7 +946,7 @@
 			// 
 			this.txtbUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.txtbUsername.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.txtbUsername.Location = new System.Drawing.Point(164, 134);
+			this.txtbUsername.Location = new System.Drawing.Point(163, 133);
 			this.txtbUsername.MinimumSize = new System.Drawing.Size(255, 27);
 			this.txtbUsername.Name = "txtbUsername";
 			this.txtbUsername.Size = new System.Drawing.Size(311, 30);

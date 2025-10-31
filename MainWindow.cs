@@ -62,7 +62,10 @@ namespace BankingSite
 				string[] databaseNames = _dbInt.GetDatabases();
 				cbDbNames.Items.AddRange(databaseNames);
 			}
-			catch { }
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "An Error ocurred");
+			}
 		}
 
 		/// <summary>
@@ -86,7 +89,7 @@ namespace BankingSite
 			if (_missingTables.Count != 0)
 			{
 				if (DialogResult.Yes == MessageBox.Show("In order to insert data the database needs to contain all required tables: customer, address, account and transaction." +
-						"\nDo you want to create these tables?", "Tables missing", MessageBoxButtons.YesNo))
+						"\n\nDo you want to create these tables?", "Tables missing", MessageBoxButtons.YesNo))
 				{
 					CreateTables();
 					MessageBox.Show("Missing tables have been succssessfully created!", "Required tables created.");
@@ -105,7 +108,10 @@ namespace BankingSite
 				_isConnectedAndHasTables = true;
 				MessageBox.Show("Data has succsessfully been inserted into all tables!", "Data succsessfully inserted");
 			}
-			catch { }
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "An Error ocurred");
+			}
 		}
 
 		private void btnConnectToDB_Click(object sender, EventArgs e)
@@ -232,7 +238,7 @@ namespace BankingSite
 			//Update the dataTable but check if all of them are valid first
 			if (!int.TryParse(phoneNumberTextBox.Text, out int phoneN))
 			{
-				MessageBox.Show("Please make sure to only input numbers for the address ID and phonenumber.", "Error using inputs for updating dataset");
+				MessageBox.Show("Please make sure to only input numbers for the phone number.", "Error using inputs for updating customer");
 				return;
 			}
 			
@@ -242,7 +248,7 @@ namespace BankingSite
 
 			if (int.TryParse(firstN, out int a) || int.TryParse(lastN, out int b) || int.TryParse(email, out int c))
 			{
-				MessageBox.Show("Please make sure to only input strings for the names and email.", "Error using inputs for updating dataset");
+				MessageBox.Show("Please make sure to only input strings for the names and email.", "Error using inputs for updating customer");
 				return;
 			}
 
@@ -394,7 +400,7 @@ namespace BankingSite
 			//Update the dataTable but check if all of them are valid first
 			if (!int.TryParse(streetNumberTextBox.Text, out int streetNumber) || !int.TryParse(zipCodeTextBox.Text, out int zipCode))
 			{
-				MessageBox.Show("Please make sure to only input numbers for the street number and zip code.", "Error using inputs for updating dataset");
+				MessageBox.Show("Please make sure to only input numbers for the street number and zip code.", "Error using inputs for updating address");
 				return;
 			}
 
@@ -403,7 +409,7 @@ namespace BankingSite
 
 			if (int.TryParse(streetName, out int a) || int.TryParse(city, out int b))
 			{
-				MessageBox.Show("Please make sure to only input strings for the street name and city.", "Error using inputs for updating dataset");
+				MessageBox.Show("Please make sure to only input strings for the street name and city.", "Error using inputs for updating address");
 				return;
 			}
 
@@ -457,7 +463,7 @@ namespace BankingSite
 		{
 			if (_customerTable.Rows.Count == 0)
 			{
-				MessageBox.Show("Can't create an account without any customers. Please create a customer first and try again.", "No Customers available");
+				MessageBox.Show("Can't create an account without any customers. Please create a customer then try again.", "No Customers available");
 				return;
 			}
 			
@@ -485,12 +491,12 @@ namespace BankingSite
 			DataTable transactions = _dbInt.GetAllTransactionsFromAccountID(accID);
 			if (transactions.Rows.Count == 0)
 			{
-				MessageBox.Show("The selected account is not assostiated with any transactions.", "Account has no transactions.");
+				MessageBox.Show("The selected account is not associated with any transactions.", "Account has no transactions.");
 				return;
 			}
 
 			AssotiatedDataTables owned = new AssotiatedDataTables(transactions);
-			owned.Text = string.Concat("Associated transactions from Account with ID ", accID);
+			owned.Text = string.Concat("Transactions Associated with Account ID ", accID);
 			owned.Show();
 		}
 
@@ -503,7 +509,7 @@ namespace BankingSite
 
 			int id = Convert.ToInt32(accountIDTextBox.Text);
 			if (MessageBox.Show(string.Concat("Are you sure you want to delete the account with the ID: ", id, "?" +
-				"\n this may also delete transactions assosiated with this account."), "Delete selected account",
+				"\n this will also delete transactions associated with this account."), "Delete selected account",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
 				_dbInt.DeleteAccountWithID(id);
@@ -529,7 +535,7 @@ namespace BankingSite
 		{
 			if (_accountTable.Rows.Count == 0)
 			{
-				MessageBox.Show("Can't create a transaction without any accounts. Please create an account first and try again.", "No Accounts available");
+				MessageBox.Show("Can't create a transaction without any accounts. Please create an account then try again.", "No Accounts available");
 				return;
 			}
 
