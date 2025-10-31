@@ -48,6 +48,7 @@
 			System.Windows.Forms.Label accountReceiver_IDLabel;
 			System.Windows.Forms.Label accountSender_IDLabel;
 			this.pnlCustomer = new System.Windows.Forms.Panel();
+			this.address_IDComboBox = new System.Windows.Forms.ComboBox();
 			this.btnCreateNewCustomer = new System.Windows.Forms.Button();
 			this.firstNameTextBox = new System.Windows.Forms.TextBox();
 			this.lastNameTextBox = new System.Windows.Forms.TextBox();
@@ -60,6 +61,7 @@
 			this.cityTextBox = new System.Windows.Forms.TextBox();
 			this.btnCreateAddress = new System.Windows.Forms.Button();
 			this.pnlAccount = new System.Windows.Forms.Panel();
+			this.customer_IDComboBox = new System.Windows.Forms.ComboBox();
 			this.iBANTextBox = new System.Windows.Forms.TextBox();
 			this.balanceTextBox = new System.Windows.Forms.TextBox();
 			this.numberTextBox = new System.Windows.Forms.TextBox();
@@ -72,8 +74,6 @@
 			this.amountTextBox = new System.Windows.Forms.TextBox();
 			this.intendedUseTextBox = new System.Windows.Forms.TextBox();
 			this.btnTransaction = new System.Windows.Forms.Button();
-			this.customer_IDComboBox = new System.Windows.Forms.ComboBox();
-			this.address_IDComboBox = new System.Windows.Forms.ComboBox();
 			firstNameLabel = new System.Windows.Forms.Label();
 			lastNameLabel = new System.Windows.Forms.Label();
 			phoneNumberLabel = new System.Windows.Forms.Label();
@@ -104,7 +104,7 @@
 			firstNameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			firstNameLabel.AutoSize = true;
 			firstNameLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			firstNameLabel.Location = new System.Drawing.Point(26, 21);
+			firstNameLabel.Location = new System.Drawing.Point(26, 36);
 			firstNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			firstNameLabel.Name = "firstNameLabel";
 			firstNameLabel.Size = new System.Drawing.Size(81, 23);
@@ -116,7 +116,7 @@
 			lastNameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			lastNameLabel.AutoSize = true;
 			lastNameLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			lastNameLabel.Location = new System.Drawing.Point(26, 67);
+			lastNameLabel.Location = new System.Drawing.Point(26, 82);
 			lastNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			lastNameLabel.Name = "lastNameLabel";
 			lastNameLabel.Size = new System.Drawing.Size(79, 23);
@@ -128,7 +128,7 @@
 			phoneNumberLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			phoneNumberLabel.AutoSize = true;
 			phoneNumberLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			phoneNumberLabel.Location = new System.Drawing.Point(26, 113);
+			phoneNumberLabel.Location = new System.Drawing.Point(26, 128);
 			phoneNumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			phoneNumberLabel.Name = "phoneNumberLabel";
 			phoneNumberLabel.Size = new System.Drawing.Size(103, 23);
@@ -140,7 +140,7 @@
 			emailAddressLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			emailAddressLabel.AutoSize = true;
 			emailAddressLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			emailAddressLabel.Location = new System.Drawing.Point(26, 159);
+			emailAddressLabel.Location = new System.Drawing.Point(26, 174);
 			emailAddressLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			emailAddressLabel.Name = "emailAddressLabel";
 			emailAddressLabel.Size = new System.Drawing.Size(103, 23);
@@ -152,7 +152,7 @@
 			address_IDLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			address_IDLabel.AutoSize = true;
 			address_IDLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			address_IDLabel.Location = new System.Drawing.Point(26, 205);
+			address_IDLabel.Location = new System.Drawing.Point(26, 220);
 			address_IDLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			address_IDLabel.Name = "address_IDLabel";
 			address_IDLabel.Size = new System.Drawing.Size(79, 23);
@@ -164,7 +164,7 @@
 			streetNameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			streetNameLabel.AutoSize = true;
 			streetNameLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			streetNameLabel.Location = new System.Drawing.Point(18, 35);
+			streetNameLabel.Location = new System.Drawing.Point(18, 34);
 			streetNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			streetNameLabel.Name = "streetNameLabel";
 			streetNameLabel.Size = new System.Drawing.Size(90, 23);
@@ -176,7 +176,7 @@
 			streetNumberLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			streetNumberLabel.AutoSize = true;
 			streetNumberLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			streetNumberLabel.Location = new System.Drawing.Point(18, 81);
+			streetNumberLabel.Location = new System.Drawing.Point(18, 80);
 			streetNumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			streetNumberLabel.Name = "streetNumberLabel";
 			streetNumberLabel.Size = new System.Drawing.Size(103, 23);
@@ -188,7 +188,7 @@
 			zipCodeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			zipCodeLabel.AutoSize = true;
 			zipCodeLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			zipCodeLabel.Location = new System.Drawing.Point(18, 127);
+			zipCodeLabel.Location = new System.Drawing.Point(18, 126);
 			zipCodeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			zipCodeLabel.Name = "zipCodeLabel";
 			zipCodeLabel.Size = new System.Drawing.Size(66, 23);
@@ -200,7 +200,7 @@
 			cityLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			cityLabel.AutoSize = true;
 			cityLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			cityLabel.Location = new System.Drawing.Point(18, 173);
+			cityLabel.Location = new System.Drawing.Point(18, 172);
 			cityLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			cityLabel.Name = "cityLabel";
 			cityLabel.Size = new System.Drawing.Size(36, 23);
@@ -260,7 +260,7 @@
 			dateLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			dateLabel.AutoSize = true;
 			dateLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			dateLabel.Location = new System.Drawing.Point(32, 24);
+			dateLabel.Location = new System.Drawing.Point(32, 25);
 			dateLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			dateLabel.Name = "dateLabel";
 			dateLabel.Size = new System.Drawing.Size(41, 23);
@@ -272,7 +272,7 @@
 			amountLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			amountLabel.AutoSize = true;
 			amountLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			amountLabel.Location = new System.Drawing.Point(32, 73);
+			amountLabel.Location = new System.Drawing.Point(32, 74);
 			amountLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			amountLabel.Name = "amountLabel";
 			amountLabel.Size = new System.Drawing.Size(61, 23);
@@ -284,7 +284,7 @@
 			intendedUseLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			intendedUseLabel.AutoSize = true;
 			intendedUseLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			intendedUseLabel.Location = new System.Drawing.Point(32, 117);
+			intendedUseLabel.Location = new System.Drawing.Point(32, 118);
 			intendedUseLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			intendedUseLabel.Name = "intendedUseLabel";
 			intendedUseLabel.Size = new System.Drawing.Size(163, 23);
@@ -296,7 +296,7 @@
 			typeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			typeLabel.AutoSize = true;
 			typeLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			typeLabel.Location = new System.Drawing.Point(32, 165);
+			typeLabel.Location = new System.Drawing.Point(32, 166);
 			typeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			typeLabel.Name = "typeLabel";
 			typeLabel.Size = new System.Drawing.Size(41, 23);
@@ -308,7 +308,7 @@
 			accountReceiver_IDLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			accountReceiver_IDLabel.AutoSize = true;
 			accountReceiver_IDLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			accountReceiver_IDLabel.Location = new System.Drawing.Point(32, 209);
+			accountReceiver_IDLabel.Location = new System.Drawing.Point(32, 210);
 			accountReceiver_IDLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			accountReceiver_IDLabel.Name = "accountReceiver_IDLabel";
 			accountReceiver_IDLabel.Size = new System.Drawing.Size(136, 23);
@@ -320,7 +320,7 @@
 			accountSender_IDLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			accountSender_IDLabel.AutoSize = true;
 			accountSender_IDLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			accountSender_IDLabel.Location = new System.Drawing.Point(32, 254);
+			accountSender_IDLabel.Location = new System.Drawing.Point(32, 255);
 			accountSender_IDLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			accountSender_IDLabel.Name = "accountSender_IDLabel";
 			accountSender_IDLabel.Size = new System.Drawing.Size(126, 23);
@@ -345,19 +345,30 @@
 			this.pnlCustomer.Location = new System.Drawing.Point(518, 7);
 			this.pnlCustomer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.pnlCustomer.Name = "pnlCustomer";
-			this.pnlCustomer.Size = new System.Drawing.Size(300, 340);
+			this.pnlCustomer.Size = new System.Drawing.Size(300, 332);
 			this.pnlCustomer.TabIndex = 0;
 			this.pnlCustomer.Visible = false;
+			// 
+			// address_IDComboBox
+			// 
+			this.address_IDComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.address_IDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.address_IDComboBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
+			this.address_IDComboBox.FormattingEnabled = true;
+			this.address_IDComboBox.Location = new System.Drawing.Point(142, 215);
+			this.address_IDComboBox.Name = "address_IDComboBox";
+			this.address_IDComboBox.Size = new System.Drawing.Size(132, 31);
+			this.address_IDComboBox.TabIndex = 40;
 			// 
 			// btnCreateNewCustomer
 			// 
 			this.btnCreateNewCustomer.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnCreateNewCustomer.AutoSize = true;
-			this.btnCreateNewCustomer.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnCreateNewCustomer.Location = new System.Drawing.Point(67, 266);
+			this.btnCreateNewCustomer.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
+			this.btnCreateNewCustomer.Location = new System.Drawing.Point(65, 269);
 			this.btnCreateNewCustomer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.btnCreateNewCustomer.Name = "btnCreateNewCustomer";
-			this.btnCreateNewCustomer.Size = new System.Drawing.Size(167, 58);
+			this.btnCreateNewCustomer.Size = new System.Drawing.Size(170, 40);
 			this.btnCreateNewCustomer.TabIndex = 22;
 			this.btnCreateNewCustomer.Text = "Create Customer";
 			this.btnCreateNewCustomer.UseVisualStyleBackColor = true;
@@ -367,7 +378,7 @@
 			// 
 			this.firstNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.firstNameTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.firstNameTextBox.Location = new System.Drawing.Point(142, 16);
+			this.firstNameTextBox.Location = new System.Drawing.Point(142, 31);
 			this.firstNameTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.firstNameTextBox.Name = "firstNameTextBox";
 			this.firstNameTextBox.Size = new System.Drawing.Size(132, 30);
@@ -377,7 +388,7 @@
 			// 
 			this.lastNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lastNameTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.lastNameTextBox.Location = new System.Drawing.Point(142, 62);
+			this.lastNameTextBox.Location = new System.Drawing.Point(142, 77);
 			this.lastNameTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.lastNameTextBox.Name = "lastNameTextBox";
 			this.lastNameTextBox.Size = new System.Drawing.Size(132, 30);
@@ -387,7 +398,7 @@
 			// 
 			this.phoneNumberTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.phoneNumberTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.phoneNumberTextBox.Location = new System.Drawing.Point(142, 108);
+			this.phoneNumberTextBox.Location = new System.Drawing.Point(142, 123);
 			this.phoneNumberTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.phoneNumberTextBox.Name = "phoneNumberTextBox";
 			this.phoneNumberTextBox.Size = new System.Drawing.Size(132, 30);
@@ -397,7 +408,7 @@
 			// 
 			this.emailAddressTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.emailAddressTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.emailAddressTextBox.Location = new System.Drawing.Point(142, 154);
+			this.emailAddressTextBox.Location = new System.Drawing.Point(142, 169);
 			this.emailAddressTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.emailAddressTextBox.Name = "emailAddressTextBox";
 			this.emailAddressTextBox.Size = new System.Drawing.Size(132, 30);
@@ -427,7 +438,7 @@
 			// 
 			this.streetNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.streetNameTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.streetNameTextBox.Location = new System.Drawing.Point(130, 29);
+			this.streetNameTextBox.Location = new System.Drawing.Point(130, 28);
 			this.streetNameTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.streetNameTextBox.Name = "streetNameTextBox";
 			this.streetNameTextBox.Size = new System.Drawing.Size(132, 30);
@@ -437,7 +448,7 @@
 			// 
 			this.streetNumberTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.streetNumberTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.streetNumberTextBox.Location = new System.Drawing.Point(130, 75);
+			this.streetNumberTextBox.Location = new System.Drawing.Point(130, 74);
 			this.streetNumberTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.streetNumberTextBox.Name = "streetNumberTextBox";
 			this.streetNumberTextBox.Size = new System.Drawing.Size(132, 30);
@@ -447,7 +458,7 @@
 			// 
 			this.zipCodeTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.zipCodeTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.zipCodeTextBox.Location = new System.Drawing.Point(130, 121);
+			this.zipCodeTextBox.Location = new System.Drawing.Point(130, 120);
 			this.zipCodeTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.zipCodeTextBox.Name = "zipCodeTextBox";
 			this.zipCodeTextBox.Size = new System.Drawing.Size(132, 30);
@@ -457,7 +468,7 @@
 			// 
 			this.cityTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.cityTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.cityTextBox.Location = new System.Drawing.Point(130, 167);
+			this.cityTextBox.Location = new System.Drawing.Point(130, 166);
 			this.cityTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.cityTextBox.Name = "cityTextBox";
 			this.cityTextBox.Size = new System.Drawing.Size(132, 30);
@@ -467,11 +478,11 @@
 			// 
 			this.btnCreateAddress.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnCreateAddress.AutoSize = true;
-			this.btnCreateAddress.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnCreateAddress.Location = new System.Drawing.Point(57, 213);
+			this.btnCreateAddress.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
+			this.btnCreateAddress.Location = new System.Drawing.Point(55, 232);
 			this.btnCreateAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.btnCreateAddress.Name = "btnCreateAddress";
-			this.btnCreateAddress.Size = new System.Drawing.Size(167, 58);
+			this.btnCreateAddress.Size = new System.Drawing.Size(170, 40);
 			this.btnCreateAddress.TabIndex = 22;
 			this.btnCreateAddress.Text = "Create Address";
 			this.btnCreateAddress.UseVisualStyleBackColor = true;
@@ -496,6 +507,17 @@
 			this.pnlAccount.Size = new System.Drawing.Size(280, 300);
 			this.pnlAccount.TabIndex = 32;
 			this.pnlAccount.Visible = false;
+			// 
+			// customer_IDComboBox
+			// 
+			this.customer_IDComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.customer_IDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.customer_IDComboBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
+			this.customer_IDComboBox.FormattingEnabled = true;
+			this.customer_IDComboBox.Location = new System.Drawing.Point(123, 167);
+			this.customer_IDComboBox.Name = "customer_IDComboBox";
+			this.customer_IDComboBox.Size = new System.Drawing.Size(132, 31);
+			this.customer_IDComboBox.TabIndex = 39;
 			// 
 			// iBANTextBox
 			// 
@@ -531,11 +553,11 @@
 			// 
 			this.btnCreateAccount.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnCreateAccount.AutoSize = true;
-			this.btnCreateAccount.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnCreateAccount.Location = new System.Drawing.Point(57, 213);
+			this.btnCreateAccount.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
+			this.btnCreateAccount.Location = new System.Drawing.Point(55, 232);
 			this.btnCreateAccount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.btnCreateAccount.Name = "btnCreateAccount";
-			this.btnCreateAccount.Size = new System.Drawing.Size(167, 58);
+			this.btnCreateAccount.Size = new System.Drawing.Size(170, 40);
 			this.btnCreateAccount.TabIndex = 22;
 			this.btnCreateAccount.Text = "Create Account";
 			this.btnCreateAccount.UseVisualStyleBackColor = true;
@@ -570,8 +592,9 @@
 			this.accountReceiver_IDComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.accountReceiver_IDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.accountReceiver_IDComboBox.Enabled = false;
+			this.accountReceiver_IDComboBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.accountReceiver_IDComboBox.FormattingEnabled = true;
-			this.accountReceiver_IDComboBox.Location = new System.Drawing.Point(193, 204);
+			this.accountReceiver_IDComboBox.Location = new System.Drawing.Point(193, 205);
 			this.accountReceiver_IDComboBox.Name = "accountReceiver_IDComboBox";
 			this.accountReceiver_IDComboBox.Size = new System.Drawing.Size(265, 31);
 			this.accountReceiver_IDComboBox.TabIndex = 38;
@@ -580,8 +603,9 @@
 			// 
 			this.accountSender_IDComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.accountSender_IDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.accountSender_IDComboBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.accountSender_IDComboBox.FormattingEnabled = true;
-			this.accountSender_IDComboBox.Location = new System.Drawing.Point(193, 251);
+			this.accountSender_IDComboBox.Location = new System.Drawing.Point(193, 252);
 			this.accountSender_IDComboBox.Name = "accountSender_IDComboBox";
 			this.accountSender_IDComboBox.Size = new System.Drawing.Size(265, 31);
 			this.accountSender_IDComboBox.TabIndex = 37;
@@ -591,8 +615,9 @@
 			// 
 			this.typeComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.typeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.typeComboBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.typeComboBox.FormattingEnabled = true;
-			this.typeComboBox.Location = new System.Drawing.Point(193, 157);
+			this.typeComboBox.Location = new System.Drawing.Point(193, 158);
 			this.typeComboBox.Name = "typeComboBox";
 			this.typeComboBox.Size = new System.Drawing.Size(265, 31);
 			this.typeComboBox.TabIndex = 36;
@@ -603,7 +628,7 @@
 			this.dateDateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.dateDateTimePicker.CalendarFont = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.dateDateTimePicker.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.dateDateTimePicker.Location = new System.Drawing.Point(193, 19);
+			this.dateDateTimePicker.Location = new System.Drawing.Point(193, 20);
 			this.dateDateTimePicker.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.dateDateTimePicker.MaxDate = new System.DateTime(2025, 10, 23, 0, 0, 0, 0);
 			this.dateDateTimePicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
@@ -616,7 +641,7 @@
 			// 
 			this.amountTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.amountTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.amountTextBox.Location = new System.Drawing.Point(193, 65);
+			this.amountTextBox.Location = new System.Drawing.Point(193, 66);
 			this.amountTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.amountTextBox.Name = "amountTextBox";
 			this.amountTextBox.Size = new System.Drawing.Size(265, 30);
@@ -626,7 +651,7 @@
 			// 
 			this.intendedUseTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.intendedUseTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.intendedUseTextBox.Location = new System.Drawing.Point(193, 111);
+			this.intendedUseTextBox.Location = new System.Drawing.Point(193, 112);
 			this.intendedUseTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.intendedUseTextBox.Name = "intendedUseTextBox";
 			this.intendedUseTextBox.Size = new System.Drawing.Size(265, 30);
@@ -636,35 +661,15 @@
 			// 
 			this.btnTransaction.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnTransaction.AutoSize = true;
-			this.btnTransaction.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-			this.btnTransaction.Location = new System.Drawing.Point(149, 299);
+			this.btnTransaction.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
+			this.btnTransaction.Location = new System.Drawing.Point(160, 311);
 			this.btnTransaction.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.btnTransaction.Name = "btnTransaction";
-			this.btnTransaction.Size = new System.Drawing.Size(185, 53);
+			this.btnTransaction.Size = new System.Drawing.Size(170, 40);
 			this.btnTransaction.TabIndex = 22;
 			this.btnTransaction.Text = "Create Transaction";
 			this.btnTransaction.UseVisualStyleBackColor = true;
 			this.btnTransaction.Click += new System.EventHandler(this.btnCreateNew_Click);
-			// 
-			// customer_IDComboBox
-			// 
-			this.customer_IDComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.customer_IDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.customer_IDComboBox.FormattingEnabled = true;
-			this.customer_IDComboBox.Location = new System.Drawing.Point(123, 167);
-			this.customer_IDComboBox.Name = "customer_IDComboBox";
-			this.customer_IDComboBox.Size = new System.Drawing.Size(132, 31);
-			this.customer_IDComboBox.TabIndex = 39;
-			// 
-			// address_IDComboBox
-			// 
-			this.address_IDComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.address_IDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.address_IDComboBox.FormattingEnabled = true;
-			this.address_IDComboBox.Location = new System.Drawing.Point(142, 200);
-			this.address_IDComboBox.Name = "address_IDComboBox";
-			this.address_IDComboBox.Size = new System.Drawing.Size(132, 31);
-			this.address_IDComboBox.TabIndex = 40;
 			// 
 			// CreateNew
 			// 
