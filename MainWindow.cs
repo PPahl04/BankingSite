@@ -102,7 +102,6 @@ namespace BankingSite
 				_dbInt.InsertToAllTables();
 
 				RefillDGVs();
-				btnInsertData.Enabled = false;
 				_isConnectedAndHasTables = true;
 				MessageBox.Show("Data has been succsessfully been inserted into the Address, Customer and Account tables!", "Data succsessfully inserted");
 			}
@@ -157,8 +156,8 @@ namespace BankingSite
 		/// </summary>
 		void RefillDGVs()
 		{
-			RefreshCustomerDataBingingsSources();
 			RefreshAddressDataBindingsSources();
+			RefreshCustomerDataBingingsSources();
 			RefreshAccountDataBindingsSources();
 			RefreshTransactionDataBindingsSources();
 		}
@@ -173,6 +172,11 @@ namespace BankingSite
 		{
 			myUiElement.DataBindings.Clear();
 			myUiElement.DataBindings.Add(new Binding("Text", myDataSource, myDataMember));
+
+			if (myDataSource.Rows.Count == 0)
+			{
+				myUiElement.Text = string.Empty;
+			}
 		}
 
 		/// <summary>
@@ -225,9 +229,8 @@ namespace BankingSite
 			{
 				return;			
 			}
-
 			//Update the dataTable but check if all of them are valid first
-			if (!int.TryParse(customerAddressIDTextBox.Text, out int addrID) || !int.TryParse(phoneNumberTextBox.Text, out int phoneN))
+			if (!int.TryParse(phoneNumberTextBox.Text, out int phoneN))
 			{
 				MessageBox.Show("Please make sure to only input numbers for the address ID and phonenumber.", "Error using inputs for updating dataset");
 				return;
@@ -245,8 +248,17 @@ namespace BankingSite
 
 			try
 			{
-				_dbInt.UpdateCustomer(firstN, lastN, phoneN, email, addrID, custID);
-				dgvCustomers.Refresh();
+				//address to update may be set to null
+				if (String.IsNullOrWhiteSpace(customerAddressIDComboBox.Text))
+				{
+					_dbInt.UpdateCustomerNoAddress(firstN, lastN, phoneN, email, custID);
+				}
+				else
+				{
+					int addrID = Convert.ToInt32(customerAddressIDComboBox.Text);
+					_dbInt.UpdateCustomer(firstN, lastN, phoneN, email, addrID, custID);
+				}
+				RefreshCustomerDataBingingsSources();
 			}
 			catch (Exception ex)
 			{
@@ -297,6 +309,13 @@ namespace BankingSite
 			owned.Show();
 		}
 
+		private void customerAddressIDComboBox_DropDown(object sender, EventArgs e)
+		{
+			//DataTable addressIDs = _dbInt.GetDataTable();
+			
+			//customerAddressIDComboBox.D
+		}
+
 		/// <summary>
 		/// Refreshes the customerTable, its dataGridViev DataSource and all Controls associated with it.
 		/// </summary>
@@ -310,7 +329,43 @@ namespace BankingSite
 			SetDataBindings(lastNameTextBox, _customerTable, "LastName");
 			SetDataBindings(phoneNumberTextBox, _customerTable, "PhoneNumber");
 			SetDataBindings(emailAddressTextBox, _customerTable, "EmailAddress");
-			SetDataBindings(customerAddressIDTextBox, _customerTable, "Address_ID");
+			RefreshCustomerAddressDropDown();
+		}
+
+		/// <summary>
+		/// Will add every available address ID to the dropdown
+		/// </summary>
+		void RefreshCustomerAddressDropDown()
+		{
+			DataTable addressIDsCopy = _addressTable.Copy();
+			foreach (DataColumn dc in addressIDsCopy.Columns)
+			{
+				dc.AllowDBNull = true;
+				dc.AutoIncrement = false;
+			}
+			
+			addressIDsCopy.Rows.Add();
+			customerAddressIDComboBox.DataSource = addressIDsCopy;
+			customerAddressIDComboBox.DisplayMember = "ID";
+
+			//to make sure that the correct address id is being shown
+			dgvCustomers_SelectionChanged(new object(), new EventArgs());
+		}
+
+		/// <summary>
+		/// Makes sure that the correct Address ID is selected for the current customer
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void dgvCustomers_SelectionChanged(object sender, EventArgs e)
+		{
+			if (dgvCustomers.SelectedCells.Count != 6)
+			{
+				return;
+			}
+			DataGridViewCell currentCell = dgvCustomers.SelectedCells[5];
+			string val = currentCell.Value.ToString();
+			customerAddressIDComboBox.Text = val;
 		}
 		#endregion
 
@@ -325,6 +380,7 @@ namespace BankingSite
 			}
 
 			RefreshAddressDataBindingsSources();
+			RefreshCustomerAddressDropDown();
 		}
 
 		void btnUpdateAddress_Click(object sender, EventArgs e)
@@ -398,6 +454,12 @@ namespace BankingSite
 		#region Account Tab
 		private void btnCreateNewAccount_Click(object sender, EventArgs e)
 		{
+			if (_customerTable.Rows.Count == 0)
+			{
+				MessageBox.Show("Can't create an account without any customers. Please create a customer first and try again.", "No Customers available");
+				return;
+			}
+			
 			CreateNew cnForm = new CreateNew(_dbInt, CreateNew.CreateType.Account);
 			if (cnForm.ShowDialog() == DialogResult.Cancel)
 			{
@@ -464,6 +526,12 @@ namespace BankingSite
 		#region Transaction Tab
 		private void btnCreateNewTransaction_Click(object sender, EventArgs e)
 		{
+			if (_accountTable.Rows.Count == 0)
+			{
+				MessageBox.Show("Can't create a transaction without any accounts. Please create an account first and try again.", "No Accounts available");
+				return;
+			}
+
 			CreateNew cnForm = new CreateNew(_dbInt, CreateNew.CreateType.Transaction);
 			if (cnForm.ShowDialog() == DialogResult.Cancel)
 			{

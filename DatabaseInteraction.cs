@@ -199,6 +199,23 @@ namespace BankingSite
 			}
 		}
 
+		public void InsertCustomerNoAddress(string myFirstName, string myLastName, int myPhoneNumber, string myEmail)
+		{
+			using (SqlConnection cn = new SqlConnection(_connectionString))
+			{
+				cn.Open();
+				SqlCommand cmd = cn.CreateCommand();
+				cmd.CommandText = File.ReadAllText(string.Concat(INSERT_DATA_FOLDER, "CustomerNoAddress", SQL_EXTENSION));
+				cmd.CommandTimeout = 5;
+
+				cmd.Parameters.AddWithValue("@FirstName", myFirstName);
+				cmd.Parameters.AddWithValue("@LastName", myLastName);
+				cmd.Parameters.AddWithValue("@PhoneNumber", myPhoneNumber);
+				cmd.Parameters.AddWithValue("@EmailAddress", myEmail);
+				cmd.ExecuteNonQuery();
+			}
+		}
+
 		public void InsertAddress(string myStreetName, int myStreetNumber, int myZipCode, string myCity)
 		{
 			using (SqlConnection cn = new SqlConnection(_connectionString))
@@ -252,7 +269,7 @@ namespace BankingSite
 			}
 		}
 
-		public void UpdateCustomer(string myFirstName, string myLastName, int myPhoneNumber, string myEmail, int myAddressID, int myCustomerID)
+		public void UpdateCustomer(string myFirstName, string myLastName, int myPhoneNumber, string myEmail, object myAddressID, int myCustomerID)
 		{
 			using (SqlConnection cn = new SqlConnection(_connectionString))
 			{
@@ -266,6 +283,24 @@ namespace BankingSite
 				cmd.Parameters.AddWithValue("@PhoneNumber", myPhoneNumber);
 				cmd.Parameters.AddWithValue("@EmailAddress", myEmail);
 				cmd.Parameters.AddWithValue("@AddressID", myAddressID);
+				cmd.Parameters.AddWithValue("@ID", myCustomerID);
+				cmd.ExecuteNonQuery();
+			}
+		}
+
+		public void UpdateCustomerNoAddress(string myFirstName, string myLastName, int myPhoneNumber, string myEmail, int myCustomerID)
+		{
+			using (SqlConnection cn = new SqlConnection(_connectionString))
+			{
+				cn.Open();
+				SqlCommand cmd = cn.CreateCommand();
+				cmd.CommandText = File.ReadAllText(string.Concat(UPDATE_TABLE_FOLDER, "CustomerNoAddress", SQL_EXTENSION));
+				cmd.CommandTimeout = 5;
+
+				cmd.Parameters.AddWithValue("@FirstName", myFirstName);
+				cmd.Parameters.AddWithValue("@LastName", myLastName);
+				cmd.Parameters.AddWithValue("@PhoneNumber", myPhoneNumber);
+				cmd.Parameters.AddWithValue("@EmailAddress", myEmail);
 				cmd.Parameters.AddWithValue("@ID", myCustomerID);
 				cmd.ExecuteNonQuery();
 			}
@@ -338,7 +373,7 @@ namespace BankingSite
 			DeleteData(ADDRESS, myAddressID);
 		}
 
-		public DataTable GetDataTable(string myCommandText)
+		DataTable GetDataTable(string myCommandText)
 		{
 			DataTable dt = new DataTable();
 			try
@@ -369,11 +404,6 @@ namespace BankingSite
 		{
 			string cmdText = File.ReadAllText(string.Concat(GET_DATA_FOLDER, "AllAssociatedTransactions", SQL_EXTENSION));
 			return GetDataTable(string.Format(cmdText, myAccountID));
-		}
-
-		public DataTable GetAllAccountIDs()
-		{
-			return GetDataTable(File.ReadAllText(string.Concat(GET_DATA_FOLDER, "AllAccountIDs", SQL_EXTENSION)));
 		}
 	
 		public DataTable GetAllAddresses()

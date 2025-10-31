@@ -29,6 +29,7 @@ namespace BankingSite
 			{
 				case CreateType.Customer:
 					UsePanel(pnlCustomer);
+					GetAddressIDs();
 					title += "Customer";
 					break;
 
@@ -39,6 +40,7 @@ namespace BankingSite
 
 				case CreateType.Account:
 					UsePanel(pnlAccount);
+					GetCustomerIDs();
 					title += "Account";
 					break;
 
@@ -72,16 +74,45 @@ namespace BankingSite
 			myPanel.Location = new Point(0, 0);
 		}
 
+
 		/// <summary>
-		/// Gets the Account Table Adapter to get all account ids and use the adapter when creating the transaction.
+		/// Gets all address ids for its dropdown control.
 		/// </summary>
-		/// <param name="myATA"></param>
-		public void GetAccountIDs()
+		void GetAddressIDs()
 		{
-			DataTable myAccountIDs = _dbInt.GetAllAccountIDs();
+			DataTable addrIDs = _dbInt.GetAllAddresses();
+
+			foreach (DataColumn dc in addrIDs.Columns)
+			{
+				dc.AllowDBNull = true;
+				dc.AutoIncrement = false;
+			}
+
+			addrIDs.Rows.Add();
+			address_IDComboBox.DataSource = addrIDs;
+			address_IDComboBox.DisplayMember = "ID";
+		}
+
+		/// <summary>
+		/// Gets all customer ids for its dropdown control.
+		/// </summary>
+		void GetCustomerIDs()
+		{
+			DataTable custIDs = _dbInt.GetAllCustomers();
+
+			customer_IDComboBox.DataSource = custIDs;
+			customer_IDComboBox.DisplayMember = "ID";
+		}
+
+		/// <summary>
+		/// Gets all account ids for its dropdown control.
+		/// </summary>
+		void GetAccountIDs()
+		{
+			DataTable accIDs = _dbInt.GetAllAccounts();
 		
-			accountReceiver_IDComboBox.DataSource = new DataView(myAccountIDs.Columns["ID"].Table);
-			accountSender_IDComboBox.DataSource = new DataView(myAccountIDs.Columns["ID"].Table);
+			accountReceiver_IDComboBox.DataSource = new DataView(accIDs);
+			accountSender_IDComboBox.DataSource = new DataView(accIDs);
 
 			accountReceiver_IDComboBox.DisplayMember = "ID";
 			accountSender_IDComboBox.DisplayMember = "ID";
@@ -116,9 +147,9 @@ namespace BankingSite
 
 		void CreateNewCustomer()
 		{   //Create a new Customer dataTable but check if all of the inputs are valid first
-			if (!int.TryParse(address_IDTextBox.Text, out int addrID) || !int.TryParse(phoneNumberTextBox.Text, out int phoneN))
+			if (!int.TryParse(phoneNumberTextBox.Text, out int phoneN))
 			{
-				MessageBox.Show("Please make sure to only input numbers for the address ID and phonenumber.", "Error using inputs for creating new dataset");
+				MessageBox.Show("Please make sure to only input numbers for the phone number.", "Error using inputs for creating new dataset");
 				return;
 			}
 
@@ -134,7 +165,16 @@ namespace BankingSite
 
 			try
 			{
-				_dbInt.InsertCustomer(firstN, lastN, phoneN, email, addrID);
+				//address to update may be set to null
+				if (String.IsNullOrWhiteSpace(address_IDComboBox.Text))
+				{
+					_dbInt.InsertCustomerNoAddress(firstN, lastN, phoneN, email);
+				}
+				else
+				{
+					int addrID = Convert.ToInt32(address_IDComboBox.Text);
+					_dbInt.InsertCustomer(firstN, lastN, phoneN, email, addrID);
+				}
 				_hasCanceled = false;
 				Close();
 			}
@@ -175,7 +215,7 @@ namespace BankingSite
 
 		void CreateNewAccount()
 		{   //Create a new Account dataTable but check if all of the inputs are valid first
-			if (!int.TryParse(balanceTextBox.Text, out int balance) || !int.TryParse(numberTextBox.Text, out int number) || !int.TryParse(customer_IDTextBox.Text, out int custID))
+			if (!int.TryParse(balanceTextBox.Text, out int balance) || !int.TryParse(numberTextBox.Text, out int number) || !int.TryParse(customer_IDComboBox.Text, out int custID))
 			{
 				MessageBox.Show("Please make sure to only input numbers for the amount, bumber and customer id.", "Error using inputs for creating new dataset");
 				return;
