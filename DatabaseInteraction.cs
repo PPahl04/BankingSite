@@ -9,6 +9,7 @@ namespace BankingSite
 {
 	public class DatabaseInteraction
 	{
+		#region class variables
 		string _connectionString;
 
 		const string SQL_FOLDER = @"..\..\SQL\";
@@ -24,7 +25,9 @@ namespace BankingSite
 		const string TRANSACTION = "Transaction";
 
 		const string SQL_EXTENSION = ".sql";
+		#endregion
 
+		#region Manage DB Connection
 		/// <summary>
 		/// If a connection can be made then the connection string will be changed to that.
 		/// </summary>
@@ -120,6 +123,7 @@ namespace BankingSite
 		/// </summary>
 		public void CreateTables(List<string> myMissingTables)
 		{
+			bool tablesCreated = false;
 			foreach (string missingTable in myMissingTables)
 			{
 				using (SqlConnection cn = new SqlConnection(_connectionString))
@@ -153,12 +157,36 @@ namespace BankingSite
 					{
 						cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, TRANSACTION, SQL_EXTENSION));
 						cmd.ExecuteNonQuery();
+						tablesCreated = true;
 						continue;
 					}
 				}
 			}
+
+			if (tablesCreated)
+			{
+				CreateTrigger();
+			}
 		}
 
+		void CreateTrigger()
+		{
+			using (SqlConnection cn = new SqlConnection(_connectionString))
+			{
+				cn.Open();
+				SqlCommand cmd = cn.CreateCommand();
+				cmd.CommandTimeout = 5;
+
+				cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "CustomerTrigger", SQL_EXTENSION));
+				cmd.ExecuteNonQuery();
+
+				cmd.CommandText = File.ReadAllText(string.Concat(CREATE_TABLE_FOLDER, "AccountTrigger", SQL_EXTENSION));
+				cmd.ExecuteNonQuery();
+			}
+		}
+		#endregion
+
+		#region SQL Insert Methods
 		public void InsertToAllTables()
 		{
 			using (SqlConnection cn = new SqlConnection(_connectionString))
@@ -268,7 +296,9 @@ namespace BankingSite
 				cmd.ExecuteNonQuery();
 			}
 		}
+		#endregion
 
+		#region SQL Update Methods
 		public void UpdateCustomer(string myFirstName, string myLastName, int myPhoneNumber, string myEmail, object myAddressID, int myCustomerID)
 		{
 			using (SqlConnection cn = new SqlConnection(_connectionString))
@@ -338,7 +368,9 @@ namespace BankingSite
 				cmd.ExecuteNonQuery();
 			}
 		}
+		#endregion
 
+		#region SQL Delete Methods
 		void DeleteData(string myType, int myID)
 		{
 			using (SqlConnection cn = new SqlConnection(_connectionString))
@@ -372,7 +404,9 @@ namespace BankingSite
 		{
 			DeleteData(ADDRESS, myAddressID);
 		}
+		#endregion
 
+		#region Get DataTable Methods
 		DataTable GetDataTable(string myCommandText)
 		{
 			DataTable dt = new DataTable();
@@ -425,7 +459,9 @@ namespace BankingSite
 		{
 			return GetDataTable(File.ReadAllText(string.Concat(GET_DATA_FOLDER, "AllTransactions", SQL_EXTENSION)));
 		}
-
+		#endregion
+		
+		#region Manage Account Balance Methods
 		/// <summary>
 		///Will remove myAmount from balance of Account with ID myAccountID.
 		/// </summary>
@@ -469,5 +505,6 @@ namespace BankingSite
 			WithdrawFromAccount(mySenderID, myAmount);
 			DepositToAccount(myReceiverID, myAmount);
 		}
+		#endregion
 	}
 }

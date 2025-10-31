@@ -1,5 +1,4 @@
-﻿/****** Object:  Table [dbo].[Transaction]    Script Date: 25.10.2025 16:26:49 ******/
-SET ANSI_NULLS ON
+﻿SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 
 CREATE TABLE [dbo].[Transaction](
@@ -23,6 +22,5 @@ ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [FK_Transaction_AccountReceiver
 
 ALTER TABLE [dbo].[Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Transaction_AccountSender] FOREIGN KEY([AccountSender_ID])
 REFERENCES [dbo].[Account] ([ID])
-ON DELETE CASCADE
 
 ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [FK_Transaction_AccountSender]

@@ -787,7 +787,7 @@
 			// 
 			// tpDBConnection
 			// 
-			this.tpDBConnection.BackColor = System.Drawing.SystemColors.ScrollBar;
+			this.tpDBConnection.BackColor = System.Drawing.Color.Gainsboro;
 			this.tpDBConnection.Controls.Add(this.pnlDbConnection);
 			this.tpDBConnection.Location = new System.Drawing.Point(4, 22);
 			this.tpDBConnection.Name = "tpDBConnection";
@@ -822,7 +822,7 @@
 			this.btnInsertData.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnInsertData.Enabled = false;
 			this.btnInsertData.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnInsertData.Location = new System.Drawing.Point(325, 281);
+			this.btnInsertData.Location = new System.Drawing.Point(295, 281);
 			this.btnInsertData.MaximumSize = new System.Drawing.Size(130, 54);
 			this.btnInsertData.MinimumSize = new System.Drawing.Size(130, 54);
 			this.btnInsertData.Name = "btnInsertData";
@@ -860,7 +860,7 @@
 			// 
 			this.btnConnectToDB.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnConnectToDB.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnConnectToDB.Location = new System.Drawing.Point(128, 281);
+			this.btnConnectToDB.Location = new System.Drawing.Point(98, 281);
 			this.btnConnectToDB.MaximumSize = new System.Drawing.Size(130, 54);
 			this.btnConnectToDB.MinimumSize = new System.Drawing.Size(130, 54);
 			this.btnConnectToDB.Name = "btnConnectToDB";
@@ -901,7 +901,7 @@
 			this.txtbPassword.Location = new System.Drawing.Point(164, 180);
 			this.txtbPassword.MinimumSize = new System.Drawing.Size(255, 27);
 			this.txtbPassword.Name = "txtbPassword";
-			this.txtbPassword.Size = new System.Drawing.Size(311, 27);
+			this.txtbPassword.Size = new System.Drawing.Size(311, 26);
 			this.txtbPassword.TabIndex = 20;
 			this.txtbPassword.UseSystemPasswordChar = true;
 			// 
@@ -912,7 +912,7 @@
 			this.txtbServerName.Location = new System.Drawing.Point(164, 88);
 			this.txtbServerName.MinimumSize = new System.Drawing.Size(255, 27);
 			this.txtbServerName.Name = "txtbServerName";
-			this.txtbServerName.Size = new System.Drawing.Size(311, 27);
+			this.txtbServerName.Size = new System.Drawing.Size(311, 26);
 			this.txtbServerName.TabIndex = 16;
 			// 
 			// lblPasword
@@ -946,7 +946,7 @@
 			this.txtbUsername.Location = new System.Drawing.Point(164, 134);
 			this.txtbUsername.MinimumSize = new System.Drawing.Size(255, 27);
 			this.txtbUsername.Name = "txtbUsername";
-			this.txtbUsername.Size = new System.Drawing.Size(311, 27);
+			this.txtbUsername.Size = new System.Drawing.Size(311, 26);
 			this.txtbUsername.TabIndex = 18;
 			// 
 			// tcWindow
@@ -967,7 +967,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.SystemColors.ScrollBar;
+			this.BackColor = System.Drawing.SystemColors.Control;
 			this.ClientSize = new System.Drawing.Size(1006, 646);
 			this.Controls.Add(this.tcWindow);
 			this.MinimumSize = new System.Drawing.Size(1022, 685);

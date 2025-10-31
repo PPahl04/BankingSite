@@ -103,7 +103,7 @@ namespace BankingSite
 
 				RefillDGVs();
 				_isConnectedAndHasTables = true;
-				MessageBox.Show("Data has been succsessfully been inserted into the Address, Customer and Account tables!", "Data succsessfully inserted");
+				MessageBox.Show("Data has succsessfully been inserted into all tables!", "Data succsessfully inserted");
 			}
 			catch { }
 		}
@@ -280,6 +280,7 @@ namespace BankingSite
 				_dbInt.DeleteCustomerWithID(id);
 				RefreshCustomerDataBingingsSources();
 				RefreshAccountDataBindingsSources();
+				RefreshTransactionDataBindingsSources();
 			}
 		}
 
