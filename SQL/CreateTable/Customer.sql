@@ -3,10 +3,10 @@ SET QUOTED_IDENTIFIER ON
 
 CREATE TABLE [dbo].[Customer](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[FirstName] [nchar](100) NOT NULL,
-	[LastName] [nchar](100) NOT NULL,
+	[FirstName] [nvarchar](100) NOT NULL,
+	[LastName] [nvarchar](100) NOT NULL,
 	[PhoneNumber] [int] NOT NULL,
-	[EmailAddress] [nchar](100) NOT NULL,
+	[EmailAddress] [nvarchar](100) NOT NULL,
 	[Address_ID] [int] NULL,
  CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED 
 (

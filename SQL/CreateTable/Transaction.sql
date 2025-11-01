@@ -5,8 +5,8 @@ CREATE TABLE [dbo].[Transaction](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Date] [date] NOT NULL,
 	[Amount] [int] NOT NULL,
-	[IntendedUse] [nchar](255) NULL,
-	[Type] [nchar](15) NOT NULL,
+	[IntendedUse] [nvarchar](255) NULL,
+	[Type] [nvarchar](15) NOT NULL,
 	[AccountReceiver_ID] [int] NOT NULL,
 	[AccountSender_ID] [int] NOT NULL,
  CONSTRAINT [PK_Transaction] PRIMARY KEY CLUSTERED 

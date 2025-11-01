@@ -3,7 +3,7 @@ SET QUOTED_IDENTIFIER ON
 
 CREATE TABLE [dbo].[Account](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[IBAN] [nchar](100) NOT NULL,
+	[IBAN] [nvarchar](100) NOT NULL,
 	[Balance] [int] NOT NULL,
 	[Number] [int] NOT NULL,
 	[Customer_ID] [int] NOT NULL,

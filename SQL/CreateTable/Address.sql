@@ -4,10 +4,10 @@ SET QUOTED_IDENTIFIER ON
 
 CREATE TABLE [dbo].[Address](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[StreetName] [nchar](100) NOT NULL,
+	[StreetName] [nvarchar](100) NOT NULL,
 	[StreetNumber] [int] NOT NULL,
 	[ZipCode] [int] NOT NULL,
-	[City] [nchar](100) NOT NULL,
+	[City] [nvarchar](100) NOT NULL,
  CONSTRAINT [PK_Address] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC

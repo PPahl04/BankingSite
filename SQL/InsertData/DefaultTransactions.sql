@@ -55,7 +55,7 @@ INSERT INTO [dbo].[Transaction]
            ('15.05.2025'
            ,50
            ,'Getting my cash money'
-           ,'Withdraw'
+           ,'Withdrawal'
            ,(SELECT TOP 1 ID
              FROM [dbo].[Account]
              WHERE IBAN = 'DE223564857926647212'
