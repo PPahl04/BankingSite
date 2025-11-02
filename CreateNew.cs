@@ -56,7 +56,6 @@ namespace BankingSite
 					table.Rows.Add(TransactionType.Withdrawal.ToString());
 					table.Rows.Add(TransactionType.Deposit.ToString());
 					table.Rows.Add(TransactionType.Transfer.ToString());
-					table.Rows.Add(TransactionType.Incoming.ToString());
 
 					typeComboBox.DataSource = table;
 					typeComboBox.DisplayMember = "Type";
@@ -297,12 +296,6 @@ namespace BankingSite
 					_dbInt.TransferFromSenderToReceiver(senderID, receiverID, amount);
 					return;
 				}               
-				
-				//What is this
-				if (type == TransactionType.Incoming.ToString())
-				{
-					return;
-				}
 			}
 			catch (Exception ex)
 			{
@@ -333,8 +326,7 @@ namespace BankingSite
 		{
 			Withdrawal,
 			Deposit,
-			Transfer,
-			Incoming
+			Transfer
 		}
 
 		/// <summary>
