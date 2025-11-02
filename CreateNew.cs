@@ -47,6 +47,9 @@ namespace BankingSite
 					UsePanel(pnlTransaction);
 					title += "Transaction";
 
+					dateDateTimePicker.MaxDate = DateTime.Now.Date;
+					dateDateTimePicker.Value = dateDateTimePicker.MaxDate;
+
 					DataTable table = new DataTable();
 					table.Columns.Add("Type");
 

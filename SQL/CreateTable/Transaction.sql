@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[Transaction](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Date] [date] NOT NULL,
 	[Amount] [int] NOT NULL,
-	[IntendedUse] [nvarchar](255) NULL,
+	[IntendedUse] [nvarchar](300) NULL,
 	[Type] [nvarchar](15) NOT NULL,
 	[AccountReceiver_ID] [int] NOT NULL,
 	[AccountSender_ID] [int] NOT NULL,

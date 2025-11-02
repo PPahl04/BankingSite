@@ -6,7 +6,7 @@ CREATE TABLE [dbo].[Customer](
 	[FirstName] [nvarchar](100) NOT NULL,
 	[LastName] [nvarchar](100) NOT NULL,
 	[PhoneNumber] [int] NOT NULL,
-	[EmailAddress] [nvarchar](100) NOT NULL,
+	[EmailAddress] [nvarchar](255) NOT NULL,
 	[Address_ID] [int] NULL,
  CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED 
 (

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
 using System.Windows.Forms;
+using System.Linq;
+using System.Data;
+using System.IO;
+using System;
 
 namespace BankingSite
 {
@@ -37,7 +37,7 @@ namespace BankingSite
 		/// <param name="myUsername"></param>
 		/// <param name="myPassword"></param>
 		/// <returns></returns>
-		public bool CanConnectToServer(string myDb, string myServerName, string myUsername, string myPassword)
+		public void CanConnectToServer(string myDb, string myServerName, string myUsername, string myPassword)
 		{
 			string cnString = string.Concat("Data Source=", myServerName, ";Initial Catalog=", myDb, ";UID=", myUsername, ";Password=", myPassword,
 						";Integrated Security=False;TrustServerCertificate=True");
@@ -46,16 +46,8 @@ namespace BankingSite
 
 			using (SqlConnection cn = new SqlConnection(builder.ConnectionString))
 			{
-				try
-				{
-					cn.Open();
-					_connectionString = cnString;
-					return true;
-				}
-				catch
-				{
-					return false;
-				}
+				cn.Open();
+				_connectionString = cnString;
 			}
 		}
 

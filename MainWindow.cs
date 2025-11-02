@@ -54,7 +54,6 @@ namespace BankingSite
 			{
 				if (!CanConnectToServer())
 				{
-					MessageBox.Show("Error occurred while connecting to server", "Error");
 					return;
 				}
 
@@ -80,9 +79,8 @@ namespace BankingSite
 
 		void InsertDataToTables()
 		{
-			if (!CanConnectToServer() || String.IsNullOrWhiteSpace(cbDbNames.Text))
+			if (!CanConnectToServer())
 			{
-				MessageBox.Show("Please make sure to establish an connection to the server and database first.", "Error trying to connect.");
 				return;
 			}
 
@@ -120,7 +118,6 @@ namespace BankingSite
 			{
 				if (!CanConnectToServer())
 				{
-					MessageBox.Show("Error occurred while connecting to server", "Error");
 					return;
 				}
 
@@ -154,7 +151,22 @@ namespace BankingSite
 
 		bool CanConnectToServer()
 		{
-			return _dbInt.CanConnectToServer(String.IsNullOrWhiteSpace(cbDbNames.Text) ? "master" : cbDbNames.Text, txtbServerName.Text, txtbUsername.Text, txtbPassword.Text);
+			try
+			{
+				if (String.IsNullOrWhiteSpace(txtbServerName.Text) || String.IsNullOrWhiteSpace(txtbUsername.Text) || String.IsNullOrWhiteSpace(txtbPassword.Text))
+				{
+					throw new Exception("Please provide a Server name, Username and Password before attemping to connect.");
+				}
+
+				_dbInt.CanConnectToServer(String.IsNullOrWhiteSpace(cbDbNames.Text) ? "master" : cbDbNames.Text, txtbServerName.Text, txtbUsername.Text, txtbPassword.Text);
+				return true;
+			}
+			catch (Exception e)
+			{
+
+				MessageBox.Show(e.Message, "Error while trying to connect");
+				return false;
+			}
 		}
 
 		/// <summary>

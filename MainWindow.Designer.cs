@@ -301,14 +301,18 @@
 			// 
 			this.dgvTransactions.AllowUserToAddRows = false;
 			this.dgvTransactions.AllowUserToDeleteRows = false;
+			this.dgvTransactions.AllowUserToResizeColumns = false;
+			this.dgvTransactions.AllowUserToResizeRows = false;
 			this.dgvTransactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
 			this.dgvTransactions.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
 			this.dgvTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.dgvTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dgvTransactions.Location = new System.Drawing.Point(4, 4);
+			this.dgvTransactions.MultiSelect = false;
 			this.dgvTransactions.Name = "dgvTransactions";
 			this.dgvTransactions.ReadOnly = true;
-			this.dgvTransactions.RowHeadersWidth = 21;
+			this.dgvTransactions.RowHeadersWidth = 4;
+			this.dgvTransactions.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.dgvTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvTransactions.Size = new System.Drawing.Size(984, 530);
 			this.dgvTransactions.TabIndex = 1;
@@ -331,6 +335,7 @@
 			this.btnCreateNewTransaction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnCreateNewTransaction.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnCreateNewTransaction.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
 			this.btnCreateNewTransaction.Location = new System.Drawing.Point(22, 17);
 			this.btnCreateNewTransaction.MaximumSize = new System.Drawing.Size(200, 40);
@@ -345,6 +350,7 @@
 			// btnDeleteTransaction
 			// 
 			this.btnDeleteTransaction.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnDeleteTransaction.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnDeleteTransaction.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
 			this.btnDeleteTransaction.Location = new System.Drawing.Point(612, 17);
 			this.btnDeleteTransaction.MaximumSize = new System.Drawing.Size(155, 40);
@@ -413,6 +419,7 @@
 			// btnShowTransactions
 			// 
 			this.btnShowTransactions.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnShowTransactions.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnShowTransactions.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
 			this.btnShowTransactions.Location = new System.Drawing.Point(612, 17);
 			this.btnShowTransactions.MaximumSize = new System.Drawing.Size(155, 40);
@@ -441,6 +448,7 @@
 			this.btnCreateNewAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnCreateNewAccount.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnCreateNewAccount.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
 			this.btnCreateNewAccount.Location = new System.Drawing.Point(22, 17);
 			this.btnCreateNewAccount.MaximumSize = new System.Drawing.Size(200, 40);
@@ -455,6 +463,7 @@
 			// btnDeleteSelectedAccount
 			// 
 			this.btnDeleteSelectedAccount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnDeleteSelectedAccount.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnDeleteSelectedAccount.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
 			this.btnDeleteSelectedAccount.Location = new System.Drawing.Point(784, 17);
 			this.btnDeleteSelectedAccount.MaximumSize = new System.Drawing.Size(155, 40);
@@ -470,15 +479,18 @@
 			// 
 			this.dgvAccounts.AllowUserToAddRows = false;
 			this.dgvAccounts.AllowUserToDeleteRows = false;
+			this.dgvAccounts.AllowUserToResizeColumns = false;
+			this.dgvAccounts.AllowUserToResizeRows = false;
 			this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
 			this.dgvAccounts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-			this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dgvAccounts.Location = new System.Drawing.Point(4, 4);
 			this.dgvAccounts.MultiSelect = false;
 			this.dgvAccounts.Name = "dgvAccounts";
 			this.dgvAccounts.ReadOnly = true;
-			this.dgvAccounts.RowHeadersWidth = 21;
+			this.dgvAccounts.RowHeadersWidth = 4;
+			this.dgvAccounts.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvAccounts.Size = new System.Drawing.Size(984, 530);
 			this.dgvAccounts.TabIndex = 1;
@@ -517,15 +529,18 @@
 			// 
 			this.dgvCustomers.AllowUserToAddRows = false;
 			this.dgvCustomers.AllowUserToDeleteRows = false;
+			this.dgvCustomers.AllowUserToResizeColumns = false;
+			this.dgvCustomers.AllowUserToResizeRows = false;
 			this.dgvCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
 			this.dgvCustomers.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-			this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvCustomers.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dgvCustomers.Location = new System.Drawing.Point(346, 4);
 			this.dgvCustomers.MultiSelect = false;
 			this.dgvCustomers.Name = "dgvCustomers";
 			this.dgvCustomers.ReadOnly = true;
-			this.dgvCustomers.RowHeadersWidth = 21;
+			this.dgvCustomers.RowHeadersWidth = 4;
+			this.dgvCustomers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.dgvCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvCustomers.ShowEditingIcon = false;
 			this.dgvCustomers.Size = new System.Drawing.Size(642, 302);
@@ -536,15 +551,18 @@
 			// 
 			this.dgvAddresses.AllowUserToAddRows = false;
 			this.dgvAddresses.AllowUserToDeleteRows = false;
+			this.dgvAddresses.AllowUserToResizeColumns = false;
+			this.dgvAddresses.AllowUserToResizeRows = false;
 			this.dgvAddresses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
 			this.dgvAddresses.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-			this.dgvAddresses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			this.dgvAddresses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvAddresses.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dgvAddresses.Location = new System.Drawing.Point(346, 313);
 			this.dgvAddresses.MultiSelect = false;
 			this.dgvAddresses.Name = "dgvAddresses";
 			this.dgvAddresses.ReadOnly = true;
-			this.dgvAddresses.RowHeadersWidth = 21;
+			this.dgvAddresses.RowHeadersWidth = 4;
+			this.dgvAddresses.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.dgvAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvAddresses.ShowEditingIcon = false;
 			this.dgvAddresses.Size = new System.Drawing.Size(642, 302);
@@ -602,6 +620,7 @@
 			this.firstNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.firstNameTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.firstNameTextBox.Location = new System.Drawing.Point(155, 48);
+			this.firstNameTextBox.MaxLength = 100;
 			this.firstNameTextBox.Name = "firstNameTextBox";
 			this.firstNameTextBox.Size = new System.Drawing.Size(171, 30);
 			this.firstNameTextBox.TabIndex = 26;
@@ -611,6 +630,7 @@
 			this.lastNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lastNameTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.lastNameTextBox.Location = new System.Drawing.Point(155, 82);
+			this.lastNameTextBox.MaxLength = 100;
 			this.lastNameTextBox.Name = "lastNameTextBox";
 			this.lastNameTextBox.Size = new System.Drawing.Size(171, 30);
 			this.lastNameTextBox.TabIndex = 28;
@@ -629,6 +649,7 @@
 			this.emailAddressTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.emailAddressTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.emailAddressTextBox.Location = new System.Drawing.Point(155, 150);
+			this.emailAddressTextBox.MaxLength = 255;
 			this.emailAddressTextBox.Name = "emailAddressTextBox";
 			this.emailAddressTextBox.Size = new System.Drawing.Size(171, 30);
 			this.emailAddressTextBox.TabIndex = 32;
@@ -636,6 +657,7 @@
 			// btnShowOwnedAccounts
 			// 
 			this.btnShowOwnedAccounts.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnShowOwnedAccounts.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnShowOwnedAccounts.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
 			this.btnShowOwnedAccounts.Location = new System.Drawing.Point(9, 257);
 			this.btnShowOwnedAccounts.Name = "btnShowOwnedAccounts";
@@ -648,6 +670,7 @@
 			// btnDeleteCustomer
 			// 
 			this.btnDeleteCustomer.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnDeleteCustomer.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnDeleteCustomer.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
 			this.btnDeleteCustomer.Location = new System.Drawing.Point(186, 257);
 			this.btnDeleteCustomer.Name = "btnDeleteCustomer";
@@ -660,6 +683,7 @@
 			// btnCreateNewCustomer
 			// 
 			this.btnCreateNewCustomer.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnCreateNewCustomer.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnCreateNewCustomer.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
 			this.btnCreateNewCustomer.Location = new System.Drawing.Point(9, 221);
 			this.btnCreateNewCustomer.Name = "btnCreateNewCustomer";
@@ -672,6 +696,7 @@
 			// btnUpdateCustomer
 			// 
 			this.btnUpdateCustomer.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnUpdateCustomer.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnUpdateCustomer.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
 			this.btnUpdateCustomer.Location = new System.Drawing.Point(186, 221);
 			this.btnUpdateCustomer.Name = "btnUpdateCustomer";
@@ -718,6 +743,7 @@
 			this.streetNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.streetNameTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.streetNameTextBox.Location = new System.Drawing.Point(166, 57);
+			this.streetNameTextBox.MaxLength = 200;
 			this.streetNameTextBox.Name = "streetNameTextBox";
 			this.streetNameTextBox.Size = new System.Drawing.Size(157, 30);
 			this.streetNameTextBox.TabIndex = 26;
@@ -745,6 +771,7 @@
 			this.cityTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.cityTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.cityTextBox.Location = new System.Drawing.Point(166, 159);
+			this.cityTextBox.MaxLength = 200;
 			this.cityTextBox.Name = "cityTextBox";
 			this.cityTextBox.Size = new System.Drawing.Size(157, 30);
 			this.cityTextBox.TabIndex = 32;
@@ -752,6 +779,7 @@
 			// btnDeleteAddress
 			// 
 			this.btnDeleteAddress.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnDeleteAddress.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnDeleteAddress.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
 			this.btnDeleteAddress.Location = new System.Drawing.Point(186, 248);
 			this.btnDeleteAddress.Name = "btnDeleteAddress";
@@ -764,6 +792,7 @@
 			// btnCreateNewAddress
 			// 
 			this.btnCreateNewAddress.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnCreateNewAddress.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnCreateNewAddress.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
 			this.btnCreateNewAddress.Location = new System.Drawing.Point(9, 210);
 			this.btnCreateNewAddress.Name = "btnCreateNewAddress";
@@ -776,6 +805,7 @@
 			// btnUpdateAddress
 			// 
 			this.btnUpdateAddress.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.btnUpdateAddress.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnUpdateAddress.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
 			this.btnUpdateAddress.Location = new System.Drawing.Point(186, 210);
 			this.btnUpdateAddress.Name = "btnUpdateAddress";
@@ -822,6 +852,7 @@
 			// 
 			this.btnInsertData.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnInsertData.BackColor = System.Drawing.SystemColors.Window;
+			this.btnInsertData.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnInsertData.Enabled = false;
 			this.btnInsertData.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnInsertData.Location = new System.Drawing.Point(294, 293);
@@ -862,6 +893,7 @@
 			// 
 			this.btnConnectToDB.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.btnConnectToDB.BackColor = System.Drawing.SystemColors.Window;
+			this.btnConnectToDB.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnConnectToDB.Font = new System.Drawing.Font("Bahnschrift Condensed", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnConnectToDB.Location = new System.Drawing.Point(97, 293);
 			this.btnConnectToDB.MaximumSize = new System.Drawing.Size(130, 40);
@@ -958,6 +990,7 @@
 			this.tcWindow.Controls.Add(this.tpCustomers);
 			this.tcWindow.Controls.Add(this.tpAccounts);
 			this.tcWindow.Controls.Add(this.tpTransactions);
+			this.tcWindow.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.tcWindow.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tcWindow.Font = new System.Drawing.Font("Bahnschrift Condensed", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.tcWindow.Location = new System.Drawing.Point(0, 0);
