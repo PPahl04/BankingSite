@@ -3,9 +3,9 @@ using System.Data;
 
 namespace BankingSite
 {
-	public partial class AssotiatedDataTables : Form
+	public partial class AssociatedDataTables : Form
 	{
-		public AssotiatedDataTables(DataTable data)
+		public AssociatedDataTables(DataTable data)
 		{
 			InitializeComponent();
 

@@ -323,7 +323,7 @@ namespace BankingSite
 				return;
 			}
 
-			AssotiatedDataTables owned = new AssotiatedDataTables(accounts);
+			AssociatedDataTables owned = new AssociatedDataTables(accounts);
 			owned.Text = string.Concat("Owned Accounts From Customer with ID ", custID);
 			owned.Show();
 		}
@@ -507,7 +507,7 @@ namespace BankingSite
 				return;
 			}
 
-			AssotiatedDataTables owned = new AssotiatedDataTables(transactions);
+			AssociatedDataTables owned = new AssociatedDataTables(transactions);
 			owned.Text = string.Concat("Transactions Associated with Account ID ", accID);
 			owned.Show();
 		}

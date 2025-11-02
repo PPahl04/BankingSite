@@ -1,6 +1,6 @@
 ﻿namespace BankingSite
 {
-	partial class AssotiatedDataTables
+	partial class AssociatedDataTables
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -52,14 +52,14 @@
 			this.dgvAssosiatedDataTable.Size = new System.Drawing.Size(620, 237);
 			this.dgvAssosiatedDataTable.TabIndex = 1;
 			// 
-			// AssotiatedDataTables
+			// AssociatedDataTables
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(644, 261);
 			this.Controls.Add(this.dgvAssosiatedDataTable);
 			this.MinimumSize = new System.Drawing.Size(660, 300);
-			this.Name = "AssotiatedDataTables";
+			this.Name = "AssociatedDataTables";
 			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "AssotiatedDataTables";
