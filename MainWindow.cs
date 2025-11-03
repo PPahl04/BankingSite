@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Data;
 using System;
+using System.Threading;
 
 namespace BankingSite
 {
@@ -30,9 +31,93 @@ namespace BankingSite
 			txtbServerName.Text = string.Concat(Environment.MachineName, "\\");
 		}
 
+		/// <summary>
+		/// Will cancel changong the tab if we're not connected and have all required tables.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void tcWindow_Selecting(object sender, TabControlCancelEventArgs e)
 		{
-			e.Cancel = !_isConnectedAndHasTables;
+			if (!_isConnectedAndHasTables)
+			{
+				e.Cancel = true;
+				return;
+			}
+
+			DrawingControl.SuspendDrawing(tcWindow);
+
+			if (tcWindow.SelectedTab == tpCustomers)
+			{
+				StopDrawingOfCustomerAddress();
+			}
+			else if (tcWindow.SelectedTab == tpTransactions)
+			{
+				StopDrawingOfTransaction();
+			}
+			else if (tcWindow.SelectedTab == tpAccounts)
+			{
+				StopDrawingOfAccount();
+			}
+		}
+
+		void StopDrawingOfCustomerAddress()
+		{
+			DrawingControl.SuspendDrawing(pnlCustomerDetails);
+			DrawingControl.SuspendDrawing(dgvCustomers);
+
+			DrawingControl.SuspendDrawing(pnlAddressTableAdapter);
+			DrawingControl.SuspendDrawing(dgvAddresses);
+		}
+
+		void StopDrawingOfTransaction()
+		{
+			DrawingControl.SuspendDrawing(pnlTransactionDetails);
+			DrawingControl.SuspendDrawing(dgvTransactions);
+		}
+
+		void StopDrawingOfAccount()
+		{
+			DrawingControl.SuspendDrawing(pnlAccountDetails);
+			DrawingControl.SuspendDrawing(dgvAccounts);
+		}
+
+		private void tcWindow_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (tcWindow.SelectedTab == tpCustomers)
+			{
+				ResumeDrawingOfCustomerAddress();
+			}
+			else if (tcWindow.SelectedTab == tpTransactions)
+			{
+				ResumeDrawingOfTransaction();
+			}
+			else if (tcWindow.SelectedTab == tpAccounts)
+			{
+				ResumeDrawingOfAccount();
+			}
+
+			DrawingControl.ResumeDrawing(tcWindow);
+		}
+
+		void ResumeDrawingOfCustomerAddress()
+		{
+			DrawingControl.ResumeDrawing(pnlCustomerDetails);
+			DrawingControl.ResumeDrawing(dgvCustomers);
+
+			DrawingControl.ResumeDrawing(pnlAddressTableAdapter);
+			DrawingControl.ResumeDrawing(dgvAddresses);
+		}
+
+		void ResumeDrawingOfTransaction()
+		{
+			DrawingControl.ResumeDrawing(pnlTransactionDetails);
+			DrawingControl.ResumeDrawing(dgvTransactions);
+		}
+
+		void ResumeDrawingOfAccount()
+		{
+			DrawingControl.ResumeDrawing(pnlAccountDetails);
+			DrawingControl.ResumeDrawing(dgvAccounts);
 		}
 
 		/// <summary>
@@ -328,18 +413,12 @@ namespace BankingSite
 			owned.Show();
 		}
 
-		private void customerAddressIDComboBox_DropDown(object sender, EventArgs e)
-		{
-			//DataTable addressIDs = _dbInt.GetDataTable();
-			
-			//customerAddressIDComboBox.D
-		}
-
 		/// <summary>
 		/// Refreshes the customerTable, its dataGridViev DataSource and all Controls associated with it.
 		/// </summary>
 		void RefreshCustomerDataBingingsSources()
 		{
+			StopDrawingOfCustomerAddress();
 			_customerTable = _dbInt.GetAllCustomers();
 			dgvCustomers.DataSource = _customerTable;
 
@@ -349,6 +428,7 @@ namespace BankingSite
 			SetDataBindings(phoneNumberTextBox, _customerTable, "PhoneNumber");
 			SetDataBindings(emailAddressTextBox, _customerTable, "EmailAddress");
 			RefreshCustomerAddressDropDown();
+			ResumeDrawingOfCustomerAddress();
 		}
 
 		/// <summary>
@@ -458,6 +538,7 @@ namespace BankingSite
 		/// </summary>
 		void RefreshAddressDataBindingsSources()
 		{
+			StopDrawingOfCustomerAddress();
 			_addressTable = _dbInt.GetAllAddresses();
 			dgvAddresses.DataSource = _addressTable;
 
@@ -467,6 +548,7 @@ namespace BankingSite
 			SetDataBindings(streetNumberTextBox, _addressTable, "StreetNumber");
 			SetDataBindings(zipCodeTextBox, _addressTable, "ZipCode");
 			SetDataBindings(cityTextBox, _addressTable, "City");
+			ResumeDrawingOfCustomerAddress();
 		}
 		#endregion
 
@@ -535,10 +617,11 @@ namespace BankingSite
 		/// </summary>
 		void RefreshAccountDataBindingsSources()
 		{
+			StopDrawingOfAccount();
 			_accountTable = _dbInt.GetAllAccounts();
 			dgvAccounts.DataSource = _accountTable;
 			SetDataBindings(accountIDTextBox, _accountTable, "ID");
-
+			ResumeDrawingOfAccount();
 		}
 		#endregion
 
@@ -579,9 +662,11 @@ namespace BankingSite
 		/// </summary>
 		void RefreshTransactionDataBindingsSources()
 		{
+			StopDrawingOfTransaction();
 			_transactionTable = _dbInt.GetAllTransactions();
 			dgvTransactions.DataSource = _transactionTable;
 			SetDataBindings(transactionIDTextBox, _transactionTable, "ID");
+			ResumeDrawingOfTransaction();
 		}
 		#endregion
 	}

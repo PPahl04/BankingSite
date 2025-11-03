@@ -41,12 +41,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.dgvAssosiatedDataTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
 			this.dgvAssosiatedDataTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-			this.dgvAssosiatedDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			this.dgvAssosiatedDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvAssosiatedDataTable.Location = new System.Drawing.Point(12, 12);
 			this.dgvAssosiatedDataTable.MultiSelect = false;
 			this.dgvAssosiatedDataTable.Name = "dgvAssosiatedDataTable";
 			this.dgvAssosiatedDataTable.ReadOnly = true;
-			this.dgvAssosiatedDataTable.RowHeadersWidth = 21;
+			this.dgvAssosiatedDataTable.RowHeadersWidth = 4;
+			this.dgvAssosiatedDataTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.dgvAssosiatedDataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvAssosiatedDataTable.ShowEditingIcon = false;
 			this.dgvAssosiatedDataTable.Size = new System.Drawing.Size(620, 237);

@@ -305,7 +305,7 @@
 			this.dgvTransactions.AllowUserToResizeRows = false;
 			this.dgvTransactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
 			this.dgvTransactions.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-			this.dgvTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			this.dgvTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dgvTransactions.Location = new System.Drawing.Point(4, 4);
 			this.dgvTransactions.MultiSelect = false;
@@ -603,7 +603,6 @@
 			this.customerAddressIDComboBox.Name = "customerAddressIDComboBox";
 			this.customerAddressIDComboBox.Size = new System.Drawing.Size(171, 31);
 			this.customerAddressIDComboBox.TabIndex = 38;
-			this.customerAddressIDComboBox.DropDown += new System.EventHandler(this.customerAddressIDComboBox_DropDown);
 			// 
 			// customerIDTextBox
 			// 
@@ -822,7 +821,7 @@
 			this.tpDBConnection.Location = new System.Drawing.Point(4, 27);
 			this.tpDBConnection.Name = "tpDBConnection";
 			this.tpDBConnection.Padding = new System.Windows.Forms.Padding(3);
-			this.tpDBConnection.Size = new System.Drawing.Size(998, 625);
+			this.tpDBConnection.Size = new System.Drawing.Size(998, 630);
 			this.tpDBConnection.TabIndex = 0;
 			this.tpDBConnection.Text = "DB Connection";
 			// 
@@ -843,7 +842,7 @@
 			this.pnlDbConnection.Controls.Add(this.lblPasword);
 			this.pnlDbConnection.Controls.Add(this.lblUsername);
 			this.pnlDbConnection.Controls.Add(this.txtbUsername);
-			this.pnlDbConnection.Location = new System.Drawing.Point(238, 130);
+			this.pnlDbConnection.Location = new System.Drawing.Point(238, 133);
 			this.pnlDbConnection.Name = "pnlDbConnection";
 			this.pnlDbConnection.Size = new System.Drawing.Size(522, 365);
 			this.pnlDbConnection.TabIndex = 24;
@@ -996,8 +995,9 @@
 			this.tcWindow.Location = new System.Drawing.Point(0, 0);
 			this.tcWindow.Name = "tcWindow";
 			this.tcWindow.SelectedIndex = 0;
-			this.tcWindow.Size = new System.Drawing.Size(1006, 656);
+			this.tcWindow.Size = new System.Drawing.Size(1006, 661);
 			this.tcWindow.TabIndex = 0;
+			this.tcWindow.SelectedIndexChanged += new System.EventHandler(this.tcWindow_SelectedIndexChanged);
 			this.tcWindow.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tcWindow_Selecting);
 			// 
 			// MainWindow
@@ -1005,9 +1005,9 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Control;
-			this.ClientSize = new System.Drawing.Size(1006, 656);
+			this.ClientSize = new System.Drawing.Size(1006, 661);
 			this.Controls.Add(this.tcWindow);
-			this.MinimumSize = new System.Drawing.Size(1022, 599);
+			this.MinimumSize = new System.Drawing.Size(1022, 700);
 			this.Name = "MainWindow";
 			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
