@@ -13,12 +13,10 @@ INSERT INTO [dbo].[Transaction]
            ,(SELECT TOP 1 ID
              FROM [dbo].[Account]
              WHERE IBAN = 'DE223564857234567891'
-             AND Number = 143543
              ORDER BY ID DESC)
            ,(SELECT TOP 1 ID
              FROM [dbo].[Account]
              WHERE IBAN = 'DE223564857926649875'
-             AND Number = 13242
              ORDER BY ID DESC))
 
 INSERT INTO [dbo].[Transaction]
@@ -36,12 +34,10 @@ INSERT INTO [dbo].[Transaction]
            ,(SELECT TOP 1 ID
              FROM [dbo].[Account]
              WHERE IBAN = 'DE84398943065064275'
-             AND Number = 12342324
              ORDER BY ID DESC)
            ,(SELECT TOP 1 ID
              FROM [dbo].[Account]
              WHERE IBAN = 'DE77394755926647212'
-             AND Number = 1234223
              ORDER BY ID DESC))
 
 INSERT INTO [dbo].[Transaction]
@@ -59,10 +55,8 @@ INSERT INTO [dbo].[Transaction]
            ,(SELECT TOP 1 ID
              FROM [dbo].[Account]
              WHERE IBAN = 'DE223564857926647212'
-             AND Number = 13213
              ORDER BY ID DESC)
            ,(SELECT TOP 1 ID
              FROM [dbo].[Account]
              WHERE IBAN = 'DE223564857926647212'
-             AND Number = 13213
              ORDER BY ID DESC))

@@ -5,7 +5,6 @@ CREATE TABLE [dbo].[Account](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[IBAN] [nvarchar](30) NOT NULL,
 	[Balance] [int] NOT NULL,
-	[Number] [int] NOT NULL,
 	[Customer_ID] [int] NOT NULL,
  CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED 
 (

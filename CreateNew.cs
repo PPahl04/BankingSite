@@ -216,22 +216,33 @@ namespace BankingSite
 
 		void CreateNewAccount()
 		{   //Create a new Account dataTable but check if all of the inputs are valid first
-			if (!int.TryParse(balanceTextBox.Text, out int balance) || !int.TryParse(numberTextBox.Text, out int number))
+			if (!int.TryParse(balanceTextBox.Text, out int balance))
 			{
-				MessageBox.Show("Please make sure to only input numbers for the balance and number.", "Error using inputs for creating new account");
+				MessageBox.Show("Please make sure to only input numbers for the starting balance.", "Error using inputs for creating new account");
+				return;
+			}
+			//ToDo: Try and generate the IBAN from customer ID, Account ID and County code
+			//User should only be able to choose the county code
+			//iban max length is 30
+			string countryCode = CountryCodeComboBox.Text;
+			
+			if (String.IsNullOrWhiteSpace(countryCode))
+			{
+				MessageBox.Show("Please select a country code then try again.", "Error using inputs for creating new account");
 				return;
 			}
 
-			string iban = iBANTextBox.Text;
-			if (int.TryParse(iban, out int a))
-			{
-				MessageBox.Show("Please make sure to only input strings for the IBAN.", "Error using inputs for creating new account");
-				return;
-			}
+			Random rnd = new Random();
+			long hashCode = Math.Abs(countryCode.GetHashCode());
+			hashCode *= rnd.Next(1, 3);
+
+			string iban = customer_IDComboBox.Text + (_dbInt.GetLastAccountID() + 1) + hashCode;
+			iban = iban.Length > 30 ? iban.Substring(0, 30) : iban;
+			iban = countryCode + iban;
 
 			try
 			{
-				_dbInt.InsertAccount(iban, balance, number, Convert.ToInt32(customer_IDComboBox.Text));
+				_dbInt.InsertAccount(iban, balance, Convert.ToInt32(customer_IDComboBox.Text));
 				_hasCanceled = false;
 				Close();
 			}

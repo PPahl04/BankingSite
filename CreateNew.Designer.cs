@@ -37,9 +37,8 @@
 			System.Windows.Forms.Label streetNumberLabel;
 			System.Windows.Forms.Label zipCodeLabel;
 			System.Windows.Forms.Label cityLabel;
-			System.Windows.Forms.Label iBANLabel;
+			System.Windows.Forms.Label CountryCodeLabel;
 			System.Windows.Forms.Label balanceLabel;
-			System.Windows.Forms.Label numberLabel;
 			System.Windows.Forms.Label customer_IDLabel;
 			System.Windows.Forms.Label dateLabel;
 			System.Windows.Forms.Label amountLabel;
@@ -62,9 +61,7 @@
 			this.btnCreateAddress = new System.Windows.Forms.Button();
 			this.pnlAccount = new System.Windows.Forms.Panel();
 			this.customer_IDComboBox = new System.Windows.Forms.ComboBox();
-			this.iBANTextBox = new System.Windows.Forms.TextBox();
 			this.balanceTextBox = new System.Windows.Forms.TextBox();
-			this.numberTextBox = new System.Windows.Forms.TextBox();
 			this.btnCreateAccount = new System.Windows.Forms.Button();
 			this.pnlTransaction = new System.Windows.Forms.Panel();
 			this.accountReceiver_IDComboBox = new System.Windows.Forms.ComboBox();
@@ -74,6 +71,7 @@
 			this.amountTextBox = new System.Windows.Forms.TextBox();
 			this.intendedUseTextBox = new System.Windows.Forms.TextBox();
 			this.btnTransaction = new System.Windows.Forms.Button();
+			this.CountryCodeComboBox = new System.Windows.Forms.ComboBox();
 			firstNameLabel = new System.Windows.Forms.Label();
 			lastNameLabel = new System.Windows.Forms.Label();
 			phoneNumberLabel = new System.Windows.Forms.Label();
@@ -83,9 +81,8 @@
 			streetNumberLabel = new System.Windows.Forms.Label();
 			zipCodeLabel = new System.Windows.Forms.Label();
 			cityLabel = new System.Windows.Forms.Label();
-			iBANLabel = new System.Windows.Forms.Label();
+			CountryCodeLabel = new System.Windows.Forms.Label();
 			balanceLabel = new System.Windows.Forms.Label();
-			numberLabel = new System.Windows.Forms.Label();
 			customer_IDLabel = new System.Windows.Forms.Label();
 			dateLabel = new System.Windows.Forms.Label();
 			amountLabel = new System.Windows.Forms.Label();
@@ -207,48 +204,36 @@
 			cityLabel.TabIndex = 30;
 			cityLabel.Text = "City:";
 			// 
-			// iBANLabel
+			// CountryCodeLabel
 			// 
-			iBANLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-			iBANLabel.AutoSize = true;
-			iBANLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			iBANLabel.Location = new System.Drawing.Point(31, 34);
-			iBANLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			iBANLabel.Name = "iBANLabel";
-			iBANLabel.Size = new System.Drawing.Size(41, 23);
-			iBANLabel.TabIndex = 24;
-			iBANLabel.Text = "IBAN:";
+			CountryCodeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+			CountryCodeLabel.AutoSize = true;
+			CountryCodeLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
+			CountryCodeLabel.Location = new System.Drawing.Point(33, 37);
+			CountryCodeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			CountryCodeLabel.Name = "CountryCodeLabel";
+			CountryCodeLabel.Size = new System.Drawing.Size(96, 23);
+			CountryCodeLabel.TabIndex = 24;
+			CountryCodeLabel.Text = "Country Code:";
 			// 
 			// balanceLabel
 			// 
 			balanceLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			balanceLabel.AutoSize = true;
 			balanceLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			balanceLabel.Location = new System.Drawing.Point(31, 80);
+			balanceLabel.Location = new System.Drawing.Point(33, 82);
 			balanceLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			balanceLabel.Name = "balanceLabel";
 			balanceLabel.Size = new System.Drawing.Size(63, 23);
 			balanceLabel.TabIndex = 26;
 			balanceLabel.Text = "Balance:";
 			// 
-			// numberLabel
-			// 
-			numberLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
-			numberLabel.AutoSize = true;
-			numberLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			numberLabel.Location = new System.Drawing.Point(31, 126);
-			numberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			numberLabel.Name = "numberLabel";
-			numberLabel.Size = new System.Drawing.Size(61, 23);
-			numberLabel.TabIndex = 28;
-			numberLabel.Text = "Number:";
-			// 
 			// customer_IDLabel
 			// 
 			customer_IDLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
 			customer_IDLabel.AutoSize = true;
 			customer_IDLabel.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			customer_IDLabel.Location = new System.Drawing.Point(31, 172);
+			customer_IDLabel.Location = new System.Drawing.Point(33, 127);
 			customer_IDLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			customer_IDLabel.Name = "customer_IDLabel";
 			customer_IDLabel.Size = new System.Drawing.Size(88, 23);
@@ -431,7 +416,7 @@
 			this.pnlAddress.Controls.Add(cityLabel);
 			this.pnlAddress.Controls.Add(this.cityTextBox);
 			this.pnlAddress.Controls.Add(this.btnCreateAddress);
-			this.pnlAddress.Location = new System.Drawing.Point(379, 387);
+			this.pnlAddress.Location = new System.Drawing.Point(65, 384);
 			this.pnlAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.pnlAddress.Name = "pnlAddress";
 			this.pnlAddress.Size = new System.Drawing.Size(360, 300);
@@ -499,19 +484,17 @@
 			// 
 			this.pnlAccount.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.pnlAccount.AutoSize = true;
+			this.pnlAccount.Controls.Add(this.CountryCodeComboBox);
 			this.pnlAccount.Controls.Add(this.customer_IDComboBox);
-			this.pnlAccount.Controls.Add(iBANLabel);
-			this.pnlAccount.Controls.Add(this.iBANTextBox);
+			this.pnlAccount.Controls.Add(CountryCodeLabel);
 			this.pnlAccount.Controls.Add(balanceLabel);
 			this.pnlAccount.Controls.Add(this.balanceTextBox);
-			this.pnlAccount.Controls.Add(numberLabel);
-			this.pnlAccount.Controls.Add(this.numberTextBox);
 			this.pnlAccount.Controls.Add(customer_IDLabel);
 			this.pnlAccount.Controls.Add(this.btnCreateAccount);
-			this.pnlAccount.Location = new System.Drawing.Point(11, 387);
+			this.pnlAccount.Location = new System.Drawing.Point(461, 349);
 			this.pnlAccount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.pnlAccount.Name = "pnlAccount";
-			this.pnlAccount.Size = new System.Drawing.Size(360, 300);
+			this.pnlAccount.Size = new System.Drawing.Size(360, 250);
 			this.pnlAccount.TabIndex = 32;
 			this.pnlAccount.Visible = false;
 			// 
@@ -521,41 +504,20 @@
 			this.customer_IDComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.customer_IDComboBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
 			this.customer_IDComboBox.FormattingEnabled = true;
-			this.customer_IDComboBox.Location = new System.Drawing.Point(129, 167);
+			this.customer_IDComboBox.Location = new System.Drawing.Point(127, 122);
 			this.customer_IDComboBox.Name = "customer_IDComboBox";
 			this.customer_IDComboBox.Size = new System.Drawing.Size(200, 31);
 			this.customer_IDComboBox.TabIndex = 39;
-			// 
-			// iBANTextBox
-			// 
-			this.iBANTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.iBANTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.iBANTextBox.Location = new System.Drawing.Point(129, 29);
-			this.iBANTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.iBANTextBox.MaxLength = 30;
-			this.iBANTextBox.Name = "iBANTextBox";
-			this.iBANTextBox.Size = new System.Drawing.Size(200, 30);
-			this.iBANTextBox.TabIndex = 25;
 			// 
 			// balanceTextBox
 			// 
 			this.balanceTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.balanceTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.balanceTextBox.Location = new System.Drawing.Point(129, 75);
+			this.balanceTextBox.Location = new System.Drawing.Point(127, 79);
 			this.balanceTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.balanceTextBox.Name = "balanceTextBox";
 			this.balanceTextBox.Size = new System.Drawing.Size(200, 30);
 			this.balanceTextBox.TabIndex = 27;
-			// 
-			// numberTextBox
-			// 
-			this.numberTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.numberTextBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.numberTextBox.Location = new System.Drawing.Point(129, 121);
-			this.numberTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.numberTextBox.Name = "numberTextBox";
-			this.numberTextBox.Size = new System.Drawing.Size(200, 30);
-			this.numberTextBox.TabIndex = 29;
 			// 
 			// btnCreateAccount
 			// 
@@ -563,7 +525,7 @@
 			this.btnCreateAccount.AutoSize = true;
 			this.btnCreateAccount.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.btnCreateAccount.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
-			this.btnCreateAccount.Location = new System.Drawing.Point(95, 232);
+			this.btnCreateAccount.Location = new System.Drawing.Point(95, 176);
 			this.btnCreateAccount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.btnCreateAccount.Name = "btnCreateAccount";
 			this.btnCreateAccount.Size = new System.Drawing.Size(170, 40);
@@ -681,6 +643,32 @@
 			this.btnTransaction.UseVisualStyleBackColor = true;
 			this.btnTransaction.Click += new System.EventHandler(this.btnCreateNew_Click);
 			// 
+			// CountryCodeComboBox
+			// 
+			this.CountryCodeComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.CountryCodeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.CountryCodeComboBox.Font = new System.Drawing.Font("Bahnschrift Condensed", 14.25F);
+			this.CountryCodeComboBox.FormattingEnabled = true;
+			this.CountryCodeComboBox.Items.AddRange(new object[] {
+            "DE",
+            "FR",
+            "AL",
+            "AD",
+            "AT",
+            "AZ",
+            "BH",
+            "BY",
+            "BE",
+            "BA",
+            "BR",
+            "BG",
+            "BI"});
+			this.CountryCodeComboBox.Location = new System.Drawing.Point(127, 35);
+			this.CountryCodeComboBox.MaxDropDownItems = 10;
+			this.CountryCodeComboBox.Name = "CountryCodeComboBox";
+			this.CountryCodeComboBox.Size = new System.Drawing.Size(200, 31);
+			this.CountryCodeComboBox.TabIndex = 40;
+			// 
 			// CreateNew
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 23F);
@@ -731,9 +719,7 @@
 		private System.Windows.Forms.Button btnCreateAccount;
 		private System.Windows.Forms.Panel pnlTransaction;
 		private System.Windows.Forms.Button btnTransaction;
-		private System.Windows.Forms.TextBox iBANTextBox;
 		private System.Windows.Forms.TextBox balanceTextBox;
-		private System.Windows.Forms.TextBox numberTextBox;
 		private System.Windows.Forms.DateTimePicker dateDateTimePicker;
 		private System.Windows.Forms.TextBox amountTextBox;
 		private System.Windows.Forms.TextBox intendedUseTextBox;
@@ -742,5 +728,6 @@
 		private System.Windows.Forms.ComboBox accountSender_IDComboBox;
 		private System.Windows.Forms.ComboBox customer_IDComboBox;
 		private System.Windows.Forms.ComboBox address_IDComboBox;
+		private System.Windows.Forms.ComboBox CountryCodeComboBox;
 	}
 }

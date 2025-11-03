@@ -1,12 +1,10 @@
 INSERT INTO [dbo].[Account]
            ([IBAN]
            ,[Balance]
-           ,[Number]
            ,[Customer_ID])
      VALUES
            ('DE223564857926647212'
            ,2000
-           ,13213
            ,(SELECT TOP 1 ID FROM [dbo].[Customer]
            WHERE FirstName = 'Anno'
            AND LastName = 'Nhyme'
@@ -17,12 +15,10 @@ INSERT INTO [dbo].[Account]
 INSERT INTO [dbo].[Account]
            ([IBAN]
            ,[Balance]
-           ,[Number]
            ,[Customer_ID])
      VALUES
            ('DE223564857926649875'
            ,500
-           ,13242
            ,(SELECT TOP 1 ID FROM [dbo].[Customer]
            WHERE FirstName = 'Annie'
            AND LastName = 'Nhyme'
@@ -33,12 +29,10 @@ INSERT INTO [dbo].[Account]
 INSERT INTO [dbo].[Account]
            ([IBAN]
            ,[Balance]
-           ,[Number]
            ,[Customer_ID])
      VALUES
            ('DE223564857926634566'
            ,3
-           ,12342
            ,(SELECT TOP 1 ID FROM [dbo].[Customer]
            WHERE FirstName = 'Nunya'
            AND LastName = 'Busnhess'
@@ -49,12 +43,10 @@ INSERT INTO [dbo].[Account]
 INSERT INTO [dbo].[Account]
            ([IBAN]
            ,[Balance]
-           ,[Number]
            ,[Customer_ID])
      VALUES
            ('DE223564857234567891'
            ,10
-           ,143543
            ,(SELECT TOP 1 ID FROM [dbo].[Customer]
            WHERE FirstName = 'Salliek'
            AND LastName = 'Songh'
@@ -65,12 +57,10 @@ INSERT INTO [dbo].[Account]
 INSERT INTO [dbo].[Account]
            ([IBAN]
            ,[Balance]
-           ,[Number]
            ,[Customer_ID])
      VALUES
            ('DE77394755926647212'
            ,0
-           ,1234223
            ,(SELECT TOP 1 ID FROM [dbo].[Customer]
            WHERE FirstName = 'Nunya'
            AND LastName = 'Busnhess'
@@ -81,12 +71,10 @@ INSERT INTO [dbo].[Account]
 INSERT INTO [dbo].[Account]
            ([IBAN]
            ,[Balance]
-           ,[Number]
            ,[Customer_ID])
      VALUES
            ('DE84398943065064275'
            ,312040
-           ,12342324
            ,(SELECT TOP 1 ID FROM [dbo].[Customer]
            WHERE FirstName = 'Nunya'
            AND LastName = 'Busnhess'

@@ -254,7 +254,7 @@ namespace BankingSite
 			}
 		}
 
-		public void InsertAccount(string myIban, int myBalance, int myNumber, int myCustomerID)
+		public void InsertAccount(string myIban, int myBalance, int myCustomerID)
 		{
 			using (SqlConnection cn = new SqlConnection(_connectionString))
 			{
@@ -265,7 +265,6 @@ namespace BankingSite
 
 				cmd.Parameters.AddWithValue("@IBAN", myIban);
 				cmd.Parameters.AddWithValue("@Balance", myBalance);
-				cmd.Parameters.AddWithValue("@Number", myNumber);
 				cmd.Parameters.AddWithValue("@Customer_ID", myCustomerID);
 				cmd.ExecuteNonQuery();
 			}
@@ -454,6 +453,12 @@ namespace BankingSite
 		public DataTable GetAllTransactions()
 		{
 			return GetDataTable(File.ReadAllText(string.Concat(GET_DATA_FOLDER, "AllTransactions", SQL_EXTENSION)));
+		}
+
+		public int GetLastAccountID()
+		{
+			DataTable dt = GetDataTable("SELECT TOP 1 ID FROM [dbo].[Account] ORDER BY ID DESC");
+			return (int)dt.Rows[0].ItemArray[0];
 		}
 		#endregion
 		
