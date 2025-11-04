@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Text.RegularExpressions;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data;
 using System;
-using System.Threading;
 
 namespace BankingSite
 {
@@ -274,7 +274,7 @@ namespace BankingSite
 		void SetDataBindings(Control myUiElement, DataTable myDataSource, string myDataMember)
 		{
 			myUiElement.DataBindings.Clear();
-			myUiElement.DataBindings.Add(new Binding("Text", myDataSource, myDataMember));
+			myUiElement.DataBindings.Add("Text", myDataSource, myDataMember, false, DataSourceUpdateMode.Never);
 
 			if (myDataSource.Rows.Count == 0)
 			{
@@ -343,9 +343,10 @@ namespace BankingSite
 			string lastN = lastNameTextBox.Text;
 			string email = emailAddressTextBox.Text;
 
-			if (int.TryParse(firstN, out int a) || int.TryParse(lastN, out int b) || int.TryParse(email, out int c))
+			Regex emailStructure = new Regex(@"^.+(?:[\x21-\x7E].+)*@.+(?:\..+)*$");
+			if (int.TryParse(firstN, out int a) || int.TryParse(lastN, out int b) || int.TryParse(email, out int c) || !emailStructure.IsMatch(email))
 			{
-				MessageBox.Show("Please make sure to only input strings for the names and email.", "Error using inputs for updating customer");
+				MessageBox.Show("Please make sure to only input strings for both names and the email. The email must follow the valid email structure.", "Error using inputs for updating customer");
 				return;
 			}
 
@@ -394,12 +395,11 @@ namespace BankingSite
 		/// <param name="e"></param>
 		private void btnShowOwnedAccounts_Click(object sender, EventArgs e)
 		{	//the ID gets set when dgv is selected and is read only, meaning that there are no rows if we come here
-			if (!int.TryParse(customerIDTextBox.Text, out int id))
+			if (!int.TryParse(customerIDTextBox.Text, out int custID))
 			{
 				return;
 			}
 
-			int custID = Convert.ToInt32(customerIDTextBox.Text);
 			DataTable accounts = _dbInt.GetOwnedAccountsByCustomerID(custID);
 
 			if (accounts.Rows.Count == 0)
@@ -601,12 +601,11 @@ namespace BankingSite
 				return;
 			}
 
-			int id = Convert.ToInt32(accountIDTextBox.Text);
-			if (MessageBox.Show(string.Concat("Are you sure you want to delete the account with the ID: ", id, "?" +
+			if (MessageBox.Show(string.Concat("Are you sure you want to delete the account with the ID: ", accID, "?" +
 				"\n this will also delete transactions associated with this account."), "Delete selected account",
 				MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
 			{
-				_dbInt.DeleteAccountWithID(id);
+				_dbInt.DeleteAccountWithID(accID);
 				RefreshAccountDataBindingsSources();
 				RefreshTransactionDataBindingsSources();
 			}
@@ -640,6 +639,7 @@ namespace BankingSite
 				return;
 			}
 			RefreshTransactionDataBindingsSources();
+			RefreshAccountDataBindingsSources();
 		}
 	
 		private void btnDeleteTransaction_Click(object sender, EventArgs e)

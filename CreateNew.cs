@@ -2,6 +2,7 @@
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace BankingSite
 {
@@ -14,7 +15,6 @@ namespace BankingSite
 		/// <summary>
 		/// Will determine which panel (that holds all neccesary UI) to use by its parameters
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
 		/// <param name="myCreateType"></param>
 		public CreateNew(DatabaseInteraction myDbInt, CreateType myCreateType)
 		{
@@ -158,9 +158,11 @@ namespace BankingSite
 			string lastN = lastNameTextBox.Text;
 			string email = emailAddressTextBox.Text;
 
-			if (int.TryParse(firstN, out int a) || int.TryParse(lastN, out int b) || int.TryParse(email, out int c))
+			//if (email.Contains("@") && email.Split('@')[0].Length <= 64 && email.Split('@')[1].Length <= 255)
+			Regex emailStructure = new Regex(@"^.+(?:[\x21-\x7E].+)*@.+(?:\..+)*$");
+			if (int.TryParse(firstN, out int a) || int.TryParse(lastN, out int b) || int.TryParse(email, out int c) || !emailStructure.IsMatch(email))
 			{
-				MessageBox.Show("Please make sure to only input strings for the names and email.", "Error using inputs for creating new customer");
+				MessageBox.Show("Please make sure to only input strings for both names and the email. The email must follow the valid email structure.", "Error using inputs for creating new customer");
 				return;
 			}
 
@@ -173,8 +175,7 @@ namespace BankingSite
 				}
 				else
 				{
-					int addrID = Convert.ToInt32(address_IDComboBox.Text);
-					_dbInt.InsertCustomer(firstN, lastN, phoneN, email, addrID);
+					_dbInt.InsertCustomer(firstN, lastN, phoneN, email, Convert.ToInt32(address_IDComboBox.Text));
 				}
 				_hasCanceled = false;
 				Close();
@@ -221,9 +222,6 @@ namespace BankingSite
 				MessageBox.Show("Please make sure to only input numbers for the starting balance.", "Error using inputs for creating new account");
 				return;
 			}
-			//ToDo: Try and generate the IBAN from customer ID, Account ID and County code
-			//User should only be able to choose the county code
-			//iban max length is 30
 			string countryCode = CountryCodeComboBox.Text;
 			
 			if (String.IsNullOrWhiteSpace(countryCode))
@@ -234,10 +232,10 @@ namespace BankingSite
 
 			Random rnd = new Random();
 			long hashCode = Math.Abs(countryCode.GetHashCode());
-			hashCode *= rnd.Next(1, 3);
+			hashCode *= rnd.Next(1, 10);																//try to make every hashcode different
 
-			string iban = customer_IDComboBox.Text + (_dbInt.GetLastAccountID() + 1) + hashCode;
-			iban = iban.Length > 30 ? iban.Substring(0, 30) : iban;
+			string iban = customer_IDComboBox.Text + (_dbInt.GetLastAccountID() + 1) + hashCode;	//at least every number before the hashcode will be different for every account
+			iban = iban.Length > 30 ? iban.Substring(0, 30) : iban;									//iban max length is 30
 			iban = countryCode + iban;
 
 			try
@@ -278,6 +276,12 @@ namespace BankingSite
 			if (int.TryParse(intendedUse, out int a))
 			{
 				MessageBox.Show("Please make sure to only input strings for the intended use.", "Error using inputs for creating new transaction");
+				return;
+			}
+
+			if (type == TransactionType.Transfer.ToString() && receiverID == senderID)
+			{
+				MessageBox.Show("You cannot transfer to the same account. Please select a different account or choose a different transaction type and try again.", "Invalid transaction");
 				return;
 			}
 
@@ -341,14 +345,14 @@ namespace BankingSite
 		}
 
 		/// <summary>
-		/// Disable the selection of receiver id if withdrawal or deposit have been selected.
-		/// The receiver will be the same as the sender on these types.
+		/// Enable the selection of receiver id if transfer has been selected.
+		/// The receiver will be the same as the sender on deposit and withdrawal.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		void typeComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			accountReceiver_IDComboBox.Enabled = typeComboBox.Text != TransactionType.Withdrawal.ToString() && typeComboBox.Text != TransactionType.Deposit.ToString();
+			accountReceiver_IDComboBox.Enabled = typeComboBox.Text == TransactionType.Transfer.ToString();
 
 			if (!accountReceiver_IDComboBox.Enabled)
 			{

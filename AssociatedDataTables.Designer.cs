@@ -36,11 +36,13 @@
 			// 
 			this.dgvAssosiatedDataTable.AllowUserToAddRows = false;
 			this.dgvAssosiatedDataTable.AllowUserToDeleteRows = false;
+			this.dgvAssosiatedDataTable.AllowUserToResizeColumns = false;
+			this.dgvAssosiatedDataTable.AllowUserToResizeRows = false;
 			this.dgvAssosiatedDataTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.dgvAssosiatedDataTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-			this.dgvAssosiatedDataTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+			this.dgvAssosiatedDataTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+			this.dgvAssosiatedDataTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
 			this.dgvAssosiatedDataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvAssosiatedDataTable.Location = new System.Drawing.Point(12, 12);
 			this.dgvAssosiatedDataTable.MultiSelect = false;
